@@ -19,28 +19,28 @@ const BUILDS = [
     num: "01",
     icon: "globe",
     title: "Websites",
-    body: "Next.js, Stripe, deployed end-to-end. The kind of site you'd hire an agency for at 4× the price.",
+    body: "Production site, payments wired, live. The kind of site you'd hire an agency for at 4× the price.",
     examples: "Examples: ChargeRight · evchargeright.com · Lennox Fields · lennoxfields.com",
   },
   {
     num: "02",
     icon: "phone",
     title: "iOS apps",
-    body: "Capacitor 8 wired into your web build. Same codebase, your customers get a native app on the truck or in the pocket.",
+    body: "Native iOS build, App Store ready. Same codebase as the website, your customers get a real app on the truck or in the pocket.",
     examples: "Examples: ChargeRight iOS · InspectRight · BendRight",
   },
   {
     num: "03",
     icon: "spark",
     title: "AI tools",
-    body: "A Claude skill, agent, or workflow that handles a repeated task. Reads your docs, answers your team, drafts your replies. Grounded on your real material.",
+    body: "AI that reads the spec the way you would. Handles a repeated task. Answers your team, drafts your replies. Grounded on your real material.",
     examples: "Examples: dealer-desk · gmail-scanner · jason-voice · 50+ shipped",
   },
   {
     num: "04",
     icon: "network",
     title: "Agent infrastructure",
-    body: "Custom MCP servers, knowledge graphs, multi-agent systems. The brain layer that ties your whole operation together.",
+    body: "Multiple AI tools wired together — they read your docs, talk to each other, get the back-office work done. The crew that doesn't sleep.",
     examples: "Example: Cortex — a 233-node knowledge graph running my whole business",
   },
 ];
@@ -328,6 +328,9 @@ export default function Home() {
               Fixed scope, fixed price, fixed delivery date. Upper tiers start with a discovery call —
               we scope together, then I quote.
             </p>
+            <p className="capacity-line">
+              Currently booking <strong>TODO(jason)</strong>. I take 4 builds a month.
+            </p>
           </div>
           <div className="tier-grid">
             {ONE_TIME_OFFERS.map((o, i) => (
@@ -342,6 +345,9 @@ export default function Home() {
                 <ul className="tier-list">
                   {o.whatYouGet.map((line, j) => (<li key={j}>{line}</li>))}
                 </ul>
+                {o.guarantee && (
+                  <p className="tier-guarantee">{o.guarantee}</p>
+                )}
                 <Link href={o.bookHref} className="tier-cta">
                   {o.featured ? "Scope it out →" : o.id === "strategy-hour" ? "Book the call →" : o.id === "full-mvp" ? "Scope the MVP →" : "Get started →"}
                 </Link>
@@ -367,6 +373,9 @@ export default function Home() {
                   <ul className="ongoing-list">
                     {o.whatYouGet.map((line, j) => (<li key={j}>{line}</li>))}
                   </ul>
+                  {o.guarantee && (
+                    <p className="tier-guarantee tier-guarantee--ongoing">{o.guarantee}</p>
+                  )}
                   <Link href={o.bookHref} className="ongoing-cta">
                     Start the month →
                   </Link>
@@ -571,6 +580,12 @@ export default function Home() {
         .tier-cta:hover { background: var(--text); color: var(--bg); }
         .tier--featured .tier-cta { background: var(--clay); color: var(--surface); border-color: var(--clay); }
         .tier--featured .tier-cta:hover { background: var(--clay-deep); border-color: var(--clay-deep); }
+        .tier-guarantee { font-family: var(--font-plex), sans-serif; font-size: 11px; line-height: 1.5; color: var(--text-mid); margin: 0 0 16px; padding: 8px 10px; background: var(--surface-2); border-radius: 6px; border-left: 2px solid var(--clay); }
+        .tier-guarantee--ongoing { margin: 4px 0 18px; }
+
+        /* ===== CAPACITY LINE ===== */
+        .capacity-line { font-family: var(--font-jbm), monospace; font-size: 12px; letter-spacing: 0.08em; color: var(--text-mid); margin: 18px auto 0; max-width: 580px; text-transform: uppercase; }
+        .capacity-line strong { color: var(--clay-deep); font-weight: 700; letter-spacing: 0.04em; }
 
         /* ===== ONGOING — subscription / retainer ===== */
         .ongoing-block { max-width: 980px; margin: 24px auto 0; padding: 48px 0 0; border-top: 1px solid var(--rule); }

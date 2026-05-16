@@ -16,7 +16,14 @@ export type OfferTier = {
   bookHref: string;
   featured?: boolean;
   group: "one-time" | "ongoing";
+  // Risk reversal shown under every tier. Defaults applied below.
+  guarantee?: string;
+  // Honest scope limits. 2-3 lines per tier. Mirror of templates' notForThis.
+  notForThis?: string[];
 };
+
+const DEFAULT_GUARANTEE =
+  "Not happy in the first 30 days? Full refund. You keep what's shipped.";
 
 export const OFFERS: OfferTier[] = [
   {
@@ -57,7 +64,7 @@ export const OFFERS: OfferTier[] = [
     duration: "2–3 weeks · scoped first",
     short: "A real thing — a website, an iOS app, an AI tool, a custom dashboard. Scoped on a discovery call, then fixed-fee.",
     whatYouGet: [
-      "Sites (Next.js, Stripe, deployed) · iOS apps (Capacitor) · AI tools (Claude agents)",
+      "Production sites, payments wired, live · Native iOS build, App Store ready · AI that reads the spec the way you would",
       "Full handoff: code, docs, walk-through video",
       "30 days of bug-fix support after delivery",
     ],
@@ -113,6 +120,11 @@ export const OFFERS: OfferTier[] = [
     group: "ongoing",
   },
 ];
+
+// Apply the default guarantee anywhere it isn't already set.
+for (const o of OFFERS) {
+  if (o.guarantee === undefined) o.guarantee = DEFAULT_GUARANTEE;
+}
 
 export const ONE_TIME_OFFERS = OFFERS.filter((o) => o.group === "one-time");
 export const ONGOING_OFFERS = OFFERS.filter((o) => o.group === "ongoing");
