@@ -7,6 +7,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { TEMPLATES, TEMPLATE_TRADES } from "@/lib/templates";
 import { MissionFooter } from "@/components/MissionFooter";
+import { Catalog } from "./Catalog";
 import {
   JsonLd,
   articleSchema,
@@ -183,42 +184,7 @@ export default function TemplatesPage() {
             </p>
           </div>
 
-          {TEMPLATE_TRADES.map((trade) => {
-            const items = TEMPLATES.filter((t) => t.trade === trade.id);
-            if (!items.length) return null;
-            return (
-              <div key={trade.id} className="t-trade-group">
-                <h3 className="t-trade-h">
-                  <span className="t-trade-tag">{trade.label}</span>
-                </h3>
-                <div className="t-card-grid">
-                  {items.map((t) => (
-                    <Link
-                      key={t.id}
-                      href={`/templates/${t.slug}`}
-                      className={
-                        "t-card" + (t.featured ? " t-card--featured" : "")
-                      }
-                    >
-                      {t.featured && (
-                        <span className="t-card-flag">Most picked</span>
-                      )}
-                      <div className="t-card-head">
-                        <span className="t-card-trade">{t.tradeLabel}</span>
-                        <span className="t-card-price">{t.priceLabel}</span>
-                      </div>
-                      <h4 className="t-card-name">{t.name}</h4>
-                      <p className="t-card-short">{t.short}</p>
-                      <div className="t-card-foot">
-                        <span className="t-card-setup">{t.setupDays}</span>
-                        <span className="t-card-arrow">See template →</span>
-                      </div>
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            );
-          })}
+          <Catalog templates={TEMPLATES} trades={TEMPLATE_TRADES} />
         </section>
 
         <section className="t-section t-faq" id="faq">
@@ -323,6 +289,19 @@ export default function TemplatesPage() {
         [data-theme="home"] .t-card-foot { display: flex; justify-content: space-between; align-items: baseline; padding-top: 14px; border-top: 1px solid var(--rule-soft); }
         [data-theme="home"] .t-card-setup { font-family: var(--font-jbm), monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-faint); }
         [data-theme="home"] .t-card-arrow { font-family: var(--font-plex), sans-serif; font-size: 12px; font-weight: 600; color: var(--clay-deep); }
+
+        /* ===== FILTER TABS ===== */
+        [data-theme="home"] .t-filter-tabs { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; max-width: 980px; margin: 0 auto 48px; padding: 0 4px; }
+        [data-theme="home"] .t-filter-tab { font-family: var(--font-jbm), monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-mid); background: transparent; border: 1px solid var(--rule); border-radius: 999px; padding: 9px 16px; cursor: pointer; transition: all 0.18s; }
+        [data-theme="home"] .t-filter-tab:hover { color: var(--text); border-color: var(--text-mid); }
+        [data-theme="home"] .t-filter-tab--active { background: var(--text); color: var(--bg); border-color: var(--text); }
+        [data-theme="home"] .t-filter-tab--active:hover { color: var(--bg); border-color: var(--text); }
+
+        /* ===== ROI SLOT ===== */
+        [data-theme="home"] .t-card-roi { font-family: var(--font-plex), sans-serif; font-size: 12px; line-height: 1.5; color: var(--text-mid); margin: 0 0 16px; padding: 8px 12px; background: var(--surface-2); border-radius: 6px; border-left: 2px solid var(--clay); }
+        [data-theme="home"] .t-card-roi span { color: var(--text); font-weight: 600; }
+        [data-theme="home"] .t-card-roi--todo { color: var(--text-faint); font-style: italic; }
+        [data-theme="home"] .t-card-roi--todo span { color: var(--text-faint); font-weight: 400; font-family: var(--font-jbm), monospace; font-size: 11px; }
 
         [data-theme="home"] .t-faq-list { max-width: 760px; margin: 0 auto; }
         [data-theme="home"] .t-faq-item { border-top: 1px solid var(--rule); padding: 22px 0; }

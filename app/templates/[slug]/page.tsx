@@ -19,6 +19,15 @@ export async function generateStaticParams() {
   return TEMPLATES.map((t) => ({ slug: t.slug }));
 }
 
+function DemoEmbed({ src }: { src?: string }) {
+  if (!src) return null;
+  return (
+    <div className="d-demo">
+      <iframe src={src} loading="lazy" allow="fullscreen" title="Template demo" />
+    </div>
+  );
+}
+
 export async function generateMetadata({
   params,
 }: {
@@ -107,6 +116,15 @@ export default async function TemplateDetailPage({
             Set me up — {t.priceLabel}
           </Link>
         </div>
+        <p className="d-summary-alt">
+          Not sure yet?{" "}
+          <Link href="/book?tier=strategy-hour">
+            Book a $300 Strategy Hour first
+          </Link>
+          .
+        </p>
+
+        <DemoEmbed src={t.demoUrl} />
 
         <section className="d-section">
           <p className="d-section-kicker">— Who this is for</p>
@@ -228,7 +246,12 @@ export default async function TemplateDetailPage({
         [data-theme="home"] .d-h1 { font-family: var(--font-fraunces), serif; font-weight: 300; font-size: clamp(40px, 6vw, 72px); line-height: 1.02; letter-spacing: -0.03em; color: var(--text); margin: 0 0 22px; font-variation-settings: "SOFT" 30; }
         [data-theme="home"] .d-short { font-family: var(--font-plex), sans-serif; font-size: 19px; line-height: 1.55; color: var(--text-mid); margin: 0 0 40px; max-width: 680px; }
 
-        [data-theme="home"] .d-summary { display: grid; grid-template-columns: 1fr; gap: 16px; padding: 28px 28px; background: var(--surface); border: 1px solid var(--rule); border-radius: 14px; margin-bottom: 64px; box-shadow: 0 1px 0 rgba(255,255,255,0.6) inset, 0 12px 32px -12px rgba(26,22,18,0.08); }
+        [data-theme="home"] .d-summary { display: grid; grid-template-columns: 1fr; gap: 16px; padding: 28px 28px; background: var(--surface); border: 1px solid var(--rule); border-radius: 14px; margin-bottom: 14px; box-shadow: 0 1px 0 rgba(255,255,255,0.6) inset, 0 12px 32px -12px rgba(26,22,18,0.08); }
+        [data-theme="home"] .d-summary-alt { font-family: var(--font-plex), sans-serif; font-size: 14px; color: var(--text-mid); text-align: center; margin: 0 0 56px; }
+        [data-theme="home"] .d-summary-alt a { color: var(--clay-deep); text-decoration: none; border-bottom: 1px solid var(--rule); padding-bottom: 1px; }
+        [data-theme="home"] .d-summary-alt a:hover { border-color: var(--clay); }
+        [data-theme="home"] .d-demo { margin: 0 0 56px; border: 1px solid var(--rule); border-radius: 14px; overflow: hidden; background: var(--surface-2); aspect-ratio: 16/9; }
+        [data-theme="home"] .d-demo iframe { display: block; width: 100%; height: 100%; border: 0; }
         @media (min-width: 760px) { [data-theme="home"] .d-summary { grid-template-columns: repeat(3, 1fr) auto; align-items: center; gap: 24px; } }
         [data-theme="home"] .d-summary-item { display: flex; flex-direction: column; gap: 4px; }
         [data-theme="home"] .d-summary-label { font-family: var(--font-jbm), monospace; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-faint); }

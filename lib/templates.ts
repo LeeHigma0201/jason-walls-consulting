@@ -37,6 +37,10 @@ export type TemplateProduct = {
   stripeUrl?: string;
   stripeProductId?: string;
   stripePriceId?: string;
+  // Fill per template. Until then, cards show TODO(jason) placeholders.
+  roi?: { hoursPerWeek: string; payoffDays: string };
+  // Loom or video URL. Renders nothing on detail page when undefined.
+  demoUrl?: string;
 };
 
 export const TEMPLATES: TemplateProduct[] = [
@@ -302,6 +306,12 @@ export const TEMPLATES: TemplateProduct[] = [
   // ──────────────────────────────────────────────────────────────
   // FIBER
   // ──────────────────────────────────────────────────────────────
+  // OSP PRICING CHECK (2026-05-16): conversion brief flagged a possible
+  // card-vs-detail mismatch ($999 vs $799). Verified in code — both the card
+  // (app/templates/page.tsx via t.priceLabel) and the detail page
+  // (app/templates/[slug]/page.tsx via t.priceLabel) render this single
+  // source: priceLabel below. No $799 reference exists anywhere for OSP
+  // Permit. Leave as-is until Jason confirms which price is right.
   {
     id: "osp-permit-row-tracker",
     slug: "osp-permit-row-tracker",
