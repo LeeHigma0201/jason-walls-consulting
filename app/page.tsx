@@ -345,6 +345,13 @@ export default function Home() {
                 <ul className="tier-list">
                   {o.whatYouGet.map((line, j) => (<li key={j}>{line}</li>))}
                 </ul>
+                {o.notForThis && o.notForThis.length > 0 && (
+                  <ul className="tier-notfor">
+                    {o.notForThis.map((line, k) => (
+                      <li key={k}>{line}</li>
+                    ))}
+                  </ul>
+                )}
                 {o.guarantee && (
                   <p className="tier-guarantee">{o.guarantee}</p>
                 )}
@@ -373,6 +380,13 @@ export default function Home() {
                   <ul className="ongoing-list">
                     {o.whatYouGet.map((line, j) => (<li key={j}>{line}</li>))}
                   </ul>
+                  {o.notForThis && o.notForThis.length > 0 && (
+                    <ul className="tier-notfor tier-notfor--ongoing">
+                      {o.notForThis.map((line, k) => (
+                        <li key={k}>{line}</li>
+                      ))}
+                    </ul>
+                  )}
                   {o.guarantee && (
                     <p className="tier-guarantee tier-guarantee--ongoing">{o.guarantee}</p>
                   )}
@@ -582,6 +596,10 @@ export default function Home() {
         .tier--featured .tier-cta:hover { background: var(--clay-deep); border-color: var(--clay-deep); }
         .tier-guarantee { font-family: var(--font-plex), sans-serif; font-size: 11px; line-height: 1.5; color: var(--text-mid); margin: 0 0 16px; padding: 8px 10px; background: var(--surface-2); border-radius: 6px; border-left: 2px solid var(--clay); }
         .tier-guarantee--ongoing { margin: 4px 0 18px; }
+        .tier-notfor { list-style: none; margin: 0 0 12px; padding: 14px 0 0; border-top: 1px dashed var(--rule); }
+        .tier-notfor li { font-family: var(--font-plex), sans-serif; font-size: 12px; line-height: 1.5; color: var(--text-mid); padding: 4px 0 4px 16px; position: relative; }
+        .tier-notfor li::before { content: "×"; color: var(--text-faint); position: absolute; left: 2px; top: 2px; font-family: var(--font-jbm), monospace; font-weight: 700; font-size: 14px; line-height: 1; }
+        .tier-notfor--ongoing { margin-top: 4px; }
 
         /* ===== CAPACITY LINE ===== */
         .capacity-line { font-family: var(--font-jbm), monospace; font-size: 12px; letter-spacing: 0.08em; color: var(--text-mid); margin: 18px auto 0; max-width: 580px; text-transform: uppercase; }
