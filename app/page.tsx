@@ -152,6 +152,48 @@ export default function Home() {
           </div>
         </section>
 
+        {/* PRESS — pulled above the fold from /trades. Cuban quote is verbatim;
+            other entries use dated outreach framing (not "published case study") to
+            stay honest. Dates sourced from origin-story memory. */}
+        <section className="section press-section" id="press">
+          <div className="section-head">
+            <p className="section-kicker">— Press</p>
+            <h2 className="display-2">
+              The work made <em>some noise.</em>
+            </h2>
+          </div>
+          <div className="press-grid">
+            <article className="press-card press-card--feature">
+              <div className="press-date">2026 · 03 · 11</div>
+              <p className="press-body">
+                Mark Cuban reposts ChargeRight:{" "}
+                <em>
+                  "I honestly don't care how it works. I'm just glad you
+                  started a business doing it."
+                </em>
+              </p>
+              <p className="press-tag">— Mark Cuban</p>
+            </article>
+            <article className="press-card">
+              <div className="press-date">2026 · 03 · 12</div>
+              <p className="press-body">
+                Danny Fortson reaches out from <em>The Sunday Times</em>{" "}
+                (London) for an interview on building software with Claude
+                while still on the trade.
+              </p>
+              <p className="press-tag">— The Sunday Times</p>
+            </article>
+            <article className="press-card">
+              <div className="press-date">2026 · 03 · 17</div>
+              <p className="press-body">
+                Anthropic reaches out — case study on a Master Electrician
+                shipping production software with Claude.
+              </p>
+              <p className="press-tag">— Anthropic</p>
+            </article>
+          </div>
+        </section>
+
         {/* HOW I WORK — panel demo moved here from hero. It's a "how" proof, not a closer. */}
         <section className="section how-section" id="how-i-work">
           <div className="section-head">
@@ -226,7 +268,7 @@ export default function Home() {
           <div className="section-head">
             <p className="section-kicker">— What I build</p>
             <h2 className="display-2">
-              Real software.<br /><em>Not slide decks.</em>
+              Shipped,<br /><em>not pitched.</em>
             </h2>
             <p className="section-sub">
               Four categories. Pick one to start. Cross over later — most clients do.
@@ -424,6 +466,18 @@ export default function Home() {
         }
         /* ===== HOW SECTION ===== */
         .how-section .hero-vis { max-width: 1100px; margin: 0 auto; }
+
+        /* ===== PRESS SECTION ===== */
+        .press-grid { display: grid; grid-template-columns: 1fr; gap: 16px; max-width: 1100px; margin: 0 auto; }
+        @media (min-width: 880px) { .press-grid { grid-template-columns: 1.4fr 1fr 1fr; gap: 18px; } }
+        .press-card { background: var(--surface); border: 1px solid var(--rule); border-radius: 14px; padding: 28px 26px; display: flex; flex-direction: column; box-shadow: 0 1px 0 rgba(255, 255, 255, 0.6) inset, 0 8px 24px -10px rgba(26, 22, 18, 0.06); }
+        .press-card--feature { border-color: var(--clay); background: linear-gradient(180deg, var(--clay-dim) 0%, var(--surface) 65%); }
+        .press-date { font-family: var(--font-jbm), monospace; font-size: 10px; letter-spacing: 0.22em; color: var(--text-mid); text-transform: uppercase; margin-bottom: 14px; }
+        .press-body { font-family: var(--font-fraunces), serif; font-weight: 400; font-size: clamp(17px, 1.9vw, 21px); line-height: 1.5; color: var(--text); margin: 0 0 14px; flex: 1; }
+        .press-card--feature .press-body { font-size: clamp(19px, 2.1vw, 24px); }
+        .press-body em { font-style: italic; color: var(--text); font-weight: 500; }
+        .press-card--feature .press-body em { color: var(--clay-deep); font-weight: 600; }
+        .press-tag { font-family: var(--font-jbm), monospace; font-size: 11px; letter-spacing: 0.16em; color: var(--text-mid); text-transform: uppercase; margin: 0; padding-top: 14px; border-top: 1px solid var(--rule-soft); }
         .cta { display: inline-flex; align-items: baseline; gap: 12px; padding: 16px 28px; background: var(--text); color: var(--bg); text-decoration: none; border-radius: 999px; font-family: var(--font-plex), sans-serif; font-weight: 600; font-size: 15px; transition: background 0.2s, transform 0.2s; }
         .cta:hover { background: var(--clay); transform: translateY(-1px); }
         .cta-meta { font-family: var(--font-jbm), monospace; font-size: 11px; letter-spacing: 0.06em; opacity: 0.7; font-weight: 400; }
