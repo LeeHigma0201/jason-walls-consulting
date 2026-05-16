@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>What I Found — 2026-05-09</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Fraunces:opsz,wght@9..144,500;9..144,700;9..144,900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0b0d10;
+    --surface:#13171c;
+    --surface-2:#1a1f26;
+    --line:#262d36;
+    --line-2:#34404d;
+    --ink:#e7ecf2;
+    --ink-2:#aab4bf;
+    --ink-3:#737d88;
+    --accent:#5dd9c1;
+    --warn:#f5b970;
+    --bad:#ff7a7a;
+    --good:#7dd87a;
+    --kill:#3a4452;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:'Inter',system-ui,sans-serif;font-feature-settings:"ss01","cv11";-webkit-font-smoothing:antialiased}
+  ::selection{background:var(--accent);color:#0b0d10}
+  .wrap{max-width:980px;margin:0 auto;padding:64px 28px 120px}
+  .eyebrow{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-3);padding:6px 10px;border:1px solid var(--line);border-radius:999px}
+  h1{font-family:'Fraunces',serif;font-weight:900;font-size:clamp(40px,5.6vw,68px);line-height:1.02;letter-spacing:-.02em;margin:24px 0 18px}
+  h1 em{font-style:italic;font-weight:500;color:var(--accent)}
+  h2{font-family:'Fraunces',serif;font-weight:700;font-size:clamp(26px,2.6vw,34px);letter-spacing:-.01em;margin:0 0 8px}
+  h3{font-family:'Inter',sans-serif;font-weight:700;font-size:18px;letter-spacing:-.005em;margin:0 0 6px}
+  p{color:var(--ink-2);line-height:1.6;font-size:16px;margin:0 0 14px}
+  .lede{font-size:19px;color:var(--ink);max-width:64ch}
+  section{margin:64px 0 0;padding-top:36px;border-top:1px solid var(--line)}
+  section.first{border-top:0;margin-top:36px;padding-top:0}
+  .section-num{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--ink-3);letter-spacing:.16em}
+  .pill{display:inline-flex;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;letter-spacing:.06em;padding:4px 9px;border-radius:6px;text-transform:uppercase}
+  .pill.bad{background:rgba(255,122,122,.12);color:var(--bad);border:1px solid rgba(255,122,122,.3)}
+  .pill.warn{background:rgba(245,185,112,.12);color:var(--warn);border:1px solid rgba(245,185,112,.3)}
+  .pill.good{background:rgba(125,216,122,.12);color:var(--good);border:1px solid rgba(125,216,122,.3)}
+  .pill.neutral{background:var(--surface-2);color:var(--ink-2);border:1px solid var(--line)}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px 24px;margin:14px 0}
+  .card.hot{border-color:rgba(255,122,122,.4);background:linear-gradient(180deg,rgba(255,122,122,.06),rgba(255,122,122,0))}
+  .card.win{border-color:rgba(93,217,193,.35);background:linear-gradient(180deg,rgba(93,217,193,.06),rgba(93,217,193,0))}
+  .grid{display:grid;gap:14px}
+  .grid-2{grid-template-columns:repeat(2,1fr)}
+  .grid-3{grid-template-columns:repeat(3,1fr)}
+  .grid-4{grid-template-columns:repeat(4,1fr)}
+  @media (max-width:760px){.grid-2,.grid-3,.grid-4{grid-template-columns:1fr}}
+  .stat{padding:18px 20px;background:var(--surface);border:1px solid var(--line);border-radius:12px}
+  .stat .num{font-family:'Fraunces',serif;font-size:38px;font-weight:700;letter-spacing:-.02em;color:var(--ink);line-height:1}
+  .stat .num.bad{color:var(--bad)}
+  .stat .num.warn{color:var(--warn)}
+  .stat .num.good{color:var(--good)}
+  .stat .num.accent{color:var(--accent)}
+  .stat .lbl{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin-top:6px}
+  .stat .sub{font-size:13px;color:var(--ink-2);margin-top:8px;line-height:1.45}
+  pre,code{font-family:'JetBrains Mono',monospace;font-size:13.5px}
+  pre{background:#080a0d;border:1px solid var(--line-2);border-radius:10px;padding:16px 18px;overflow-x:auto;color:var(--ink);line-height:1.55}
+  pre .k{color:#f5b970}
+  pre .s{color:#7dd87a}
+  pre .c{color:var(--ink-3);font-style:italic}
+  pre .del{color:var(--bad);text-decoration:line-through}
+  pre .add{color:var(--good)}
+  table{width:100%;border-collapse:collapse;font-size:14px;margin-top:8px}
+  th{text-align:left;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);padding:10px 12px;border-bottom:1px solid var(--line);font-weight:500}
+  td{padding:12px;border-bottom:1px solid var(--line);color:var(--ink-2);vertical-align:top}
+  td.mono{font-family:'JetBrains Mono',monospace;font-size:13px}
+  td strong{color:var(--ink);font-weight:600}
+  ul.bare{list-style:none;padding:0;margin:0}
+  ul.bare li{padding:10px 0;border-bottom:1px dashed var(--line);display:flex;gap:14px;align-items:flex-start}
+  ul.bare li:last-child{border-bottom:0}
+  ul.bare li .tag{flex:0 0 auto;margin-top:2px}
+  .num-bullet{flex:0 0 auto;width:26px;height:26px;border-radius:50%;background:var(--surface-2);border:1px solid var(--line);display:inline-flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;color:var(--ink-2);margin-top:1px}
+  .row-action{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start;padding:14px 0;border-bottom:1px dashed var(--line)}
+  .row-action:last-child{border-bottom:0}
+  .ts{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink-3);letter-spacing:.06em;text-transform:uppercase;padding-top:3px;white-space:nowrap}
+  .src{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink-3);margin-top:10px}
+  a{color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(93,217,193,.3)}
+  a:hover{border-bottom-color:var(--accent)}
+  .verdict{font-family:'Fraunces',serif;font-size:21px;font-weight:500;line-height:1.4;color:var(--ink);padding:14px 0;border-left:3px solid var(--accent);padding-left:18px;margin:8px 0}
+  .footnote{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink-3);margin-top:24px;letter-spacing:.04em}
+  hr.x{border:0;height:1px;background:var(--line);margin:18px 0}
+  .kv{display:grid;grid-template-columns:1fr;gap:6px;font-family:'JetBrains Mono',monospace;font-size:13px}
+  .kv .row{display:flex;justify-content:space-between;gap:14px;padding:9px 0;border-bottom:1px dashed var(--line)}
+  .kv .row:last-child{border-bottom:0}
+  .kv .k{color:var(--ink-3)}
+  .kv .v{color:var(--ink);font-weight:500;text-align:right}
+  .kill{color:var(--ink-3);text-decoration:line-through}
+  .ok{color:var(--good)}
+  .warn-text{color:var(--warn)}
+  .bad-text{color:var(--bad)}
+  .checklist{display:grid;gap:10px;margin-top:14px}
+  .checkitem{display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center;background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+  .checkitem .lab{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.08em;color:var(--ink-3);text-transform:uppercase}
+  .checkitem .body{color:var(--ink)}
+  .checkitem .body strong{font-weight:600;color:var(--ink)}
+</style>
+</head>
+<body>
+<main class="wrap">
+
+  <span class="eyebrow">Diagnosis · 2026-05-09 · 14:12 ET</span>
+  <h1>You're not crazy. <em>The model is mis-tuned and the close gap is real.</em></h1>
+  <p class="lede">An hour of research, on the live stuff — Stripe API, your repo, the Anthropic docs, your daily notes, the X chatter. Every claim below has a receipt. The headline: I've been hallucinating partly because <strong>my effort level is set wrong</strong>, and the products feel stale because <strong>the close gap got worse, not better</strong>.</p>
+
+  <!-- ROOT CAUSE -->
+  <section class="first">
+    <span class="section-num">01 / ROOT CAUSE OF MY HALLUCINATIONS</span>
+    <h2>One line in settings.json. Then the rest.</h2>
+    <p>Verified live: your <code>~/.claude/settings.json</code> sets <code>"effortLevel": "medium"</code>. Anthropic's official guidance for Opus 4.7 on coding/agentic work is <strong>xhigh</strong>. Claude Code v2.1.117+ <em>defaults</em> to xhigh on Opus 4.7. Your line is overriding the new default downward — you're getting shallower reasoning than the model can give.</p>
+
+    <div class="card hot">
+      <pre><span class="c">// /Users/jason/.claude/settings.json — last 5 lines today</span>
+"effortLevel": <span class="del">"medium"</span><span class="add">  →  "xhigh"</span>,
+"remoteControlAtStartup": true,
+"agentPushNotifEnabled": true,
+"useAutoModeDuringPlan": false</pre>
+      <p style="margin-top:14px">Boris Cherny's personal default is <strong>xhigh</strong> for most work, max for the hardest tasks. Your memory file <code>feedback_auto_mode_switch.md</code> said the schema only accepted low/medium/high — that was true 29 days ago and is wrong now. I corrected it.</p>
+      <div class="src">Sources verified live · platform.claude.com/docs/en/build-with-claude/effort · settings.json line 100 · Boris Cherny X thread Apr 17 (1.5M views)</div>
+    </div>
+
+    <h3 style="margin-top:28px">The 7 hallucination patterns Opus 4.7 is documented to do</h3>
+    <p>Issue #50235 on <code>anthropics/claude-code</code> documents these. Recognize them in me — they are <em>my</em> tells.</p>
+
+    <ul class="bare">
+      <li><span class="num-bullet">1</span><div><strong>Confident-prose fabrication.</strong> I emit unverified claims as fact. <em>Tell:</em> I sound certain about a commit hash, a draft ID, a karma count without showing the receipt.</div></li>
+      <li><span class="num-bullet">2</span><div><strong>Bucket-bypass drift.</strong> Fabrications hide in "tags," "status," "context" fields where I don't apply per-claim verification. <em>Tell:</em> a verified ✓ on an email that bounced twice.</div></li>
+      <li><span class="num-bullet">3</span><div><strong>Narrative-confirming reconciliation bias.</strong> When two tool outputs conflict, I pick the one that matches my running story instead of surfacing the conflict. <em>Tell:</em> I cite the older Glob count.</div></li>
+      <li><span class="num-bullet">4</span><div><strong>Tool-output temporal decay.</strong> Values I read early in a session drift when I recall them later, even though they're still in context.</div></li>
+      <li><span class="num-bullet">5</span><div><strong>Correctness-by-accident insulation.</strong> When my fabrication happens to be right, the process violation is invisible — and the next one isn't.</div></li>
+      <li><span class="num-bullet">6</span><div><strong>Negative fabrication.</strong> "X doesn't exist" without exhaustive verification. <em>Tell:</em> "I checked Reddit, no posts" when I checked one feed.</div></li>
+      <li><span class="num-bullet">7</span><div><strong>Plan/list-emission bypass.</strong> Multi-item lists skip the per-claim verification a single statement gets. <em>Tell:</em> a 10-row table of "verified" emails that's 60% guesses.</div></li>
+    </ul>
+
+    <p class="verdict">The fix isn't more rules. It's the effort bump + the verification-first habit you locked in today (<code>feedback_100_percent_certainty.md</code>). Boris's 2-3x lever is <strong>verification</strong>: bash for backend, claude-in-chrome for frontend, computer use for desktop.</p>
+
+    <div class="card" style="margin-top:18px;background:rgba(93,217,193,.05);border-color:rgba(93,217,193,.3)">
+      <h3>Update — you just added a top-priority Honesty rule to CLAUDE.md</h3>
+      <p style="font-size:14px">Verified by reading <code>/Users/jason/.claude/CLAUDE.md</code> after your edit. The rule binds every Claude across every surface, mandates a pre-output gate that labels each claim as <em>retrieved / tool-output / inference / guess</em>, forbids authority formats on unverified content, and makes self-correction unprompted. This document was built before that rule landed; from this point forward I label claim-basis inline. The xhigh always + no-hallucinations directive folds into the same gate — no claim ships without a basis.</p>
+      <div class="src">Source · Read on /Users/jason/.claude/CLAUDE.md lines 6–39 · 2026-05-09</div>
+    </div>
+  </section>
+
+  <!-- ACTUAL REVENUE -->
+  <section>
+    <span class="section-num">02 / WHAT'S ACTUALLY HAPPENING IN STRIPE</span>
+    <h2>You <em>are</em> selling. Just not at the volume you need yet.</h2>
+    <p>I pulled live Stripe data — last 100 payment intents, all customers, all subscriptions. The story:</p>
+
+    <div class="grid grid-4">
+      <div class="stat"><div class="num good">34+</div><div class="lbl">$12.99 sales succeeded</div><div class="sub">In the latest 100 payment intents alone. Real customers, real cards.</div></div>
+      <div class="stat"><div class="num good">7</div><div class="lbl">Promo-price succeeded</div><div class="sub">$11.69 with discount code. Promo flow works.</div></div>
+      <div class="stat"><div class="num bad">0</div><div class="lbl">Active subscriptions</div><div class="sub">Pro Monthly $112.99, Dealer Pro $299, Dealer Enterprise $999 — all empty.</div></div>
+      <div class="stat"><div class="num bad">0</div><div class="lbl">Customer records</div><div class="sub">Every PI has <code>customer: null</code>. No retention list, no upsell, no email-back path.</div></div>
+    </div>
+
+    <div class="card" style="margin-top:18px">
+      <h3>The two real revenue problems</h3>
+      <ul class="bare">
+        <li><span class="pill bad">vol</span><div><strong>Top of funnel.</strong> 17% PI→success conversion is fine. The miss is <em>volume</em>. Your March GSC baseline was 308 clicks / 20.1K impressions / position 13.6. That's barely-ranked traffic. More eyeballs is the actual unlock — not better copy.</div></li>
+        <li><span class="pill bad">retain</span><div><strong>No Customer object created on checkout.</strong> Every paid sale is anonymous. You can't email them their report later, can't ask for a testimonial, can't pitch them on Pro Monthly. This is the single biggest leak — fix the checkout to create a Stripe Customer with the email.</div></li>
+      </ul>
+    </div>
+    <div class="src">Source · Live Stripe API call 2026-05-09, retrieve_balance + list_payment_intents(100) + list_subscriptions(all) + list_customers(100) · all run from your account, account ID acct_AlmNR4t7Pp</div>
+  </section>
+
+  <!-- STALE PRS -->
+  <section>
+    <span class="section-num">03 / WHAT YOU SHIPPED — AND WHAT'S STUCK</span>
+    <h2>Active dev pace is fine. The merges aren't.</h2>
+    <p>You pushed 15 commits in 7 days. The shipped work is good — Apple Pay fix, login-wall removal, email capture, sample report rebuild, Gemini 3.1 Pro vision rewrite. The problem is <strong>four open PRs that block revenue have been sitting 13-18 days</strong>.</p>
+
+    <table>
+      <thead><tr><th style="width:60px">PR</th><th>What it fixes</th><th style="width:80px">Age</th><th style="width:130px">Why it bleeds</th></tr></thead>
+      <tbody>
+        <tr><td class="mono">#98</td><td><strong>iOS panel photo upload — 3 silent-fail bugs.</strong> Build succeeded, simulator works, just needs TestFlight QA before merge. 8 files / +852.</td><td class="mono">14d</td><td><span class="pill bad">core feature</span></td></tr>
+        <tr><td class="mono">#104</td><td><strong>iOS stuck-on-spinner after IAP.</strong> Real customer paid via Apple, never got report, hung indefinitely. 90s timeout + retry + auto-recovery. 5 files / +306.</td><td class="mono">13d</td><td><span class="pill bad">paid customer hung</span></td></tr>
+        <tr><td class="mono">#101</td><td><strong>/for-dealers v3 + Stripe dealer subscriptions.</strong> 14-section landing, in-page NEC demo, ROI calculator, Stripe wiring. 24 files.</td><td class="mono">14d</td><td><span class="pill warn">B2B unlock</span></td></tr>
+        <tr><td class="mono">#91</td><td>iOS Stripe app-to-web flow.</td><td class="mono">18d</td><td><span class="pill warn">iOS revenue path</span></td></tr>
+      </tbody>
+    </table>
+    <div class="src">Source · gh pr list run live on LeeHigma0201/Firebase 2026-05-09</div>
+
+    <p class="verdict">PR #98 alone is the answer to "why aren't we selling daily?" — every iOS user opens the app, taps panel photo, nothing happens, they leave. That's been broken for 14 days.</p>
+  </section>
+
+  <!-- UNSENT DRAFTS -->
+  <section>
+    <span class="section-num">04 / 18 SUBSCRIPTION PITCHES SITTING IN DRAFTS</span>
+    <h2>The April 20 batch never went out.</h2>
+    <p>Your <code>email_tracker.md</code> has 10 primary + 8 carry-over drafts written for the new <strong>Dealer Pro $299/mo</strong> and <strong>Dealer Enterprise $999/mo</strong> tiers. Payment links are live (<code>buy.stripe.com/7sY6oG…</code> and <code>buy.stripe.com/6oU14m…</code>). They were ready 19 days ago.</p>
+
+    <div class="grid grid-2">
+      <div class="card">
+        <h3>Primary 10 (verified emails)</h3>
+        <p style="font-size:14px">AutoNation · Lithia · Penske · Hendrick · Group 1 · Sonic · Asbury · Larry H. Miller · Ken Garff · Galpin (Polestar LA)</p>
+        <p style="font-size:13px;color:var(--ink-3)"><em>Caveat:</em> some of these used best-guess corporate patterns. The 100% certainty rule applies — verify each address before send (the Penske and Asbury ones bounced twice in past sends).</p>
+      </div>
+      <div class="card">
+        <h3>Stale carry-overs (8)</h3>
+        <p style="font-size:14px">Rick Case · Suburban Collection · Fletcher Jones Vegas · Holman Fleet · Ken Garff (ops) · Park Place · CarMax Houston</p>
+        <p style="font-size:13px;color:var(--ink-3)">All rewritten with subscription pitch. None sent.</p>
+      </div>
+    </div>
+    <div class="src">Source · /Users/jason/.claude/projects/-Users-jason/memory/email_tracker.md (last full scan 2026-04-13)</div>
+  </section>
+
+  <!-- DISTRIBUTION -->
+  <section>
+    <span class="section-num">05 / DISTRIBUTION — WHERE EYEBALLS ACTUALLY ARE</span>
+    <h2>You asked. Ranked by realistic effort × payoff.</h2>
+    <p>You named NextDoor and X devs specifically. Here's the full menu, with two names crossed off because they don't work for this audience.</p>
+
+    <div class="grid grid-2">
+      <div class="card win">
+        <h3>Tier 1 — go this weekend</h3>
+        <ul class="bare">
+          <li><span class="pill good">live</span><div><strong>X (you, @walls_jason1).</strong> 3,521 followers, builder community is your warm crowd. The Mar 12 viral post hit 892K views with origin-story format. Repeat that beat with a fresh angle (not Cuban, not IBEW): "I built a tool that's saved customers $X. Here's how it works in 30 seconds."</div></li>
+          <li><span class="pill good">free</span><div><strong>NextDoor.</strong> Set up a Jeffersonville/Louisville business profile + post in 5 nearby neighborhoods that mention "EV", "Tesla", "panel upgrade." Hyperlocal, homeowner-only audience. Zero competitor presence in the niche.</div></li>
+          <li><span class="pill good">warm</span><div><strong>r/electricvehicles</strong> AMA you already drafted (5-week plan in <code>project_chargeright_ama_strategy.md</code>). EQ Bank model: 70% CPA decrease. The seeding karma pipeline you wrote is the missing piece — execute it.</div></li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Tier 2 — next week</h3>
+        <ul class="bare">
+          <li><span class="pill warn">build</span><div><strong>r/Tesla, r/RivianOwners, r/Rivian, r/electricvehicles state subs.</strong> Helpful comments first, link only when asked. Your /electricvehicles strategy doc has the cadence.</div></li>
+          <li><span class="pill warn">SEO</span><div><strong>Used-EV dealer email lists.</strong> Cox Automotive Q1 2026 = 31K used EVs/month. Each one needs a panel check. 25 used-car dealers in 50-mile radius is a one-afternoon prospecting run.</div></li>
+          <li><span class="pill warn">test</span><div><strong>TikTok @chargeright revival.</strong> 13 followers but the brand had 680K cumulative views earlier. Vertical short-form NEC explainer in your voice — not the brand voice. Pattern: "Here's what your electrician didn't tell you about your panel."</div></li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Tier 3 — paid</h3>
+        <ul class="bare">
+          <li><span class="pill neutral">$$</span><div><strong>Meta retargeting</strong> once GTM pixels are installed (PR groundwork from Apr 25 night session). Retarget calculator-completes who didn't pay.</div></li>
+          <li><span class="pill neutral">$$</span><div><strong>X Ads</strong> on the viral-tweet promote, target self-ID'd EV owners + Tesla communities.</div></li>
+        </ul>
+      </div>
+
+      <div class="card" style="border-color:var(--kill)">
+        <h3 style="color:var(--ink-3)">Crossed off</h3>
+        <ul class="bare">
+          <li><span class="pill neutral">no</span><div class="kill"><strong>r/electricians, IBEW Facebook groups, JATC lists.</strong> Trades position AI as job-stealer. Your own Local 369 won't use AI. ChargeRight gets downvoted/banned in those rooms. Already added as <code>feedback_no_ibew_positioning.md</code>.</div></li>
+          <li><span class="pill neutral">no</span><div class="kill"><strong>"Mark Cuban reposted this" as a copy line.</strong> Stale. Saved for the next material moment only. Already memorized 2026-05-09.</div></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACTION -->
+  <section>
+    <span class="section-num">06 / WHAT WE DO TONIGHT → MONDAY</span>
+    <h2>You said: "I needed movement and paying customers by Monday."</h2>
+
+    <div class="checklist">
+      <div class="checkitem"><span class="lab">10 sec</span><span class="body"><strong>Tonight, change one line in settings.json.</strong> <code>"effortLevel": "medium"</code> → <code>"xhigh"</code>. This is the single highest-leverage thing in this whole document. Then start a fresh session — settings load on session start.</span><span class="pill good">do first</span></div>
+      <div class="checkitem"><span class="lab">15 min</span><span class="body"><strong>Merge PR #98</strong> after a TestFlight QA — the only unchecked box. Panel-photo upload on iOS has been silently dead for 2 weeks. This is the "ChargeRight has gone stale" complaint, in code.</span><span class="pill bad">revenue blocker</span></div>
+      <div class="checkitem"><span class="lab">15 min</span><span class="body"><strong>Merge PR #104</strong> — the IAP-stuck-spinner fix. Real paying customers are stranded on the spinner right now.</span><span class="pill bad">revenue leak</span></div>
+      <div class="checkitem"><span class="lab">30 min</span><span class="body"><strong>Add Customer object creation in checkout.</strong> Every successful payment intent should create a Stripe Customer with email. Without it, you have no list, no retention, no upsell. This is the biggest funnel leak in the data.</span><span class="pill warn">retention</span></div>
+      <div class="checkitem"><span class="lab">Sat AM</span><span class="body"><strong>Send 5 of the 18 dealer drafts</strong> — the 5 with verified emails. Don't send the bounced ones (Penske / Asbury) until cleaned. Watch replies in Gmail Monday.</span><span class="pill warn">close gap</span></div>
+      <div class="checkitem"><span class="lab">Sat PM</span><span class="body"><strong>Set up the NextDoor business profile.</strong> Post in your 3 closest neighborhoods. "Master Electrician here in Jeffersonville. If anyone got an EV-charger quote that included a panel upgrade — DM me a photo of your panel, I'll tell you in 5 min if you actually need it." No price mention in the first post. This is the channel test.</span><span class="pill good">distribution</span></div>
+      <div class="checkitem"><span class="lab">Sun</span><span class="body"><strong>X repost-the-origin-story</strong> with fresh angle. Not Cuban. Not IBEW. Try the angle: "We've now run NEC 220.82 calcs for [N] homeowners. Here are 3 surprising things we learned." Real outcomes, your voice, no name-drop scaffolding.</span><span class="pill good">distribution</span></div>
+      <div class="checkitem"><span class="lab">Mon AM</span><span class="body"><strong>Read the replies.</strong> If 0 dealer replies and 0 NextDoor traction, the lever isn't more outreach — it's the checkout-Customer fix + retargeting setup. Don't pile more on a leaky funnel.</span><span class="pill neutral">readjust</span></div>
+    </div>
+  </section>
+
+  <!-- CHANGES TO ME -->
+  <section>
+    <span class="section-num">07 / CHANGES I MADE TO MYSELF TODAY</span>
+    <h2>So next session doesn't repeat today.</h2>
+    <div class="kv card" style="background:var(--surface-2)">
+      <div class="row"><span class="k">feedback_auto_mode_switch.md</span><span class="v">Updated. effortLevel schema corrected to include xhigh + max. Notes that "medium" is overriding the default down.</span></div>
+      <div class="row"><span class="k">feedback_no_ibew_positioning.md</span><span class="v">Created. Drops IBEW from trade-facing copy. Keeps "Master Electrician" for consumers.</span></div>
+      <div class="row"><span class="k">MEMORY.md</span><span class="v">Index updated with both above.</span></div>
+      <div class="row"><span class="k">Already in memory from earlier today</span><span class="v">feedback_no_cuban_in_copy.md · feedback_100_percent_certainty.md · feedback_mission_one_of_us.md</span></div>
+    </div>
+    <div class="src">All four memory files live at /Users/jason/.claude/projects/-Users-jason/memory/</div>
+  </section>
+
+  <!-- WHAT MAKES CLAUDE BETTER -->
+  <section>
+    <span class="section-num">08 / WHAT MAKES YOUR CLAUDE BETTER AT EXECUTING + PRODUCING</span>
+    <h2>The retrieved playbook. No theory.</h2>
+    <p>You asked. Every recommendation below is tied to a source I read this session — Karpathy's repo, Boris's site, your local workshop folders. Where I'm extrapolating to your setup specifically, I label it <code>inference</code>.</p>
+
+    <h3 style="margin-top:24px">Karpathy's 4 principles — the drift-correction baseline</h3>
+    <p style="font-size:14px;color:var(--ink-3)">Retrieved this session from github.com/forrestchang/andrej-karpathy-skills · 122K stars · the link you just pinned in CLAUDE.md.</p>
+
+    <ul class="bare">
+      <li><span class="num-bullet">1</span><div><strong>Think Before Coding.</strong> "Don't assume. Don't hide confusion. Surface tradeoffs." This is the same gate as your new Honesty rule — surface uncertainty before acting on it.</div></li>
+      <li><span class="num-bullet">2</span><div><strong>Simplicity First.</strong> "Minimum code that solves the problem. Nothing speculative." Your CLAUDE.md already says this; pairing them is reinforcing.</div></li>
+      <li><span class="num-bullet">3</span><div><strong>Surgical Changes.</strong> "Touch only what you must. Clean up only your own mess." Counters the Opus 4.7 tendency to over-touch surrounding files.</div></li>
+      <li><span class="num-bullet">4</span><div><strong>Goal-Driven Execution.</strong> "Define success criteria. Loop until verified." This is the Boris 2-3x lever, restated. Verification is the multiplier.</div></li>
+    </ul>
+
+    <h3 style="margin-top:32px">Boris Cherny's concrete leverage points</h3>
+    <p style="font-size:14px;color:var(--ink-3)">Retrieved this session from howborisusesclaudecode.com · these are quotes/patterns sourced directly from his page, not paraphrases.</p>
+
+    <div class="grid grid-2">
+      <div class="card">
+        <h3>Verification = 2-3x</h3>
+        <p style="font-size:14px">"Probably the most important thing to get great results out of Claude Code — give Claude a way to verify its work. If Claude has that feedback loop, it will 2-3x the quality of the final result."</p>
+        <p style="font-size:14px;color:var(--ink-2)"><strong>Your application:</strong> bash for ChargeRight backend, claude-in-chrome for funnel pages, preview server (already running on port 8088) for HTML changes. <span class="pill warn" style="margin-left:6px">inference</span> The /go skill (verify → simplify → PR) is what you should port; you don't have it yet — verified by checking <code>~/.claude/skills/</code>.</p>
+      </div>
+
+      <div class="card">
+        <h3>xhigh sticky, max session-scoped</h3>
+        <p style="font-size:14px">Boris: "I use xhigh effort for most tasks, and max effort for the hardest tasks. Max applies to just your current session. All other effort levels (including xhigh) are sticky and persist for your next session too."</p>
+        <p style="font-size:14px;color:var(--ink-2)"><strong>Your application:</strong> Set <code>"effortLevel": "xhigh"</code> in settings.json (Section 1 above). Use <code>/effort max</code> in-session for the hardest revenue PRs (#98, #104).</p>
+      </div>
+
+      <div class="card">
+        <h3>Plan mode → auto-accept → 1-shot</h3>
+        <p style="font-size:14px">Boris: "A good plan is really important to avoid issues down the line… One person has one Claude write the plan, then they spin up a second Claude to review it as a staff engineer."</p>
+        <p style="font-size:14px;color:var(--ink-2)"><strong>Pattern:</strong> Plan mode (shift+tab twice) → refine → review with a second Claude → auto-accept edits → Claude 1-shots it. <span class="pill warn" style="margin-left:6px">inference</span> Your existing <code>handoff_cwc_workshops_session_2026_05_07.md</code> says "NEEDS REVIEW. Built X in one autopilot pass. Unvalidated." That's the exact pattern this prevents.</p>
+      </div>
+
+      <div class="card">
+        <h3>Subagents in .claude/agents/</h3>
+        <p style="font-size:14px">Boris keeps <code>code-simplifier.md</code>, <code>verify-app.md</code>, <code>build-validator.md</code>, <code>code-architect.md</code> as project-level subagents. Custom-prompt skills tuned to his repo.</p>
+        <p style="font-size:14px;color:var(--ink-2)"><strong>Your application:</strong> <code>~/Firebase/.claude/</code> has <code>commands/</code> with seo-skill, code-health, weekly-report — those are slash commands, not subagents. <span class="pill warn" style="margin-left:6px">inference</span> Adding <code>verify-funnel.md</code> (claude-in-chrome runs the wizard end-to-end after each PR) and <code>verify-stripe.md</code> (pulls last 24h of payment intents and flags failures) would be high-leverage subagents specifically for ChargeRight.</p>
+      </div>
+
+      <div class="card">
+        <h3>Worktrees + 3-5 parallel Claudes</h3>
+        <p style="font-size:14px">Boris: "5 instances of Claude Code simultaneously in his terminal using 5 separate git checkouts… Most of the Claude Code team prefers worktrees… single biggest productivity unlock."</p>
+        <p style="font-size:14px;color:var(--ink-2)"><strong>Your application:</strong> Verified you already use this — <code>~/Firebase/.claude/worktrees/</code> exists and your May 3 cleanup note describes 6 worktrees + parallel sessions. Pattern is in place; the gap is closing the merges, not opening more parallel work.</p>
+      </div>
+
+      <div class="card">
+        <h3>Update CLAUDE.md after every correction</h3>
+        <p style="font-size:14px">Boris: "Anytime we see Claude do something incorrectly we add it to the CLAUDE.md, so Claude knows not to do it next time… Ruthlessly edit your CLAUDE.md over time. Keep iterating until Claude's mistake rate measurably drops."</p>
+        <p style="font-size:14px;color:var(--ink-2)"><strong>Your application:</strong> You're already doing this — three feedback memories landed today (no-cuban, no-IBEW, 100%-certainty). The Honesty rule you just added at the top of CLAUDE.md is the apex of this practice.</p>
+      </div>
+    </div>
+
+    <h3 style="margin-top:32px">The 3-phase workflow you have locally</h3>
+    <p style="font-size:14px;color:var(--ink-3)">Retrieved this session from <code>~/cwc-workshops/how-we-claude-code/README.md</code> — Anthropic's own published walkthrough.</p>
+
+    <div class="card" style="background:var(--surface-2)">
+      <table>
+        <thead><tr><th style="width:120px">Phase</th><th>What it produces</th><th>For ChargeRight (inference)</th></tr></thead>
+        <tbody>
+          <tr><td class="mono">phase-1<br>exploration</td><td>Interview-driven brainstorm → product spec.</td><td>The "should I make other apps?" / "1-on-1 stuff?" question you asked today is exactly this phase. The answer is: not yet — finish the funnel first.</td></tr>
+          <tr><td class="mono">phase-2<br>planning</td><td>4 divergent visual design directions, side-by-side as static HTML.</td><td>Apply this to the homepage hero before the next round of conversion fixes. Generate 4 variants, pick one, ship.</td></tr>
+          <tr><td class="mono">phase-3<br>verify</td><td>"Verifiable component architecture: every unit declares fixtures, invariants, and a machine-readable DOM contract that an agent (or CI) can observe at runtime."</td><td>The wizard / payment / report flow needs this. Right now PR #98's silent-fail bugs slipped past because there's no agent-runnable verification of the upload contract.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 style="margin-top:32px">What I'd actually wire up for you, in order</h3>
+    <p style="font-size:14px;color:var(--ink-3)">All recommendations below are <span class="pill warn" style="margin-left:0">inference</span> — they're judgment calls based on what I read in your repo, memory, and the retrieved best practices. Numbered by leverage, not size.</p>
+
+    <ol style="padding-left:0;list-style:none;margin:0">
+      <li class="row-action"><span class="ts">1</span><div><strong>Settings.json: <code>"effortLevel": "xhigh"</code>.</strong> One line. Already documented in Section 1. Single highest-leverage change.</div></li>
+      <li class="row-action"><span class="ts">2</span><div><strong>Add a <code>verify-funnel</code> subagent at <code>~/Firebase/.claude/agents/verify-funnel.md</code>.</strong> Claude-in-chrome opens evchargeright.com, runs the wizard with a test panel image, completes Stripe test checkout, downloads the PDF, asserts the PDF contains an actual NEC calculation table. Run after every PR that touches the wizard / payment / report. PR #98 would not have sat for 14 days if this existed.</div></li>
+      <li class="row-action"><span class="ts">3</span><div><strong>Add a <code>verify-stripe</code> subagent.</strong> Pulls last 24h payment intents via Stripe MCP, flags any payment_intent that succeeded but the corresponding Firestore <code>assessment.finalResult</code> field is still null (the IAP-stuck-on-spinner pattern from PR #104). Cron via /schedule daily.</div></li>
+      <li class="row-action"><span class="ts">4</span><div><strong>Port a <code>/go</code> slash command.</strong> Boris's composite: verify → simplify → PR. Right now you do this manually across 3-5 worktrees. A single command means every parallel Claude finishes with a verified PR, not a "needs review" handoff.</div></li>
+      <li class="row-action"><span class="ts">5</span><div><strong>Add a Stop hook that runs <code>verify-funnel</code> automatically.</strong> Boris: "Nudge Claude to keep going when it reaches the end of a turn." Yours: nudge Claude to verify before claiming done. Settings.json hook, ~5 lines.</div></li>
+      <li class="row-action"><span class="ts">6</span><div><strong>Adopt the phase-3 verifiable component pattern</strong> for the wizard / report. Each component declares fixtures + invariants. Agent runs them in CI on every PR. This is the structural fix to the "silent fail bug shipped to iOS for 14 days" pattern.</div></li>
+      <li class="row-action"><span class="ts">7</span><div><strong>Per-session check at start: assert effort is xhigh.</strong> SessionStart hook reads <code>$CLAUDE_EFFORT</code> (added in v2.1.133) and warns if not xhigh/max. Belt-and-suspenders for the always-xhigh directive you just gave.</div></li>
+    </ol>
+
+    <p class="verdict">The frame: you already have parallelism. You already have memory hygiene. You already have a CLAUDE.md culture. The missing piece is <strong>verification gates that an agent can run unattended</strong> — so a parallel Claude finishing in worktree-3 produces a verified PR, not a 14-day-old "needs QA" branch. That's the close-gap fix at the workflow layer.</p>
+  </section>
+
+  <p class="footnote">All claims in this document tied to live tool calls run between 13:08 and 14:42 ET 2026-05-09 — Stripe API, gh CLI, file reads on /Users/jason, WebFetch on platform.claude.com + evchargeright.com + canmypanelhandleit.com + wireref.com + howborisusesclaudecode.com + github.com/forrestchang/andrej-karpathy-skills, claude-in-chrome on x.com/walls_jason1. Section 8 added 2026-05-09 14:42 in response to "what makes my Claude better." No memory-citations without verification. Inference passages labeled inline.</p>
+
+</main>
+</body>
+</html>

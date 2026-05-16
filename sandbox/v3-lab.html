@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>v3 · The Lab · Jason Walls</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@200;400;500;700&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #0e0e10;
+      --ink-2: #171719;
+      --ink-3: #22222a;
+      --paper: #f4f2ee;
+      --text: #e8e6e0;
+      --text-mid: #88857c;
+      --signal: #39ff6a;
+      --signal-dim: rgba(57, 255, 106, 0.1);
+      --amber: #f0a800;
+      --amber-dim: rgba(240, 168, 0, 0.1);
+      --rule: #2a2a32;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      background: var(--ink);
+      color: var(--text);
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 1.55;
+      min-height: 100vh;
+    }
+    body::before {
+      content: "";
+      position: fixed; inset: 0;
+      background:
+        radial-gradient(circle at 15% 0%, rgba(57, 255, 106, 0.04) 0, transparent 50%),
+        radial-gradient(circle at 100% 100%, rgba(240, 168, 0, 0.025) 0, transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    main { position: relative; z-index: 1; }
+
+    /* STATUS BAR */
+    .status { display: flex; gap: 20px; padding: 14px 32px; border-bottom: 1px solid var(--rule); font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-mid); flex-wrap: wrap; align-items: center; }
+    .status .dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--signal); margin-right: 8px; vertical-align: middle; box-shadow: 0 0 8px var(--signal); animation: pulse 2s infinite; }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+    .status span { display: inline-flex; align-items: center; }
+    .status .accent { color: var(--text); }
+    .status .ml { margin-left: auto; }
+    .status a { color: var(--text); text-decoration: none; border-bottom: 1px dotted var(--text-mid); padding-bottom: 1px; }
+
+    /* HERO — split: typed left, demo right */
+    .hero { padding: 80px 32px; max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 1fr; gap: 48px; align-items: center; }
+    @media (min-width: 980px) { .hero { grid-template-columns: 1fr 1fr; gap: 80px; } }
+
+    .h-kicker { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--signal); margin-bottom: 28px; letter-spacing: 0.16em; }
+    .h-kicker::before { content: "// "; }
+
+    .h-title { font-family: 'JetBrains Mono', monospace; font-weight: 200; font-size: clamp(36px, 4.5vw, 60px); letter-spacing: -0.02em; line-height: 1.05; color: var(--text); margin-bottom: 28px; }
+    .h-title b { font-weight: 700; color: var(--signal); }
+    .h-tagline { font-family: 'IBM Plex Sans', sans-serif; font-weight: 300; font-size: 19px; line-height: 1.5; color: var(--text-mid); max-width: 480px; min-height: 60px; margin-bottom: 36px; }
+    .h-tagline::after { content: "▍"; color: var(--signal); animation: blink 0.8s steps(1) infinite; margin-left: 2px; }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    .h-cta { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn { display: inline-flex; align-items: center; gap: 10px; padding: 14px 22px; font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; text-decoration: none; transition: all 0.2s; cursor: pointer; border: 1px solid transparent; }
+    .btn-primary { background: var(--signal); color: var(--ink); }
+    .btn-primary:hover { background: #4dffa0; }
+    .btn-ghost { background: transparent; color: var(--text); border-color: var(--rule); }
+    .btn-ghost:hover { border-color: var(--signal); color: var(--signal); }
+    .btn .arr { transition: transform 0.2s; }
+    .btn:hover .arr { transform: translateX(4px); }
+
+    /* DEMO PANEL */
+    .demo {
+      background: var(--ink-2);
+      border: 1px solid var(--rule);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 24px 48px rgba(0,0,0,0.5);
+      transform: perspective(1200px) rotateY(-3deg) rotateX(2deg);
+      transform-origin: center;
+    }
+    .demo-bar { display: flex; align-items: center; gap: 8px; padding: 12px 16px; border-bottom: 1px solid var(--rule); background: var(--ink-3); }
+    .demo-bar .dot { width: 11px; height: 11px; border-radius: 50%; }
+    .demo-bar .dot.r { background: #ff5f56; }
+    .demo-bar .dot.y { background: var(--amber); }
+    .demo-bar .dot.g { background: var(--signal); box-shadow: none; animation: none; }
+    .demo-bar .file { margin-left: 12px; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-mid); }
+    .demo-body { padding: 28px 24px; font-family: 'JetBrains Mono', monospace; font-size: 13px; line-height: 1.7; color: var(--text); }
+    .demo-body .gut { color: var(--text-mid); margin-right: 16px; user-select: none; }
+    .demo-body .kw { color: var(--amber); }
+    .demo-body .str { color: var(--signal); }
+    .demo-body .com { color: var(--text-mid); }
+    .demo-body .out { color: var(--signal); padding: 6px 0 6px 12px; border-left: 2px solid var(--signal); margin-top: 16px; }
+
+    /* PRICING */
+    .pricing { padding: 96px 32px; max-width: 1280px; margin: 0 auto; }
+    .p-h { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--signal); letter-spacing: 0.16em; margin-bottom: 16px; }
+    .p-h::before { content: "// "; }
+    .p-title { font-family: 'JetBrains Mono', monospace; font-weight: 200; font-size: clamp(28px, 3.5vw, 44px); letter-spacing: -0.02em; line-height: 1.1; max-width: 720px; margin-bottom: 14px; }
+    .p-title b { font-weight: 700; color: var(--text); }
+    .p-sub { font-family: 'IBM Plex Sans', sans-serif; font-size: 17px; color: var(--text-mid); max-width: 640px; margin-bottom: 56px; }
+
+    .tier-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+    @media (min-width: 760px) { .tier-grid { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 1080px) { .tier-grid { grid-template-columns: 1fr 1fr 1fr 1fr; } }
+
+    .tier { background: var(--ink-2); border: 1px solid var(--rule); padding: 28px; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); display: flex; flex-direction: column; }
+    .tier:hover { transform: translateY(-4px); border-color: var(--signal); }
+    .tier.featured { border-color: var(--signal); box-shadow: 0 0 0 1px var(--signal-dim), 0 12px 32px rgba(57,255,106,0.06); transform: scale(1.02); }
+    .tier.featured:hover { transform: scale(1.02) translateY(-4px); }
+    .tier .badge { font-family: 'JetBrains Mono', monospace; font-size: 9px; text-transform: uppercase; letter-spacing: 0.22em; color: var(--signal); margin-bottom: 16px; }
+    .tier .name { font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 18px; color: var(--text); margin-bottom: 8px; line-height: 1.2; }
+    .tier .price { font-family: 'JetBrains Mono', monospace; font-weight: 200; font-size: 36px; color: var(--text); margin-bottom: 4px; letter-spacing: -0.02em; }
+    .tier .duration { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-mid); margin-bottom: 24px; letter-spacing: 0.06em; }
+    .tier ul { list-style: none; margin-bottom: 24px; flex: 1; }
+    .tier li { font-family: 'IBM Plex Sans', sans-serif; font-size: 13px; color: var(--text); padding: 6px 0 6px 22px; position: relative; line-height: 1.45; }
+    .tier li::before { content: "✓"; color: var(--signal); position: absolute; left: 0; top: 6px; font-family: 'JetBrains Mono', monospace; }
+    .tier .book { display: block; text-align: center; padding: 12px; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--text); border: 1px solid var(--rule); text-decoration: none; transition: all 0.2s; }
+    .tier .book:hover { border-color: var(--signal); color: var(--signal); }
+    .tier.featured .book { background: var(--signal); color: var(--ink); border-color: var(--signal); }
+
+    /* MISSION echo */
+    .mission { padding: 80px 32px; max-width: 880px; margin: 0 auto; border-top: 1px solid var(--rule); }
+    .mission p { font-family: 'IBM Plex Sans', sans-serif; font-size: 19px; line-height: 1.55; color: var(--text); }
+    .mission p::before { content: "/* "; color: var(--text-mid); font-family: 'JetBrains Mono', monospace; }
+    .mission p::after { content: " */"; color: var(--text-mid); font-family: 'JetBrains Mono', monospace; }
+
+    footer { padding: 32px; border-top: 1px solid var(--rule); font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.18em; color: var(--text-mid); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+
+    @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } .demo { transform: none !important; } }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="status">
+      <span><span class="dot"></span><span class="accent">on the wire</span></span>
+      <span>availability: <span class="accent">2 slots open</span></span>
+      <span>response time: <span class="accent">&lt; 4 hrs</span></span>
+      <span>last shipped: <span class="accent">2026-05-08</span></span>
+      <span class="ml"><a href="/">← three frameworks</a></span>
+    </div>
+
+    <section class="hero">
+      <div>
+        <p class="h-kicker">jason walls · ibew local 369 · ai builder</p>
+        <h1 class="h-title">Watch me<br>build. <b>Pay by<br>the job.</b></h1>
+        <p class="h-tagline" id="tagline"></p>
+        <div class="h-cta">
+          <a class="btn btn-primary" href="#book">Book a Strategy Hour <span class="arr">→</span></a>
+          <a class="btn btn-ghost" href="#work">See the work <span class="arr">→</span></a>
+        </div>
+      </div>
+      <div class="demo" aria-hidden="true">
+        <div class="demo-bar">
+          <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+          <span class="file">~/jason-walls-consulting · live</span>
+        </div>
+        <div class="demo-body">
+          <div><span class="gut">01</span><span class="com">// 4 weeks of work, in 4 days. ←  not a demo. real client.</span></div>
+          <div><span class="gut">02</span><span class="kw">async function</span> <span class="str">build</span>(brief) {</div>
+          <div><span class="gut">03</span>&nbsp;&nbsp;<span class="kw">const</span> spec = <span class="kw">await</span> Claude.spec(brief)</div>
+          <div><span class="gut">04</span>&nbsp;&nbsp;<span class="kw">const</span> code = <span class="kw">await</span> Claude.write(spec)</div>
+          <div><span class="gut">05</span>&nbsp;&nbsp;<span class="kw">const</span> live = <span class="kw">await</span> deploy(code)</div>
+          <div><span class="gut">06</span>&nbsp;&nbsp;<span class="kw">return</span> live <span class="com">// usually friday</span></div>
+          <div><span class="gut">07</span>}</div>
+          <div class="out">→ shipped · 47 min · client charged $5,000 (fixed) · time saved: ~3 weeks</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pricing" id="work">
+      <p class="p-h">offers · electrician's pricing</p>
+      <h2 class="p-title">You don't pay your electrician by the minute. <b>Don't pay your AI builder that way either.</b></h2>
+      <p class="p-sub">Fixed scope, fixed price, fixed delivery date. The hours are mine. The receipt is yours.</p>
+
+      <div class="tier-grid">
+        <div class="tier">
+          <div class="badge">tier 01</div>
+          <div class="name">Strategy Hour</div>
+          <div class="price">$300</div>
+          <div class="duration">1 call · 60 min</div>
+          <ul>
+            <li>One sharp call, no fluff</li>
+            <li>Walk away with a workflow you can run</li>
+            <li>Cheaper than one billable electrician hour</li>
+          </ul>
+          <a class="book" href="#book">Book now</a>
+        </div>
+        <div class="tier">
+          <div class="badge">tier 02</div>
+          <div class="name">Workflow in a Week</div>
+          <div class="price">$1,500</div>
+          <div class="duration">1 week · fixed</div>
+          <ul>
+            <li>One Claude skill or agent that solves a repeated task</li>
+            <li>Documented, deployed, yours to keep</li>
+            <li>Replaces hours of weekly work</li>
+          </ul>
+          <a class="book" href="#book">Get started</a>
+        </div>
+        <div class="tier featured">
+          <div class="badge">★ tier 03 · most picked</div>
+          <div class="name">Custom AI Tool</div>
+          <div class="price">$5,000</div>
+          <div class="duration">2 weeks · fixed</div>
+          <ul>
+            <li>A real internal tool: dashboard, chatbot, automation</li>
+            <li>Full handoff: code, docs, walk-through video</li>
+            <li>Most agencies quote $25K+ for this scope</li>
+          </ul>
+          <a class="book" href="#book">Book the build</a>
+        </div>
+        <div class="tier">
+          <div class="badge">tier 04</div>
+          <div class="name">Idea → Live</div>
+          <div class="price">$10,000</div>
+          <div class="duration">14 days · fixed</div>
+          <ul>
+            <li>Full mini-MVP shipped, deployed, payment-ready</li>
+            <li>Same craft that built ChargeRight to 680K views</li>
+            <li>Day-15: you have a live product</li>
+          </ul>
+          <a class="book" href="#book">Start the clock</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="mission">
+      <p>A Master Electrician and Claude, paying forward the expertise AI handed us — to the people who couldn't afford it either. One industry at a time.</p>
+    </section>
+  </main>
+
+  <footer>
+    <span>v3 · lab · jetbrains mono + ibm plex sans</span>
+    <span>ink · signal · amber</span>
+    <span>aesthetic · industrial / utilitarian</span>
+  </footer>
+
+  <script>
+    // Typewriter — one pass, then static (per cookbook rule)
+    const lines = [
+      "I'm a working IBEW Master Electrician using Claude as a second tool belt.",
+      "I build things in days that would take an agency a month — and I charge for the build, not the build time.",
+      "ChargeRight: 680K views, paying users, shipped in 97 days. Same hands. Now yours."
+    ];
+    const target = document.getElementById('tagline');
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      let li = 0, ci = 0, current = '';
+      const tick = () => {
+        if (li >= lines.length) return;
+        current = lines[li].slice(0, ci + 1);
+        target.textContent = current;
+        ci++;
+        if (ci >= lines[li].length) { li++; ci = 0; setTimeout(tick, 1400); }
+        else setTimeout(tick, 22 + Math.random() * 30);
+      };
+      setTimeout(tick, 600);
+    } else {
+      target.textContent = lines[0];
+    }
+  </script>
+</body>
+</html>

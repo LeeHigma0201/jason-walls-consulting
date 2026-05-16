@@ -1,0 +1,128 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   BASE
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: var(--font-plex), system-ui, sans-serif;
+}
+::selection { background: rgba(57, 255, 106, 0.25); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+
+/* ============================================================
+   THEME — HOME (canonical /) · premium editorial
+   Apple typographic discipline + Claude warm clay + RightSuite professional bones.
+   Cream paper, deep warm ink, single clay accent, optional teal data-color.
+   ============================================================ */
+[data-theme="home"] {
+  --bg: #F8F4ED;
+  --surface: #FFFFFF;
+  --surface-2: #F1ECDF;
+  --text: #1A1612;
+  --text-mid: #5A5048;
+  --text-faint: #8A7F71;
+  --rule: #E5DDC9;
+  --rule-soft: #EFE8D6;
+  --clay: #CC785C;
+  --clay-deep: #B85E40;
+  --clay-dim: rgba(204, 120, 92, 0.08);
+  --teal: #0D6963;
+  --teal-dim: rgba(13, 105, 99, 0.06);
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  background-image:
+    radial-gradient(ellipse 60% 40% at 50% 0%, rgba(204, 120, 92, 0.04) 0%, transparent 70%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0.05 0 0 0 0 0.04 0 0 0 0 0.03 0 0 0 0.025 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+[data-theme="home"] ::selection { background: rgba(204, 120, 92, 0.25); }
+
+/* ============================================================
+   THEME — LAB (now at /lab) — original dark/signal
+   ============================================================ */
+[data-theme="lab"] {
+  --bg: #0e0e10;
+  --surface: #171719;
+  --surface-2: #22222a;
+  --paper: #f4f2ee;
+  --text: #e8e6e0;
+  --text-mid: #88857c;
+  --signal: #39ff6a;
+  --signal-dim: rgba(57, 255, 106, 0.1);
+  --amber: #f0a800;
+  --amber-dim: rgba(240, 168, 0, 0.1);
+  --rule: #2a2a32;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+[data-theme="lab"] body::before, [data-theme="lab"]::before {
+  content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  background:
+    radial-gradient(circle at 15% 0%, rgba(57, 255, 106, 0.04) 0, transparent 50%),
+    radial-gradient(circle at 100% 100%, rgba(240, 168, 0, 0.025) 0, transparent 50%);
+}
+
+/* ============================================================
+   THEME — RECEIPTS (/trades)
+   ============================================================ */
+[data-theme="trades"] {
+  --bg: #f5f1e8;
+  --surface: #fefcf6;
+  --paper-2: #ede7d4;
+  --text: #1a1612;
+  --text-mid: #4a4540;
+  --rule: #d8cfb8;
+  --stamp: #10b981;
+  --stamp-dim: rgba(16, 185, 129, 0.12);
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(0,0,0,0.018) 0, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(0,0,0,0.015) 0, transparent 50%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ============================================================
+   THEME — WORKSHOP (/story)
+   ============================================================ */
+[data-theme="story"] {
+  --bg: #f4efe6;
+  --paper-2: #ebe2cf;
+  --text: #1c1a18;
+  --text-mid: #5a4f43;
+  --rule: #d8ccb4;
+  --copper: #a85c2a;
+  --copper-dim: rgba(168, 92, 42, 0.08);
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0.05 0 0 0 0 0.04 0 0 0 0 0.03 0 0 0 0.04 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ============================================================
+   ANIMATIONS — shared
+   ============================================================ */
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+@keyframes blink { 50% { opacity: 0; } }
+@keyframes countUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Reveal on viewport entry */
+.reveal { opacity: 0; transform: translateY(12px); transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1); }
+.reveal.in { opacity: 1; transform: translateY(0); }

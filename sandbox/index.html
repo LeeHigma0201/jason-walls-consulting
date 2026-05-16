@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Three Frameworks · Jason Walls Consulting Prototype</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@200;400;700&family=IBM+Plex+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { font-family: 'IBM Plex Sans', sans-serif; color: #1a1a1a; background: #f7f5f0; line-height: 1.5; }
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 80px 32px 120px; }
+    h1 { font-family: 'JetBrains Mono', monospace; font-weight: 200; font-size: clamp(40px, 5vw, 72px); letter-spacing: -0.02em; line-height: 1.05; margin-bottom: 16px; }
+    .tag { font-family: 'JetBrains Mono', monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 0.18em; color: #5a5a5a; margin-bottom: 64px; }
+    .mission { font-size: 22px; line-height: 1.5; max-width: 720px; margin-bottom: 16px; color: #2a2a2a; }
+    .mission strong { color: #0a0a0a; font-weight: 600; }
+    .test { font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #6a6a6a; margin-bottom: 80px; padding-left: 16px; border-left: 2px solid #1a1a1a; max-width: 720px; }
+    .grid { display: grid; gap: 24px; grid-template-columns: 1fr; margin-top: 32px; }
+    @media (min-width: 800px) { .grid { grid-template-columns: 1fr 1fr 1fr; } }
+    .card { display: block; padding: 40px 28px; text-decoration: none; color: inherit; transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s; position: relative; min-height: 320px; }
+    .card:hover { transform: translateY(-4px); }
+    .v1 { background: #f5f1e8; border: 1px solid #e8dfca; }
+    .v1:hover { border-color: #10b981; }
+    .v2 { background: #f4efe6; border: 1px solid #e3d7c0; }
+    .v2:hover { border-color: #a85c2a; }
+    .v3 { background: #0e0e10; border: 1px solid #2a2a2e; color: #f0f0ee; }
+    .v3:hover { border-color: #39ff6a; }
+    .card .name { font-family: 'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em; opacity: 0.6; margin-bottom: 24px; }
+    .card .title { font-family: 'JetBrains Mono', monospace; font-size: 32px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 12px; line-height: 1.1; }
+    .v2 .title { font-family: 'IBM Plex Sans', serif; font-weight: 300; }
+    .card .desc { font-size: 15px; line-height: 1.5; opacity: 0.78; margin-bottom: 32px; }
+    .card .meta { position: absolute; bottom: 28px; left: 28px; right: 28px; display: flex; justify-content: space-between; font-family: 'JetBrains Mono', monospace; font-size: 11px; opacity: 0.55; text-transform: uppercase; letter-spacing: 0.12em; }
+    .footer { margin-top: 96px; padding-top: 32px; border-top: 1px solid #d8d2c0; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #6a6a6a; line-height: 1.7; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <p class="tag">prototype · 2026-05-09</p>
+    <h1>Three theories.<br>Test in the real world.</h1>
+    <p class="mission">A Master Electrician and Claude, paying forward the expertise AI handed us — to the people who couldn't afford it either. <strong>One industry at a time.</strong></p>
+    <p class="test">two-gate test → does this widen access to expertise, or narrow it? · does it sound like one of us, or one of them? · fail either, kill it.</p>
+
+    <p class="tag" style="margin-bottom: 24px;">candidates</p>
+    <div class="grid">
+      <a class="card v1" href="/v1-receipts.html">
+        <div class="name">v1 · receipts</div>
+        <div class="title">Itemized.<br>Honest.<br>Paid.</div>
+        <div class="desc">A tradesperson's invoice, beautifully typeset. Receipts are the universal honest document.</div>
+        <div class="meta"><span>jetbrains mono + fraunces</span><span>cream · ink · stamp</span></div>
+      </a>
+      <a class="card v2" href="/v2-workshop.html">
+        <div class="name">v2 · workshop</div>
+        <div class="title">Read the<br>piece, then<br>decide.</div>
+        <div class="desc">Sunday Times feature about a working-class hero. Editorial honesty doubles down on for the rest of us.</div>
+        <div class="meta"><span>newsreader + plex sans</span><span>cream · ink · copper</span></div>
+      </a>
+      <a class="card v3" href="/v3-lab.html">
+        <div class="name">v3 · lab</div>
+        <div class="title">Watch me<br>build. Pay<br>by the job.</div>
+        <div class="desc">A tradesperson's tool wall. Pricing on-page so access isn't gated by quote-by-quote opacity.</div>
+        <div class="meta" style="border-color: rgba(240,240,238,0.2)"><span>jbm + plex sans</span><span>ink · signal · amber</span></div>
+      </a>
+    </div>
+
+    <div class="footer">
+      <p>fonts · all free on google fonts · no inter · no roboto · no space grotesk · per anthropic frontend-aesthetics cookbook</p>
+      <p>aesthetic directions · v1 editorial/utilitarian · v2 editorial/magazine · v3 industrial/utilitarian</p>
+      <p>verdict pending · click each to render the signature moment</p>
+    </div>
+  </div>
+</body>
+</html>

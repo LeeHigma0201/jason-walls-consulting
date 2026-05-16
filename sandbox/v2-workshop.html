@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>v2 · The Workshop · Jason Walls</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,600;6..72,800&family=IBM+Plex+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --paper: #f4efe6;
+      --paper-2: #ebe2cf;
+      --ink: #1c1a18;
+      --ink-mid: #5a4f43;
+      --rule: #d8ccb4;
+      --copper: #a85c2a;
+      --copper-light: rgba(168, 92, 42, 0.08);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-weight: 400;
+      font-size: 17px;
+      line-height: 1.6;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0.05 0 0 0 0 0.04 0 0 0 0 0.03 0 0 0 0.04 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+    .masthead { padding: 32px 48px; border-bottom: 1px solid var(--rule); display: flex; justify-content: space-between; align-items: center; font-family: 'IBM Plex Sans', sans-serif; font-size: 12px; text-transform: uppercase; letter-spacing: 0.22em; color: var(--ink-mid); }
+    .masthead a { color: var(--ink); text-decoration: none; border-bottom: 1px solid currentColor; padding-bottom: 1px; }
+    .masthead .title { font-family: 'Newsreader', serif; font-weight: 800; font-style: italic; font-size: 18px; letter-spacing: -0.01em; text-transform: none; color: var(--ink); }
+
+    /* SECTION: HERO with Anthropic-style scroll-card */
+    .hero-section { position: relative; padding: 80px 0 96px; overflow: hidden; }
+    .hero-card {
+      max-width: 1240px;
+      margin: 0 auto;
+      background: #1c1a18;
+      color: var(--paper);
+      border-radius: 24px;
+      padding: 96px 64px;
+      transition: max-width 0.6s cubic-bezier(0.4, 0, 0.2, 1), border-radius 0.6s cubic-bezier(0.4, 0, 0.2, 1), padding 0.6s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-card.scrolled {
+      max-width: 100%;
+      border-radius: 0;
+    }
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 80% 20%, rgba(168,92,42,0.18) 0, transparent 60%);
+      pointer-events: none;
+    }
+    .hero-grid { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr; gap: 48px; align-items: center; }
+    @media (min-width: 900px) { .hero-grid { grid-template-columns: 1.3fr 1fr; gap: 64px; } }
+
+    .kicker { font-family: 'IBM Plex Sans', sans-serif; font-size: 12px; text-transform: uppercase; letter-spacing: 0.28em; color: var(--copper); font-weight: 600; margin-bottom: 32px; }
+    .kicker::before { content: "★ "; }
+
+    .lede {
+      font-family: 'Newsreader', serif;
+      font-weight: 300;
+      font-size: clamp(28px, 4vw, 44px);
+      line-height: 1.18;
+      letter-spacing: -0.015em;
+      color: var(--paper);
+    }
+    .lede::first-letter {
+      font-family: 'Newsreader', serif;
+      font-weight: 800;
+      font-style: italic;
+      font-size: 5.6em;
+      float: left;
+      line-height: 0.85;
+      margin: 0.04em 0.08em -0.04em 0;
+      color: var(--copper);
+    }
+    .lede em { font-style: italic; color: var(--copper); }
+
+    .pull {
+      background: #2a2521;
+      padding: 32px 32px 32px 36px;
+      border-left: 3px solid var(--copper);
+      font-family: 'Newsreader', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 22px;
+      line-height: 1.4;
+      color: var(--paper);
+    }
+    .pull cite { display: block; margin-top: 16px; font-style: normal; font-family: 'IBM Plex Sans', sans-serif; font-size: 11px; text-transform: uppercase; letter-spacing: 0.22em; color: rgba(255,255,255,0.6); font-weight: 600; }
+
+    .meta-row { display: flex; gap: 28px; margin-top: 48px; flex-wrap: wrap; align-items: center; }
+    .meta-row a { font-family: 'IBM Plex Sans', sans-serif; font-size: 13px; font-weight: 600; padding: 14px 22px; text-decoration: none; transition: background 0.2s; }
+    .read-cta { background: var(--copper); color: var(--paper); }
+    .read-cta:hover { background: #c97137; }
+    .alt-cta { color: var(--paper); border-bottom: 1px solid var(--paper); padding-bottom: 4px; padding-left: 0; padding-right: 0; opacity: 0.85; }
+
+    /* TIMELINE — The 97 days */
+    .timeline { max-width: 1100px; margin: 96px auto; padding: 0 48px; }
+    .tl-h { font-family: 'IBM Plex Sans', sans-serif; font-size: 12px; text-transform: uppercase; letter-spacing: 0.28em; color: var(--ink-mid); font-weight: 600; margin-bottom: 16px; }
+    .tl-title { font-family: 'Newsreader', serif; font-weight: 300; font-size: clamp(32px, 4vw, 56px); letter-spacing: -0.02em; line-height: 1.05; margin-bottom: 56px; max-width: 760px; }
+    .tl-title em { font-style: italic; font-weight: 800; color: var(--copper); }
+    .tl-list { display: grid; grid-template-columns: 1fr; gap: 0; border-top: 1px solid var(--rule); }
+    .tl-row { display: grid; grid-template-columns: 140px 1fr 90px; align-items: baseline; padding: 28px 0; border-bottom: 1px solid var(--rule); transition: background 0.3s; }
+    .tl-row:hover { background: rgba(168,92,42,0.03); }
+    .tl-date { font-family: 'IBM Plex Sans', sans-serif; font-size: 12px; text-transform: uppercase; letter-spacing: 0.18em; color: var(--ink-mid); font-weight: 600; }
+    .tl-event { font-family: 'Newsreader', serif; font-weight: 400; font-size: 19px; line-height: 1.4; color: var(--ink); padding-right: 24px; }
+    .tl-event em { font-style: italic; }
+    .tl-tag { font-family: 'IBM Plex Sans', sans-serif; font-size: 10px; text-transform: uppercase; letter-spacing: 0.2em; color: var(--copper); text-align: right; font-weight: 600; }
+    @media (max-width: 700px) { .tl-row { grid-template-columns: 1fr; gap: 8px; } .tl-tag { text-align: left; } }
+
+    .end { padding: 80px 48px; max-width: 760px; margin: 0 auto; text-align: center; }
+    .end .quote { font-family: 'Newsreader', serif; font-style: italic; font-weight: 300; font-size: clamp(24px, 3vw, 36px); line-height: 1.35; color: var(--ink); margin-bottom: 28px; }
+    .end cite { font-family: 'IBM Plex Sans', sans-serif; font-size: 12px; text-transform: uppercase; letter-spacing: 0.28em; color: var(--copper); font-weight: 600; font-style: normal; }
+
+    footer { padding: 32px 48px; border-top: 1px solid var(--rule); font-family: 'IBM Plex Sans', sans-serif; font-size: 11px; text-transform: uppercase; letter-spacing: 0.22em; color: var(--ink-mid); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; font-weight: 500; }
+
+    @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+  </style>
+</head>
+<body>
+  <div class="masthead">
+    <span>The Workshop · vol.001</span>
+    <span class="title">A working portrait</span>
+    <a href="/">← three frameworks</a>
+  </div>
+
+  <section class="hero-section">
+    <div class="hero-card" id="hero">
+      <div class="hero-grid">
+        <div>
+          <p class="kicker">a feature</p>
+          <p class="lede">Jason Walls had spent twenty years pulling wire when AI handed him a <em>second tool belt.</em> Ninety-seven days later, his side project had Mark Cuban's attention, a piece in the Sunday Times, and 680,000 views.</p>
+          <div class="meta-row">
+            <a class="read-cta" href="#piece">Read the full piece</a>
+            <a class="alt-cta" href="#book">Book the builder</a>
+          </div>
+        </div>
+        <div class="pull">
+          "I honestly don't care how it works. I'm just glad you started a business doing it."
+          <cite>— Mark Cuban, replying on X · Mar 11 2026</cite>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="timeline" id="piece">
+    <p class="tl-h">Chapter one · The arc</p>
+    <h2 class="tl-title">From <em>"put some respect on my name"</em> to Anthropic's case study, Cuban's reply, and Shark Tank — in ninety-seven days.</h2>
+    <div class="tl-list">
+      <div class="tl-row"><div class="tl-date">2025 · 12 · 14</div><div class="tl-event">First test email to himself: <em>"hello this is jason walls with EV charge Right put some respect on my name."</em></div><div class="tl-tag">day one</div></div>
+      <div class="tl-row"><div class="tl-date">2025 · 12 · 31</div><div class="tl-event">First paying customer hits a bug. He refunds her, then spends six emails personally walking her through the NEC 220.82 calc. <em>This is who he is.</em></div><div class="tl-tag">customer one</div></div>
+      <div class="tl-row"><div class="tl-date">2026 · 03 · 11</div><div class="tl-event">Mark Cuban reposts the tweet. The cc goes to Mindy Zemrak at Shark Tank.</div><div class="tl-tag">cuban</div></div>
+      <div class="tl-row"><div class="tl-date">2026 · 03 · 12</div><div class="tl-event">Danny Fortson at the <em>Sunday Times</em> of London asks for a meeting.</div><div class="tl-tag">press</div></div>
+      <div class="tl-row"><div class="tl-date">2026 · 03 · 17</div><div class="tl-event">Anthropic reaches out. Shark Tank casting responds. Same day.</div><div class="tl-tag">three at once</div></div>
+      <div class="tl-row"><div class="tl-date">2026 · 03 · 20</div><div class="tl-event"><em>ZombieWells</em> built in forty-five minutes — a public-interest tool exposing abandoned, contaminated oil wells in Texas.</div><div class="tl-tag">45 min build</div></div>
+      <div class="tl-row"><div class="tl-date">2026 · 03 · 22</div><div class="tl-event">680,000+ views on ChargeRight. Paying customers. Day job: still electrician.</div><div class="tl-tag">today</div></div>
+    </div>
+  </section>
+
+  <section class="end">
+    <p class="quote">"AI handed me the keys to expertise I was priced out of my whole career. The least I can do is pay it forward — to the people who couldn't afford it either."</p>
+    <cite>— from the Mission · CLAUDE.md · May 9 2026</cite>
+  </section>
+
+  <footer>
+    <span>v2 · workshop · newsreader + ibm plex sans</span>
+    <span>cream paper · ink · copper · grain</span>
+    <span>aesthetic · editorial / magazine</span>
+  </footer>
+
+  <script>
+    // Anthropic.com signature scroll moment — rounded card → full bleed
+    const hero = document.getElementById('hero');
+    const onScroll = () => {
+      const y = window.scrollY;
+      if (y > 80) hero.classList.add('scrolled');
+      else hero.classList.remove('scrolled');
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+  </script>
+</body>
+</html>
