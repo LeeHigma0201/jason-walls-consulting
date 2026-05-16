@@ -16,7 +16,14 @@ export type OfferTier = {
   bookHref: string;
   featured?: boolean;
   group: "one-time" | "ongoing";
+  // Risk reversal shown under every tier. Defaults applied below.
+  guarantee?: string;
+  // Honest scope limits. 2-3 lines per tier. Mirror of templates' notForThis.
+  notForThis?: string[];
 };
+
+const DEFAULT_GUARANTEE =
+  "Not happy in the first 30 days? Full refund. You keep what's shipped.";
 
 export const OFFERS: OfferTier[] = [
   {
@@ -31,6 +38,10 @@ export const OFFERS: OfferTier[] = [
       "A specific workflow tailored to your actual work",
       "30 days of email follow-up if you get stuck",
     ],
+    notForThis: [
+      "Not for \"I just want a quote\" — a call is for naming the right scope, not pricing a guess",
+      "Not for \"rewrite my stack in an hour\" — that's an audit; this is a working session",
+    ],
     bookHref: "/book?tier=strategy-hour",
     group: "one-time",
   },
@@ -40,11 +51,15 @@ export const OFFERS: OfferTier[] = [
     priceLabel: "$2,500",
     priceNum: 2500,
     duration: "1 week · fixed",
-    short: "One Claude skill, agent, or automation that solves a repeated task. Documented, deployed, yours to keep.",
+    short: "One AI workflow that solves a repeated task. Documented, deployed, yours to keep.",
     whatYouGet: [
       "A single AI workflow built for your real job",
       "Deployed where you work (Slack, browser, phone, CLI)",
       "Walk-through video + plain-English docs",
+    ],
+    notForThis: [
+      "Not for \"5 stakeholders need to approve every change\" — decisions get made on the call, not in committee",
+      "Not for \"I don't know what problem I'm solving yet\" — start with the Strategy Hour; we name the problem first",
     ],
     bookHref: "/book?tier=workflow-week",
     group: "one-time",
@@ -57,9 +72,13 @@ export const OFFERS: OfferTier[] = [
     duration: "2–3 weeks · scoped first",
     short: "A real thing — a website, an iOS app, an AI tool, a custom dashboard. Scoped on a discovery call, then fixed-fee.",
     whatYouGet: [
-      "Sites (Next.js, Stripe, deployed) · iOS apps (Capacitor) · AI tools (Claude agents)",
+      "Production sites, payments wired, live · Native iOS build, App Store ready · AI that reads the spec the way you would",
       "Full handoff: code, docs, walk-through video",
       "30 days of bug-fix support after delivery",
+    ],
+    notForThis: [
+      "Not for \"match this agency proposal but cheaper\" — I don't bid against slide decks",
+      "Not for half-finished handoffs from a previous developer — that's a separate audit",
     ],
     bookHref: "/book?tier=custom-build",
     featured: true,
@@ -77,6 +96,11 @@ export const OFFERS: OfferTier[] = [
       "Domain + hosting + Stripe wired end-to-end",
       "Plain-English handoff so you can keep going on your own",
     ],
+    notForThis: [
+      "Not for \"I want to invest in software but won't ship for 6 months\" — 14 days, live",
+      "Not for \"build me what Uber has but for X\" — that's a Series A, not a sprint",
+      "Not for a CTO replacement — this is a build, not a co-founder seat",
+    ],
     bookHref: "/book?tier=full-mvp",
     group: "one-time",
   },
@@ -91,7 +115,11 @@ export const OFFERS: OfferTier[] = [
     whatYouGet: [
       "Hosting + uptime monitoring on anything I built for you",
       "1 hour of my time per month for tweaks, fixes, additions",
-      "First crack at new Claude features as they ship",
+      "First crack at new AI features as they ship",
+    ],
+    notForThis: [
+      "Not for tools I didn't build — I can't reliably keep someone else's stack alive",
+      "Not for major rewrites — that's a Workflow in a Week, not an hour of tweaks",
     ],
     bookHref: "/book?tier=tool-tune-up",
     group: "ongoing",
@@ -107,12 +135,22 @@ export const OFFERS: OfferTier[] = [
     whatYouGet: [
       "1–2 builds shipped per month, scoped together",
       "Slack or phone access for fast calls",
-      "First priority on new ideas + Claude features",
+      "First priority on new ideas + AI features",
+    ],
+    notForThis: [
+      "Not for full-time engineer replacement — I'm running my own jobs too",
+      "Not for nights and weekends paging — business-hours availability only",
+      "Not for \"I'll figure out what I want as we go\" — we scope monthly, top-down",
     ],
     bookHref: "/book?tier=embedded",
     group: "ongoing",
   },
 ];
+
+// Apply the default guarantee anywhere it isn't already set.
+for (const o of OFFERS) {
+  if (o.guarantee === undefined) o.guarantee = DEFAULT_GUARANTEE;
+}
 
 export const ONE_TIME_OFFERS = OFFERS.filter((o) => o.group === "one-time");
 export const ONGOING_OFFERS = OFFERS.filter((o) => o.group === "ongoing");

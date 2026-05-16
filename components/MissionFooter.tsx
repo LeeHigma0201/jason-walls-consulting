@@ -140,7 +140,7 @@ export function MissionFooter({
             borderTop: "1px solid var(--rule)",
           }}
         >
-          <span>© 2026 Jason Walls · IBEW Local 369</span>
+          <span>© 2026 Jason Walls</span>
           <span>
             <Link href="mailto:hi@jasonwalls.work" style={{ color: "var(--text)" }}>
               hi@jasonwalls.work

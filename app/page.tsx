@@ -12,34 +12,35 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { ONE_TIME_OFFERS, ONGOING_OFFERS } from "@/lib/offers";
 import { MissionFooter } from "@/components/MissionFooter";
+import { LeadMagnetSignup } from "@/components/LeadMagnetSignup";
 
 const BUILDS = [
   {
     num: "01",
     icon: "globe",
     title: "Websites",
-    body: "Next.js, Stripe, deployed end-to-end. The kind of site you'd hire an agency for at 4× the price.",
+    body: "Production site, payments wired, live. The kind of site you'd hire an agency for at 4× the price.",
     examples: "Examples: ChargeRight · evchargeright.com · Lennox Fields · lennoxfields.com",
   },
   {
     num: "02",
     icon: "phone",
     title: "iOS apps",
-    body: "Capacitor 8 wired into your web build. Same codebase, your customers get a native app on the truck or in the pocket.",
+    body: "Native iOS build, App Store ready. Same codebase as the website, your customers get a real app on the truck or in the pocket.",
     examples: "Examples: ChargeRight iOS · InspectRight · BendRight",
   },
   {
     num: "03",
     icon: "spark",
     title: "AI tools",
-    body: "A Claude skill, agent, or workflow that handles a repeated task. Reads your docs, answers your team, drafts your replies. Grounded on your real material.",
+    body: "AI that reads the spec the way you would. Handles a repeated task. Answers your team, drafts your replies. Grounded on your real material.",
     examples: "Examples: dealer-desk · gmail-scanner · jason-voice · 50+ shipped",
   },
   {
     num: "04",
     icon: "network",
     title: "Agent infrastructure",
-    body: "Custom MCP servers, knowledge graphs, multi-agent systems. The brain layer that ties your whole operation together.",
+    body: "Multiple AI tools wired together — they read your docs, talk to each other, get the back-office work done. The crew that doesn't sleep.",
     examples: "Example: Cortex — a 233-node knowledge graph running my whole business",
   },
 ];
@@ -130,9 +131,9 @@ export default function Home() {
             <span className="d-line"><em>a working</em> electrician.</span>
           </h1>
           <p className="lede reveal" style={{ "--d": "180ms" } as React.CSSProperties}>
-            Fixed-fee software, the way an electrician charges — you pay for what's done,
-            not the hours it took. Same craft that built ChargeRight to <span className="num">680,000+</span> views
-            and shipped <span className="num">50+</span> Claude tools — solo, with the day job still on.
+            Sites, iOS apps, and AI tools for electricians, low-voltage crews,
+            and fiber shops running 1–10 trucks. Fixed fee. You own the code.
+            Shipped, not promised.
           </p>
           <div className="cta-row reveal" style={{ "--d": "260ms" } as React.CSSProperties}>
             <Link href="/book?tier=strategy-hour" className="cta">
@@ -143,7 +144,102 @@ export default function Home() {
             </a>
           </div>
 
-          <div className="hero-vis reveal" style={{ "--d": "360ms" } as React.CSSProperties} aria-hidden="true">
+          <div className="trust-bar reveal" style={{ "--d": "340ms" } as React.CSSProperties} aria-label="Credentials and press">
+            <span className="trust-item">IBEW Local 369</span>
+            <span className="trust-item">Anthropic case study</span>
+            <span className="trust-item">The Sunday Times</span>
+            <span className="trust-item">Mark Cuban repost</span>
+            <span className="trust-item">ChargeRight · 680K+ views</span>
+          </div>
+        </section>
+
+        {/* PRESS — pulled above the fold from /trades. Cuban quote is verbatim;
+            other entries use dated outreach framing (not "published case study") to
+            stay honest. Dates sourced from origin-story memory. */}
+        <section className="section press-section" id="press">
+          <div className="section-head">
+            <p className="section-kicker">— Press</p>
+            <h2 className="display-2">
+              The work made <em>some noise.</em>
+            </h2>
+          </div>
+          <div className="press-grid">
+            <article className="press-card press-card--feature">
+              <div className="press-date">2026 · 03 · 11</div>
+              <p className="press-body">
+                Mark Cuban reposts ChargeRight:{" "}
+                <em>
+                  "I honestly don't care how it works. I'm just glad you
+                  started a business doing it."
+                </em>
+              </p>
+              <p className="press-tag">— Mark Cuban</p>
+            </article>
+            <article className="press-card">
+              <div className="press-date">2026 · 03 · 12</div>
+              <p className="press-body">
+                Danny Fortson reaches out from <em>The Sunday Times</em>{" "}
+                (London) for an interview on building software with Claude
+                while still on the trade.
+              </p>
+              <p className="press-tag">— The Sunday Times</p>
+            </article>
+            <article className="press-card">
+              <div className="press-date">2026 · 03 · 17</div>
+              <p className="press-body">
+                Anthropic reaches out — case study on a Master Electrician
+                shipping production software with Claude.
+              </p>
+              <p className="press-tag">— Anthropic</p>
+            </article>
+          </div>
+        </section>
+
+        {/* TESTIMONIALS — TODO(jason): fill once first 3 clients land.
+            Brief rule: no fabricated names/quotes/photos/metrics. When
+            real clients are in hand, uncomment the import in the file
+            header and the section below.
+
+            import { Testimonial } from "@/components/Testimonial";
+
+            <section className="section testimonials-section" id="testimonials">
+              <div className="section-head">
+                <p className="section-kicker">— In their words</p>
+                <h2 className="display-2">
+                  What clients<br /><em>actually say.</em>
+                </h2>
+              </div>
+              <div className="testimonials-grid">
+                <Testimonial quote="" name="" title="" company="" trade="" metric="" />
+                <Testimonial quote="" name="" title="" company="" trade="" metric="" />
+                <Testimonial quote="" name="" title="" company="" trade="" metric="" />
+              </div>
+            </section>
+
+            CSS (drop into the <style jsx> block below if needed):
+              .testimonials-grid { display: grid; grid-template-columns: 1fr; gap: 18px; max-width: 1100px; margin: 0 auto; }
+              @media (min-width: 880px) { .testimonials-grid { grid-template-columns: 1fr 1fr 1fr; } }
+        */}
+
+        {/* LEAD MAGNET — inline signup. Soft conversion path for visitors not
+            ready to book a $300 call. */}
+        <section className="section lead-magnet-section" id="lead-magnet">
+          <LeadMagnetSignup />
+        </section>
+
+        {/* HOW I WORK — panel demo moved here from hero. It's a "how" proof, not a closer. */}
+        <section className="section how-section" id="how-i-work">
+          <div className="section-head">
+            <p className="section-kicker">— How I work</p>
+            <h2 className="display-2">
+              Grounded on <em>your real material.</em>
+            </h2>
+            <p className="section-sub">
+              Every tool reads your prints, your spec book, your job folder. Not generic
+              answers. Source-cited, page-numbered, the way you'd answer if you had the time.
+            </p>
+          </div>
+          <div className="hero-vis reveal in" aria-hidden="true">
             <div className="vis-frame">
               <div className="vis-grid">
                 <div className="vis-pane vis-print">
@@ -205,7 +301,7 @@ export default function Home() {
           <div className="section-head">
             <p className="section-kicker">— What I build</p>
             <h2 className="display-2">
-              Real software.<br /><em>Not slide decks.</em>
+              Shipped,<br /><em>not pitched.</em>
             </h2>
             <p className="section-sub">
               Four categories. Pick one to start. Cross over later — most clients do.
@@ -258,6 +354,9 @@ export default function Home() {
               Fixed scope, fixed price, fixed delivery date. Upper tiers start with a discovery call —
               we scope together, then I quote.
             </p>
+            <p className="capacity-line">
+              Currently booking <strong>TODO(jason)</strong>. I take 4 builds a month.
+            </p>
           </div>
           <div className="tier-grid">
             {ONE_TIME_OFFERS.map((o, i) => (
@@ -272,6 +371,16 @@ export default function Home() {
                 <ul className="tier-list">
                   {o.whatYouGet.map((line, j) => (<li key={j}>{line}</li>))}
                 </ul>
+                {o.notForThis && o.notForThis.length > 0 && (
+                  <ul className="tier-notfor">
+                    {o.notForThis.map((line, k) => (
+                      <li key={k}>{line}</li>
+                    ))}
+                  </ul>
+                )}
+                {o.guarantee && (
+                  <p className="tier-guarantee">{o.guarantee}</p>
+                )}
                 <Link href={o.bookHref} className="tier-cta">
                   {o.featured ? "Scope it out →" : o.id === "strategy-hour" ? "Book the call →" : o.id === "full-mvp" ? "Scope the MVP →" : "Get started →"}
                 </Link>
@@ -297,6 +406,16 @@ export default function Home() {
                   <ul className="ongoing-list">
                     {o.whatYouGet.map((line, j) => (<li key={j}>{line}</li>))}
                   </ul>
+                  {o.notForThis && o.notForThis.length > 0 && (
+                    <ul className="tier-notfor tier-notfor--ongoing">
+                      {o.notForThis.map((line, k) => (
+                        <li key={k}>{line}</li>
+                      ))}
+                    </ul>
+                  )}
+                  {o.guarantee && (
+                    <p className="tier-guarantee tier-guarantee--ongoing">{o.guarantee}</p>
+                  )}
                   <Link href={o.bookHref} className="ongoing-cta">
                     Start the month →
                   </Link>
@@ -391,7 +510,30 @@ export default function Home() {
         .display em { font-family: var(--font-fraunces), serif; font-style: italic; font-weight: 600; color: var(--clay); }
         .lede { font-family: var(--font-plex), sans-serif; font-weight: 400; font-size: 19px; line-height: 1.55; color: var(--text-mid); max-width: 660px; margin: 0 auto 40px; }
         .lede .num { font-family: var(--font-jbm), monospace; font-weight: 600; color: var(--text); }
-        .cta-row { display: flex; justify-content: center; align-items: center; gap: 28px; flex-wrap: wrap; margin-bottom: 80px; }
+        .cta-row { display: flex; justify-content: center; align-items: center; gap: 28px; flex-wrap: wrap; margin-bottom: 44px; }
+        /* ===== TRUST BAR ===== */
+        .trust-bar { display: flex; justify-content: center; align-items: center; gap: 0; flex-wrap: wrap; max-width: 920px; margin: 0 auto; padding: 20px 24px; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); font-family: var(--font-jbm), monospace; font-size: 11px; letter-spacing: 0.14em; color: var(--text-mid); text-transform: uppercase; }
+        .trust-item { display: inline-block; padding: 4px 16px; white-space: nowrap; }
+        .trust-item:not(:last-child) { border-right: 1px solid var(--rule); }
+        @media (max-width: 760px) {
+          .trust-bar { font-size: 10px; padding: 14px 12px; gap: 4px 0; }
+          .trust-item { padding: 4px 10px; }
+          .trust-item:not(:last-child) { border-right: none; }
+        }
+        /* ===== HOW SECTION ===== */
+        .how-section .hero-vis { max-width: 1100px; margin: 0 auto; }
+
+        /* ===== PRESS SECTION ===== */
+        .press-grid { display: grid; grid-template-columns: 1fr; gap: 16px; max-width: 1100px; margin: 0 auto; }
+        @media (min-width: 880px) { .press-grid { grid-template-columns: 1.4fr 1fr 1fr; gap: 18px; } }
+        .press-card { background: var(--surface); border: 1px solid var(--rule); border-radius: 14px; padding: 28px 26px; display: flex; flex-direction: column; box-shadow: 0 1px 0 rgba(255, 255, 255, 0.6) inset, 0 8px 24px -10px rgba(26, 22, 18, 0.06); }
+        .press-card--feature { border-color: var(--clay); background: linear-gradient(180deg, var(--clay-dim) 0%, var(--surface) 65%); }
+        .press-date { font-family: var(--font-jbm), monospace; font-size: 10px; letter-spacing: 0.22em; color: var(--text-mid); text-transform: uppercase; margin-bottom: 14px; }
+        .press-body { font-family: var(--font-fraunces), serif; font-weight: 400; font-size: clamp(17px, 1.9vw, 21px); line-height: 1.5; color: var(--text); margin: 0 0 14px; flex: 1; }
+        .press-card--feature .press-body { font-size: clamp(19px, 2.1vw, 24px); }
+        .press-body em { font-style: italic; color: var(--text); font-weight: 500; }
+        .press-card--feature .press-body em { color: var(--clay-deep); font-weight: 600; }
+        .press-tag { font-family: var(--font-jbm), monospace; font-size: 11px; letter-spacing: 0.16em; color: var(--text-mid); text-transform: uppercase; margin: 0; padding-top: 14px; border-top: 1px solid var(--rule-soft); }
         .cta { display: inline-flex; align-items: baseline; gap: 12px; padding: 16px 28px; background: var(--text); color: var(--bg); text-decoration: none; border-radius: 999px; font-family: var(--font-plex), sans-serif; font-weight: 600; font-size: 15px; transition: background 0.2s, transform 0.2s; }
         .cta:hover { background: var(--clay); transform: translateY(-1px); }
         .cta-meta { font-family: var(--font-jbm), monospace; font-size: 11px; letter-spacing: 0.06em; opacity: 0.7; font-weight: 400; }
@@ -478,6 +620,16 @@ export default function Home() {
         .tier-cta:hover { background: var(--text); color: var(--bg); }
         .tier--featured .tier-cta { background: var(--clay); color: var(--surface); border-color: var(--clay); }
         .tier--featured .tier-cta:hover { background: var(--clay-deep); border-color: var(--clay-deep); }
+        .tier-guarantee { font-family: var(--font-plex), sans-serif; font-size: 11px; line-height: 1.5; color: var(--text-mid); margin: 0 0 16px; padding: 8px 10px; background: var(--surface-2); border-radius: 6px; border-left: 2px solid var(--clay); }
+        .tier-guarantee--ongoing { margin: 4px 0 18px; }
+        .tier-notfor { list-style: none; margin: 0 0 12px; padding: 14px 0 0; border-top: 1px dashed var(--rule); }
+        .tier-notfor li { font-family: var(--font-plex), sans-serif; font-size: 12px; line-height: 1.5; color: var(--text-mid); padding: 4px 0 4px 16px; position: relative; }
+        .tier-notfor li::before { content: "×"; color: var(--text-faint); position: absolute; left: 2px; top: 2px; font-family: var(--font-jbm), monospace; font-weight: 700; font-size: 14px; line-height: 1; }
+        .tier-notfor--ongoing { margin-top: 4px; }
+
+        /* ===== CAPACITY LINE ===== */
+        .capacity-line { font-family: var(--font-jbm), monospace; font-size: 12px; letter-spacing: 0.08em; color: var(--text-mid); margin: 18px auto 0; max-width: 580px; text-transform: uppercase; }
+        .capacity-line strong { color: var(--clay-deep); font-weight: 700; letter-spacing: 0.04em; }
 
         /* ===== ONGOING — subscription / retainer ===== */
         .ongoing-block { max-width: 980px; margin: 24px auto 0; padding: 48px 0 0; border-top: 1px solid var(--rule); }
