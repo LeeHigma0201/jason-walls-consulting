@@ -205,6 +205,31 @@ export default function TemplatesPage() {
           </div>
         </section>
 
+        {/* TESTIMONIALS — TODO(jason): fill once first 3 clients land.
+            Brief rule: no fabricated names/quotes/photos/metrics. When
+            real clients are in hand, uncomment the import in the file
+            header and the section below.
+
+            import { Testimonial } from "@/components/Testimonial";
+
+            <section className="t-section" id="testimonials">
+              <div className="t-section-head">
+                <p className="t-section-kicker">— In their words</p>
+                <h2 className="t-display-2">
+                  What shops <em>actually say.</em>
+                </h2>
+              </div>
+              <div className="testimonials-grid">
+                <Testimonial quote="" name="" title="" company="" trade="" metric="" />
+                <Testimonial quote="" name="" title="" company="" trade="" metric="" />
+              </div>
+            </section>
+
+            CSS (drop into the <style> block below if needed):
+              [data-theme="home"] .testimonials-grid { display: grid; grid-template-columns: 1fr; gap: 18px; max-width: 1100px; margin: 0 auto; }
+              @media (min-width: 760px) { [data-theme="home"] .testimonials-grid { grid-template-columns: 1fr 1fr; } }
+        */}
+
         <section className="t-section" id="lead-magnet">
           <LeadMagnetSignup />
         </section>

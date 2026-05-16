@@ -195,6 +195,32 @@ export default function Home() {
           </div>
         </section>
 
+        {/* TESTIMONIALS — TODO(jason): fill once first 3 clients land.
+            Brief rule: no fabricated names/quotes/photos/metrics. When
+            real clients are in hand, uncomment the import in the file
+            header and the section below.
+
+            import { Testimonial } from "@/components/Testimonial";
+
+            <section className="section testimonials-section" id="testimonials">
+              <div className="section-head">
+                <p className="section-kicker">— In their words</p>
+                <h2 className="display-2">
+                  What clients<br /><em>actually say.</em>
+                </h2>
+              </div>
+              <div className="testimonials-grid">
+                <Testimonial quote="" name="" title="" company="" trade="" metric="" />
+                <Testimonial quote="" name="" title="" company="" trade="" metric="" />
+                <Testimonial quote="" name="" title="" company="" trade="" metric="" />
+              </div>
+            </section>
+
+            CSS (drop into the <style jsx> block below if needed):
+              .testimonials-grid { display: grid; grid-template-columns: 1fr; gap: 18px; max-width: 1100px; margin: 0 auto; }
+              @media (min-width: 880px) { .testimonials-grid { grid-template-columns: 1fr 1fr 1fr; } }
+        */}
+
         {/* LEAD MAGNET — inline signup. Soft conversion path for visitors not
             ready to book a $300 call. */}
         <section className="section lead-magnet-section" id="lead-magnet">
