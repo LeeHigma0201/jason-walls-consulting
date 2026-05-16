@@ -130,9 +130,9 @@ export default function Home() {
             <span className="d-line"><em>a working</em> electrician.</span>
           </h1>
           <p className="lede reveal" style={{ "--d": "180ms" } as React.CSSProperties}>
-            Fixed-fee software, the way an electrician charges — you pay for what's done,
-            not the hours it took. Same craft that built ChargeRight to <span className="num">680,000+</span> views
-            and shipped <span className="num">50+</span> Claude tools — solo, with the day job still on.
+            Sites, iOS apps, and AI tools for electricians, low-voltage crews,
+            and fiber shops running 1–10 trucks. Fixed fee. You own the code.
+            Shipped, not promised.
           </p>
           <div className="cta-row reveal" style={{ "--d": "260ms" } as React.CSSProperties}>
             <Link href="/book?tier=strategy-hour" className="cta">
@@ -143,7 +143,28 @@ export default function Home() {
             </a>
           </div>
 
-          <div className="hero-vis reveal" style={{ "--d": "360ms" } as React.CSSProperties} aria-hidden="true">
+          <div className="trust-bar reveal" style={{ "--d": "340ms" } as React.CSSProperties} aria-label="Credentials and press">
+            <span className="trust-item">IBEW Local 369</span>
+            <span className="trust-item">Anthropic case study</span>
+            <span className="trust-item">The Sunday Times</span>
+            <span className="trust-item">Mark Cuban repost</span>
+            <span className="trust-item">ChargeRight · 680K+ views</span>
+          </div>
+        </section>
+
+        {/* HOW I WORK — panel demo moved here from hero. It's a "how" proof, not a closer. */}
+        <section className="section how-section" id="how-i-work">
+          <div className="section-head">
+            <p className="section-kicker">— How I work</p>
+            <h2 className="display-2">
+              Grounded on <em>your real material.</em>
+            </h2>
+            <p className="section-sub">
+              Every tool reads your prints, your spec book, your job folder. Not generic
+              answers. Source-cited, page-numbered, the way you'd answer if you had the time.
+            </p>
+          </div>
+          <div className="hero-vis reveal in" aria-hidden="true">
             <div className="vis-frame">
               <div className="vis-grid">
                 <div className="vis-pane vis-print">
@@ -391,7 +412,18 @@ export default function Home() {
         .display em { font-family: var(--font-fraunces), serif; font-style: italic; font-weight: 600; color: var(--clay); }
         .lede { font-family: var(--font-plex), sans-serif; font-weight: 400; font-size: 19px; line-height: 1.55; color: var(--text-mid); max-width: 660px; margin: 0 auto 40px; }
         .lede .num { font-family: var(--font-jbm), monospace; font-weight: 600; color: var(--text); }
-        .cta-row { display: flex; justify-content: center; align-items: center; gap: 28px; flex-wrap: wrap; margin-bottom: 80px; }
+        .cta-row { display: flex; justify-content: center; align-items: center; gap: 28px; flex-wrap: wrap; margin-bottom: 44px; }
+        /* ===== TRUST BAR ===== */
+        .trust-bar { display: flex; justify-content: center; align-items: center; gap: 0; flex-wrap: wrap; max-width: 920px; margin: 0 auto; padding: 20px 24px; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); font-family: var(--font-jbm), monospace; font-size: 11px; letter-spacing: 0.14em; color: var(--text-mid); text-transform: uppercase; }
+        .trust-item { display: inline-block; padding: 4px 16px; white-space: nowrap; }
+        .trust-item:not(:last-child) { border-right: 1px solid var(--rule); }
+        @media (max-width: 760px) {
+          .trust-bar { font-size: 10px; padding: 14px 12px; gap: 4px 0; }
+          .trust-item { padding: 4px 10px; }
+          .trust-item:not(:last-child) { border-right: none; }
+        }
+        /* ===== HOW SECTION ===== */
+        .how-section .hero-vis { max-width: 1100px; margin: 0 auto; }
         .cta { display: inline-flex; align-items: baseline; gap: 12px; padding: 16px 28px; background: var(--text); color: var(--bg); text-decoration: none; border-radius: 999px; font-family: var(--font-plex), sans-serif; font-weight: 600; font-size: 15px; transition: background 0.2s, transform 0.2s; }
         .cta:hover { background: var(--clay); transform: translateY(-1px); }
         .cta-meta { font-family: var(--font-jbm), monospace; font-size: 11px; letter-spacing: 0.06em; opacity: 0.7; font-weight: 400; }
