@@ -8,6 +8,7 @@ import Link from "next/link";
 import { TEMPLATES, TEMPLATE_TRADES } from "@/lib/templates";
 import { MissionFooter } from "@/components/MissionFooter";
 import { Catalog } from "./Catalog";
+import { LeadMagnetSignup } from "@/components/LeadMagnetSignup";
 import {
   JsonLd,
   articleSchema,
@@ -202,6 +203,10 @@ export default function TemplatesPage() {
               </details>
             ))}
           </div>
+        </section>
+
+        <section className="t-section" id="lead-magnet">
+          <LeadMagnetSignup />
         </section>
 
         <section className="t-section t-close">

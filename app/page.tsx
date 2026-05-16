@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { ONE_TIME_OFFERS, ONGOING_OFFERS } from "@/lib/offers";
 import { MissionFooter } from "@/components/MissionFooter";
+import { LeadMagnetSignup } from "@/components/LeadMagnetSignup";
 
 const BUILDS = [
   {
@@ -192,6 +193,12 @@ export default function Home() {
               <p className="press-tag">— Anthropic</p>
             </article>
           </div>
+        </section>
+
+        {/* LEAD MAGNET — inline signup. Soft conversion path for visitors not
+            ready to book a $300 call. */}
+        <section className="section lead-magnet-section" id="lead-magnet">
+          <LeadMagnetSignup />
         </section>
 
         {/* HOW I WORK — panel demo moved here from hero. It's a "how" proof, not a closer. */}
