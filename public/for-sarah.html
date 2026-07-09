@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="home">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Two Things I Think I Can Build — for Sarah Stogner · Jason Walls</title>
+<meta name="description" content="Two realistically buildable legal-tech frameworks scoped against the May 12, 2026 Claude for Legal launch and the ZombieWells investigative work — sized for Sarah Stogner specifically. Every claim sourced; every limit named." />
+<meta name="robots" content="noindex" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,SOFT,wght@0,9..144,0..100,300..600;1,9..144,0..100,300..600&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@200;400;500;700&display=swap" rel="stylesheet" />
+<script>document.documentElement.classList.add('js');</script>
+<style>
+  /* ============================================================
+     JASON WALLS — "home" theme (cream editorial · clay accent)
+     Pattern reuse: public/for-james-robert.html, for-sarah.html v1
+     v2 changes: print-safe reveals, tighter scope, brutal honesty.
+     ============================================================ */
+  :root {
+    --bg: #F8F4ED;
+    --surface: #FFFFFF;
+    --surface-2: #F1ECDF;
+    --surface-3: #EAE3CF;
+    --text: #1A1612;
+    --text-mid: #5A5048;
+    --text-faint: #8A7F71;
+    --rule: #E5DDC9;
+    --rule-soft: #EFE8D6;
+    --clay: #CC785C;
+    --clay-deep: #B85E40;
+    --clay-dim: rgba(204, 120, 92, 0.08);
+    --teal: #0D6963;
+    --teal-dim: rgba(13, 105, 99, 0.06);
+    --font-serif: "Fraunces", Georgia, serif;
+    --font-sans: "IBM Plex Sans", system-ui, sans-serif;
+    --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-family: var(--font-sans);
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    background-image:
+      radial-gradient(ellipse 60% 40% at 50% 0%, rgba(204, 120, 92, 0.05) 0%, transparent 70%),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0.05 0 0 0 0 0.04 0 0 0 0 0.03 0 0 0 0.025 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  ::selection { background: rgba(204, 120, 92, 0.25); }
+  a { color: inherit; }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+
+  /* ===== REVEAL — print/headless-safe ===== */
+  html.js .reveal { opacity: 0; transform: translateY(14px); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+  html.js .reveal.in { opacity: 1; transform: translateY(0); }
+  @media (prefers-reduced-motion: reduce), print {
+    html.js .reveal { opacity: 1 !important; transform: none !important; }
+  }
+  @media print {
+    .nav { display: none; }
+    body { background: white; }
+    .fw, .callout, .gap-card, .ask, .signal, .method { break-inside: avoid; }
+    .section { padding: 36px 24px; }
+    a { color: var(--clay-deep); text-decoration: none; }
+  }
+
+  /* ===== NAV ===== */
+  .nav { position: sticky; top: 0; z-index: 50; transition: background 0.3s, border-color 0.3s, backdrop-filter 0.3s; border-bottom: 1px solid transparent; }
+  .nav.solid { background: rgba(248,244,237,0.85); backdrop-filter: saturate(180%) blur(20px); -webkit-backdrop-filter: saturate(180%) blur(20px); border-bottom: 1px solid var(--rule); }
+  .nav-inner { max-width: 1100px; margin: 0 auto; padding: 18px 32px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+  .mark { display: flex; flex-direction: column; line-height: 1; text-decoration: none; color: inherit; gap: 4px; }
+  .mark-name { font-family: var(--font-serif); font-weight: 600; font-size: 18px; letter-spacing: -0.01em; }
+  .mark-sub { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.18em; color: var(--text-faint); text-transform: uppercase; }
+  .nav-link { font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-mid); text-decoration: none; transition: color 0.2s; }
+  .nav-link:hover { color: var(--clay-deep); }
+
+  /* ===== SHARED ===== */
+  .section { max-width: 1100px; margin: 0 auto; padding: 76px 32px; }
+  .section-wide { max-width: 1180px; }
+  .section-head { max-width: 760px; margin: 0 auto 48px; text-align: center; }
+  .kicker { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.22em; color: var(--clay); text-transform: uppercase; margin: 0 0 18px; display: inline-flex; align-items: center; gap: 10px; }
+  .kicker-dot { width: 6px; height: 6px; border-radius: 999px; background: var(--clay); display: inline-block; }
+  .display-2 { font-family: var(--font-serif); font-weight: 300; font-size: clamp(34px, 5vw, 58px); line-height: 1.02; letter-spacing: -0.025em; margin: 0; font-variation-settings: "SOFT" 30; }
+  .display-2 em { font-style: italic; font-weight: 600; color: var(--clay); }
+  .section-sub { font-family: var(--font-sans); font-size: 17px; line-height: 1.55; color: var(--text-mid); margin: 22px auto 0; max-width: 620px; }
+  .num { font-family: var(--font-mono); font-weight: 600; color: var(--text); }
+  sup.cite { font-family: var(--font-mono); font-size: 0.66em; font-weight: 600; color: var(--clay-deep); padding: 0 1px 0 2px; letter-spacing: 0.04em; }
+  sup.cite a { text-decoration: none; border: none; }
+
+  /* ===== HERO ===== */
+  .hero { max-width: 880px; margin: 0 auto; padding: 72px 32px 52px; text-align: center; }
+  .hero h1 { font-family: var(--font-serif); font-weight: 300; font-size: clamp(40px, 6.4vw, 76px); line-height: 1.0; letter-spacing: -0.032em; margin: 0 auto 30px; max-width: 16ch; font-variation-settings: "SOFT" 30; }
+  .hero h1 em { font-style: italic; font-weight: 600; color: var(--clay); }
+  .hero .lede { font-family: var(--font-sans); font-weight: 400; font-size: 19px; line-height: 1.6; color: var(--text-mid); max-width: 640px; margin: 0 auto; }
+  .hero .lede strong { color: var(--text); font-weight: 600; }
+  .hero-meta { margin-top: 30px; display: inline-flex; flex-wrap: wrap; justify-content: center; gap: 8px 22px; font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.13em; text-transform: uppercase; color: var(--text-faint); }
+
+  /* ===== DIVIDER ===== */
+  .rule-line { max-width: 1100px; margin: 0 auto; height: 1px; background: var(--rule); }
+
+  /* ===== CALLOUT ===== */
+  .callout { background: var(--surface); border: 1px solid var(--rule); border-left: 3px solid var(--clay); border-radius: 4px; padding: 30px 32px; max-width: 760px; margin: 0 auto 32px; box-shadow: 0 1px 0 rgba(255,255,255,0.6) inset, 0 12px 32px -14px rgba(26,22,18,0.10); }
+  .callout .lbl { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--clay-deep); margin: 0 0 12px; }
+  .callout p { font-family: var(--font-sans); font-size: 16px; line-height: 1.62; color: var(--text); margin: 0; }
+  .callout p + p { margin-top: 12px; }
+  .callout em { font-style: italic; color: var(--clay-deep); }
+  .callout a { color: var(--clay-deep); text-decoration: none; border-bottom: 1px dotted var(--clay-deep); }
+
+  /* ===== SIGNAL STRIP ===== */
+  .signal { background: var(--surface); border: 1px solid var(--rule); border-radius: 12px; max-width: 880px; margin: 0 auto; padding: 28px 32px; }
+  .signal-grid { display: grid; grid-template-columns: 1fr; gap: 22px; }
+  @media (min-width: 760px) { .signal-grid { grid-template-columns: repeat(3, 1fr); gap: 28px; } }
+  .signal-cell { display: flex; flex-direction: column; gap: 6px; }
+  .signal-cell .v { font-family: var(--font-serif); font-weight: 300; font-size: clamp(28px, 3.4vw, 36px); letter-spacing: -0.025em; line-height: 1; color: var(--text); font-variation-settings: "SOFT" 30; }
+  .signal-cell .v em { font-style: italic; color: var(--clay); font-weight: 600; }
+  .signal-cell .l { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.13em; text-transform: uppercase; color: var(--text-mid); line-height: 1.5; }
+  .signal-cell .s { font-family: var(--font-sans); font-size: 14px; line-height: 1.55; color: var(--text-mid); }
+
+  /* ===== METHOD CARD ===== */
+  .method { background: var(--surface-2); border: 1px solid var(--rule); border-radius: 10px; padding: 26px 30px; max-width: 880px; margin: 28px auto 0; }
+  .method .lbl { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-mid); margin: 0 0 12px; }
+  .method ul { font-family: var(--font-sans); font-size: 14.5px; line-height: 1.62; color: var(--text-mid); margin: 0; padding-left: 18px; }
+  .method li { padding: 4px 0; }
+  .method li strong { color: var(--text); font-weight: 600; }
+  .method a { color: var(--clay-deep); text-decoration: none; border-bottom: 1px dotted var(--clay-deep); }
+
+  /* ===== FRAMEWORK CARD ===== */
+  .fw { background: var(--surface); border: 1px solid var(--rule); border-radius: 14px; max-width: 980px; margin: 0 auto 36px; box-shadow: 0 1px 0 rgba(255,255,255,0.6) inset, 0 16px 40px -18px rgba(26,22,18,0.10); overflow: hidden; }
+  .fw.demoted { background: var(--surface-2); }
+  .fw-hd { padding: 28px 36px 24px; border-bottom: 1px solid var(--rule-soft); display: grid; grid-template-columns: 1fr; gap: 12px; }
+  @media (min-width: 760px) { .fw-hd { grid-template-columns: auto 1fr auto; align-items: baseline; gap: 28px; } }
+  .fw-num { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.18em; color: var(--clay); text-transform: uppercase; padding-top: 4px; }
+  .fw-title { font-family: var(--font-serif); font-weight: 600; font-size: clamp(22px, 3vw, 30px); line-height: 1.12; letter-spacing: -0.018em; margin: 0; color: var(--text); }
+  .fw-title em { font-style: italic; color: var(--clay); font-weight: 600; }
+  .fw-tag { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-mid); white-space: nowrap; padding: 4px 10px; background: var(--surface-2); border-radius: 999px; }
+  .fw-tag.pick { color: var(--bg); background: var(--clay); }
+  .fw-tag.phase2 { color: var(--bg); background: var(--text); }
+
+  .fw-strip { background: var(--surface-2); padding: 14px 36px; border-bottom: 1px solid var(--rule-soft); display: grid; grid-template-columns: 1fr; gap: 14px; }
+  .fw.demoted .fw-strip { background: var(--surface-3); }
+  @media (min-width: 720px) { .fw-strip { grid-template-columns: repeat(3, 1fr); gap: 26px; } }
+  .fw-strip .k { font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-faint); margin: 0 0 4px; }
+  .fw-strip .v { font-family: var(--font-sans); font-size: 14px; color: var(--text); line-height: 1.45; }
+  .fw-strip .v strong { font-weight: 600; }
+
+  .fw-body { padding: 30px 36px 8px; }
+  .fw-section { margin-bottom: 24px; }
+  .fw-section:last-child { margin-bottom: 0; }
+  .fw-section h4 { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--clay-deep); margin: 0 0 12px; font-weight: 600; }
+  .fw-section p { font-family: var(--font-sans); font-size: 15.5px; line-height: 1.62; color: var(--text-mid); margin: 0; }
+  .fw-section p + p { margin-top: 12px; }
+  .fw-section p strong { color: var(--text); font-weight: 600; }
+  .fw-section p em { font-style: italic; color: var(--clay-deep); }
+  .fw-section a { color: var(--clay-deep); text-decoration: none; border-bottom: 1px dotted var(--clay-deep); }
+
+  /* Pipeline / flow */
+  .flow { background: var(--surface-2); border: 1px solid var(--rule); border-radius: 8px; padding: 16px 20px; font-family: var(--font-mono); font-size: 12.5px; line-height: 1.75; color: var(--text); overflow-x: auto; white-space: pre-wrap; word-break: break-word; }
+  .fw.demoted .flow { background: var(--surface); }
+  .flow .arr { color: var(--clay); padding: 0 6px; }
+  .flow .box { background: var(--surface); border: 1px solid var(--rule); padding: 2px 8px; border-radius: 4px; margin: 0 2px; display: inline-block; }
+  .fw.demoted .flow .box { background: var(--surface-2); }
+  .flow .accent { color: var(--clay-deep); font-weight: 700; }
+
+  /* Build plan */
+  .plan { display: grid; grid-template-columns: 1fr; gap: 10px; }
+  .plan-row { display: grid; grid-template-columns: 80px 1fr; gap: 18px; align-items: baseline; padding: 12px 16px; background: var(--surface-2); border: 1px solid var(--rule); border-radius: 8px; }
+  .fw.demoted .plan-row { background: var(--surface); }
+  .plan-wk { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--clay); font-weight: 600; }
+  .plan-task { font-family: var(--font-sans); font-size: 14.5px; line-height: 1.55; color: var(--text); }
+  .plan-task strong { font-weight: 600; }
+  .plan-task .sub { font-family: var(--font-mono); font-size: 11px; color: var(--text-faint); margin-top: 4px; display: block; letter-spacing: 0.02em; }
+
+  /* Stack list */
+  .stack { display: grid; grid-template-columns: 1fr; gap: 8px; }
+  @media (min-width: 640px) { .stack { grid-template-columns: 1fr 1fr; gap: 12px 24px; } }
+  .stack-row { display: grid; grid-template-columns: 110px 1fr; gap: 12px; align-items: baseline; padding: 7px 0; border-bottom: 1px solid var(--rule-soft); }
+  .stack-row:last-child { border-bottom: none; }
+  .stack-k { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-faint); }
+  .stack-v { font-family: var(--font-mono); font-size: 13px; color: var(--text); }
+
+  /* Ask card */
+  .ask { background: var(--clay-dim); border: 1px solid var(--clay); border-radius: 8px; padding: 22px 26px; margin-top: 8px; }
+  .ask .lbl { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--clay-deep); margin: 0 0 12px; font-weight: 600; }
+  .ask ol { font-family: var(--font-sans); font-size: 15px; line-height: 1.62; color: var(--text); margin: 0; padding-left: 22px; }
+  .ask li { padding: 4px 0; }
+  .ask li strong { font-weight: 600; }
+
+  /* Brief / not-yet mentions */
+  .briefs { max-width: 980px; margin: 0 auto; display: grid; grid-template-columns: 1fr; gap: 18px; }
+  @media (min-width: 760px) { .briefs { grid-template-columns: repeat(3, 1fr); gap: 22px; } }
+  .brief { background: var(--surface); border: 1px solid var(--rule); border-radius: 12px; padding: 24px 26px; box-shadow: 0 1px 0 rgba(255,255,255,0.6) inset; }
+  .brief .tag { font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-faint); margin: 0 0 8px; }
+  .brief .tag.warn { color: var(--clay-deep); }
+  .brief .tag.cut { color: var(--text); }
+  .brief h4 { font-family: var(--font-serif); font-weight: 600; font-size: 19px; line-height: 1.2; letter-spacing: -0.012em; margin: 0 0 10px; }
+  .brief p { font-family: var(--font-sans); font-size: 14px; line-height: 1.6; color: var(--text-mid); margin: 0; }
+  .brief p + p { margin-top: 8px; }
+
+  /* Realistic-build-math table */
+  .math { background: var(--surface); border: 1px solid var(--rule); border-radius: 12px; max-width: 880px; margin: 0 auto; overflow: hidden; }
+  .math-hd { display: grid; grid-template-columns: 1fr 100px 100px 100px; padding: 14px 22px; background: var(--surface-2); border-bottom: 1px solid var(--rule); font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-mid); }
+  .math-hd .c { text-align: center; }
+  .math-row { display: grid; grid-template-columns: 1fr 100px 100px 100px; padding: 14px 22px; border-bottom: 1px solid var(--rule-soft); align-items: center; }
+  .math-row:last-child { border-bottom: none; }
+  .math-row .name { font-family: var(--font-sans); font-size: 14.5px; color: var(--text); }
+  .math-row .name strong { font-weight: 600; }
+  .math-row .v { text-align: center; font-family: var(--font-mono); font-size: 12px; }
+  .math-row .v.yes { color: var(--teal); font-weight: 700; }
+  .math-row .v.maybe { color: var(--clay); font-weight: 700; }
+  .math-row .v.no { color: var(--text-faint); }
+
+  /* ===== HONEST GAP ===== */
+  .gap-card { background: var(--text); color: var(--bg); border-radius: 14px; padding: 38px 36px; max-width: 880px; margin: 32px auto 0; }
+  .gap-card .lbl { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--clay); margin: 0 0 16px; }
+  .gap-card h3 { font-family: var(--font-serif); font-weight: 600; font-size: clamp(22px, 2.8vw, 30px); line-height: 1.12; letter-spacing: -0.02em; margin: 0 0 16px; color: var(--bg); }
+  .gap-card h3 em { font-style: italic; color: var(--clay); }
+  .gap-card p { font-family: var(--font-sans); font-size: 15.5px; line-height: 1.64; color: rgba(248,244,237,0.78); margin: 0; }
+  .gap-card p + p { margin-top: 12px; }
+  .gap-card p strong { color: var(--bg); font-weight: 600; }
+  .gap-card ul { color: rgba(248,244,237,0.78); margin: 14px 0 0; padding-left: 20px; font-size: 15px; line-height: 1.65; }
+  .gap-card li { padding: 4px 0; }
+  .gap-card li strong { color: var(--bg); font-weight: 600; }
+
+  /* ===== SOURCES ===== */
+  .sources-section { background: var(--surface-2); }
+  .src-note { background: var(--surface); border: 1px solid var(--rule); border-radius: 10px; padding: 22px 26px; max-width: 820px; margin: 0 auto 32px; }
+  .src-note p { font-family: var(--font-sans); font-size: 14.5px; line-height: 1.62; color: var(--text-mid); margin: 0; }
+  .src-note strong { color: var(--text); font-weight: 600; }
+  .src-list { max-width: 880px; margin: 0 auto; list-style: none; padding: 0; counter-reset: src; }
+  .src-list li { counter-increment: src; display: grid; grid-template-columns: 36px 1fr; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--rule); scroll-margin-top: 80px; }
+  .src-list li:first-child { border-top: 1px solid var(--rule); }
+  .src-list li::before { content: counter(src, decimal-leading-zero); font-family: var(--font-mono); font-size: 11px; font-weight: 700; color: var(--clay); letter-spacing: 0.04em; padding-top: 3px; }
+  .src-claim { font-family: var(--font-sans); font-size: 14.5px; line-height: 1.5; color: var(--text); font-weight: 600; margin: 0 0 5px; }
+  .src-where { font-family: var(--font-sans); font-size: 13px; line-height: 1.58; color: var(--text-mid); margin: 0; }
+  .src-where a { color: var(--clay-deep); text-decoration: none; border-bottom: 1px dotted var(--clay-deep); word-break: break-word; }
+  .src-where .typ { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-faint); }
+
+  /* ===== FOOTER ===== */
+  .footer { max-width: 780px; margin: 0 auto; padding: 60px 32px 76px; text-align: center; }
+  .footer .mq { font-family: var(--font-serif); font-weight: 400; font-style: italic; font-size: clamp(18px, 2.3vw, 23px); line-height: 1.45; color: var(--text); margin: 0 0 24px; }
+  .footer .mq em { color: var(--clay); font-weight: 600; }
+  .footer-cta { display: inline-flex; align-items: baseline; gap: 10px; padding: 14px 26px; background: var(--text); color: var(--bg); text-decoration: none; border-radius: 999px; font-family: var(--font-sans); font-weight: 600; font-size: 14px; transition: background 0.2s, transform 0.2s; }
+  html.js .footer-cta:hover { background: var(--clay); transform: translateY(-1px); }
+  .footer-cta .m { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.06em; opacity: 0.7; font-weight: 400; }
+  .footer-sig { margin-top: 26px; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-faint); }
+  .micro { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-faint); text-align: center; margin: 12px auto 0; }
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="/" class="mark">
+      <span class="mark-name">Jason Walls</span>
+      <span class="mark-sub">Master Electrician · IBEW Local 369</span>
+    </a>
+    <a href="/" class="nav-link">jason-walls.vercel.app&nbsp;↗</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- ===== HERO ===== -->
+  <header class="hero">
+    <p class="kicker reveal"><span class="kicker-dot"></span> Prepared for Sarah Stogner · 143rd Judicial District</p>
+    <h1 class="reveal">Two things I think<br /><em>I can actually build.</em></h1>
+    <p class="lede reveal">
+      Sarah — you asked me Thursday night what to flag in the Anthropic legal webinar, and you've said
+      a few times now that you believe in what I'm building. So here's the honest version of what I
+      picked up: I watched the webinar, pulled the transcript, cloned the source repo, read the
+      statutes, and put a research agent on the legal exposure of every idea I had. <strong>Started with five
+      frameworks. After validation: two worth building, one honest Phase-2, two cut.</strong> What I'm
+      really asking — does the market need any of this, and would you be the lawyer to <em>this build</em> the way being an electrician was to ChargeRight? Every claim has a numbered source — pull on anything.
+    </p>
+    <div class="hero-meta reveal">
+      <span>May 16, 2026 · v2 (validated)</span>
+      <span>Webinar attended May 15</span>
+      <span>Replaces draft sent earlier today</span>
+    </div>
+  </header>
+
+  <div class="rule-line"></div>
+
+  <!-- ===== THE MOMENT ===== -->
+  <section class="section">
+    <div class="section-head">
+      <p class="kicker reveal"><span class="kicker-dot"></span> The moment · why now</p>
+      <h2 class="display-2 reveal">Three things landed<br /><em>in the same week.</em></h2>
+      <p class="section-sub reveal">
+        Anthropic shipped the rails. Texas zombie wells hit a 53% surge. And you texted me the exact
+        pain language the Anthropic plugins are not yet built around.
+      </p>
+    </div>
+
+    <div class="signal reveal">
+      <div class="signal-grid">
+        <div class="signal-cell">
+          <span class="v"><em>May 12</em></span>
+          <span class="l">Claude for Legal — official launch</span>
+          <span class="s">12 practice-area plugins + 20+ MCP connectors. Open source at <a href="https://github.com/anthropics/claude-for-legal" style="color:var(--clay-deep);border-bottom:1px dotted">github.com/anthropics/claude-for-legal</a> — 6,400+ stars.<sup class="cite"><a href="#s1">[1]</a><a href="#s2">[2]</a><a href="#s3">[3]</a></sup></span>
+        </div>
+        <div class="signal-cell">
+          <span class="v"><em>53%</em></span>
+          <span class="l">Surge in TX zombie wells (FY26)</span>
+          <span class="s">29 leaking wells per day; 11,000+ orphan backlog; RRC proposes emergency rules. <em>Your fight, current.</em><sup class="cite"><a href="#s4">[4]</a><a href="#s5">[5]</a></sup></span>
+        </div>
+        <div class="signal-cell">
+          <span class="v"><em>20,000+</em></span>
+          <span class="l">Lawyers at one webinar</span>
+          <span class="s">Mark Pike, Anthropic Associate GC, on the recording. Solo + small-office pricing is openly unsolved per his own quote.<sup class="cite"><a href="#s6">[6]</a></sup></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="method reveal">
+      <p class="lbl">What I did before writing this — so you can audit it</p>
+      <ul>
+        <li><strong>Downloaded</strong> the 59-minute webinar from Goldcast → 1.0 GB MP4.</li>
+        <li><strong>Transcribed</strong> with mlx-whisper turbo → 10,054-word transcript + JSON timestamps.</li>
+        <li><strong>Cloned</strong> <code>anthropics/claude-for-legal</code> locally and read the actual plugin scaffolding (privacy-legal, legal-clinic, litigation-legal CLAUDE.md files).<sup class="cite"><a href="#s3">[3]</a></sup></li>
+        <li><strong>Verified directly:</strong> Texas Bar Opinion 705 (Feb 2025) — 4 obligations.<sup class="cite"><a href="#s7">[7]</a></sup> Texas Gov Code §552.221 — 10-business-day TPIA response.<sup class="cite"><a href="#s8">[8]</a></sup> §552.108 — law-enforcement exception.<sup class="cite"><a href="#s9">[9]</a></sup> Local Schedule PS — DA case files retained "AV after final disposition," historical files permanent.<sup class="cite"><a href="#s10">[10]</a></sup></li>
+        <li><strong>Population-checked your district:</strong> Reeves 14,748 · Loving 64 (least-populous county in the U.S.) · Ward 11,644 = <strong>26,456</strong> total.<sup class="cite"><a href="#s11">[11]</a><a href="#s12">[12]</a><a href="#s13">[13]</a></sup></li>
+        <li><strong>Ran a legal-validity agent</strong> on the five frameworks against UPL, Opinion 705, Schedule PS, eFileTexas certification realities. It killed two of them. I kept its findings.</li>
+        <li><strong>Corrected my own first draft:</strong> Matey AI is NOT defense-only (it serves prosecutors too — I had that wrong).<sup class="cite"><a href="#s14">[14]</a></sup> The legal question of whether a 3rd-party SaaS can lawfully hold Texas victim records is open and load-bearing.</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="rule-line"></div>
+
+  <!-- ===== WHAT ANTHROPIC SAID ===== -->
+  <section class="section">
+    <div class="section-head">
+      <p class="kicker reveal"><span class="kicker-dot"></span> The opening · what Anthropic said out loud</p>
+      <h2 class="display-2 reveal">The gaps weren't<br /><em>between the lines.</em></h2>
+    </div>
+
+    <div class="callout reveal">
+      <p class="lbl">From the webinar transcript · timestamps included</p>
+      <p>
+        Mark Pike on solo pricing — <em>"I've heard the feedback in every session I've done. I am
+        chatting with our product team"</em> (~57:48).<sup class="cite"><a href="#s6">[6]</a></sup>
+        On unplugged practice areas — <em>immigration, environmental, tax</em> all named as not-yet-covered (~12:26).<sup class="cite"><a href="#s6">[6]</a></sup>
+        And from the repo's <code>CONNECTORS.md</code>, "Wanted connectors" section verbatim:
+        <em>"Court e-filing systems (PACER write, state e-filing) — with a hard irreversibility gate, obviously."</em><sup class="cite"><a href="#s15">[15]</a></sup>
+      </p>
+      <p>
+        You guessed all of this on Thursday night. Your exact words: <em>"Trial prep and criminal work.
+        Will probably be mostly civil/transactional and not relevant to my day to day."</em>
+        <strong>You were right.</strong> Every demo they did was civil/M&amp;A/privacy. Criminal prosecution, the
+        DA-side workflows, and the privacy-compliance constraints you named are unsolved.
+      </p>
+    </div>
+
+    <div class="callout reveal" style="border-left-color: var(--teal);">
+      <p class="lbl" style="color: var(--teal);">The ask, in plain English</p>
+      <p>
+        I'm not pitching you to buy any of this. <strong>I'm asking you to be to a legal-tech build
+        what being a Master Electrician was to ChargeRight</strong> — the inside-the-trade credibility
+        that tells me whether the market actually needs this, what the buyers near you would pay for,
+        where the lines are I shouldn't cross, and which 2–3 people in your network would be the right
+        first pilots if any of it is real.
+      </p>
+      <p>
+        ChargeRight works because a Master Electrician built it. <em>If any of these legal tools end
+        up real, it'll be because a working DA and oil-and-gas attorney was the lawyer behind it.</em>
+        Doesn't have to be a day-to-day commitment. It's the same role Hawk plays on ZombieWells —
+        the SME who keeps the build honest.
+      </p>
+    </div>
+  </section>
+
+  <div class="rule-line"></div>
+
+  <!-- ===== LEAD FRAMEWORK — ZOMBIEWELLS ENGINE ===== -->
+  <section class="section section-wide">
+    <div class="section-head">
+      <p class="kicker reveal"><span class="kicker-dot"></span> Lead framework · the one I'd actually start with</p>
+      <h2 class="display-2 reveal">Productize what<br /><em>you and Hawk already do.</em></h2>
+      <p class="section-sub reveal">
+        The investigator-side toolkit. Not "compliance for operators" (that's the opposite of your mission).
+        The thing journalists, plaintiff attorneys, environmental orgs, and AG offices would pay for —
+        because you and Hawk are already running the manual version of it.
+      </p>
+    </div>
+
+    <article class="fw reveal" id="f1">
+      <div class="fw-hd">
+        <span class="fw-num">Framework 01 · LEAD</span>
+        <h3 class="fw-title">ZombieWells Engine — the<br /><em>investigator's workbench.</em></h3>
+        <span class="fw-tag pick">Ships 70% in 4 weeks</span>
+      </div>
+      <div class="fw-strip">
+        <div><p class="k">Who buys</p><p class="v">Investigative reporters, plaintiff/environmental attorneys, AG offices, independent investigators.</p></div>
+        <div><p class="k">Price logic</p><p class="v"><strong>$79–199/seat/mo</strong> individuals · <strong>$499–1,999/mo</strong> newsroom/org tier.</p></div>
+        <div><p class="k">Anthropic surface</p><p class="v">Cowork + Managed Agents API + repo's "Reg Feed Watcher" cookbook.<sup class="cite"><a href="#s3">[3]</a></sup></p></div>
+      </div>
+      <div class="fw-body">
+        <div class="fw-section">
+          <h4>The problem · why this exists</h4>
+          <p>
+            ZombieWells documented 100+ leaking wells across West Texas — <em>manually.</em><sup class="cite"><a href="#s16">[16]</a></sup>
+            The pattern (PIA request → response inbox → OCR returned records → matter folder → cross-reference
+            against RRC filings) is the same pattern every investigative beat reporter, every environmental
+            NGO, and every plaintiff's office in the Permian runs by hand.
+          </p>
+          <p>
+            Texas RRC offers a GIS Viewer and Online Research Queries but <em>no public API for filings,
+            NOVs, or P-13s.</em><sup class="cite"><a href="#s17">[17]</a></sup> The structured data has to be scraped. ZombieWells already does
+            that. The product is: <strong>the codebase you've been building informally, with the UX and
+            subscription rails on top.</strong>
+          </p>
+          <p>
+            And the moment is right: 29 leaking wells/day in FY26 (53% YoY surge), 11,000-well backlog,
+            $254M federal grant + $100M state appropriation, and the RRC is openly trying to crack down
+            on operators near zombie wells.<sup class="cite"><a href="#s4">[4]</a><a href="#s5">[5]</a></sup> Demand for accountability tools is real and funded.
+          </p>
+        </div>
+
+        <div class="fw-section">
+          <h4>How it works · the flow</h4>
+          <div class="flow"><span class="box">Subject of interest</span><span class="arr">→</span><span class="box">Agency lookup</span><span class="arr">→</span><span class="box accent">PIA request drafted (Gov Code §552)</span>
+<span class="box">Sent + tracked</span><span class="arr">→</span><span class="box">10-day clock</span><span class="arr">→</span><span class="box">Response inbox</span><span class="arr">→</span><span class="box">OCR</span>
+<span class="box accent">RRC scraper</span><span class="arr">→</span><span class="box">Wells + NOVs + P-13s</span><span class="arr">→</span><span class="box">GIS overlay</span>
+<span class="box">Matter folder</span><span class="arr">→</span><span class="box accent">Morning brief (Claude)</span><span class="arr">→</span><span class="box">Story / motion / referral</span></div>
+        </div>
+
+        <div class="fw-section">
+          <h4>Realistic 4-week build · what ships, what's Phase 2</h4>
+          <div class="plan">
+            <div class="plan-row">
+              <span class="plan-wk">Week 1</span>
+              <span class="plan-task"><strong>TX PIA generator + agency directory + tracker.</strong>
+              <span class="sub">Seed list of TX state + Permian-county agencies with PIA contact emails. Claude drafts compliant §552 request. Built-in 10-business-day deadline clock per §552.221.</span></span>
+            </div>
+            <div class="plan-row">
+              <span class="plan-wk">Week 2</span>
+              <span class="plan-task"><strong>Response inbox + record archiver + OCR.</strong>
+              <span class="sub">Dedicated reply-to per request. Inbound parser saves attachments to matter folder. Tesseract OCR. Auto-flag boilerplate denials with §552.301 appeal language.</span></span>
+            </div>
+            <div class="plan-row">
+              <span class="plan-wk">Week 3</span>
+              <span class="plan-task"><strong>RRC scraper + GIS overlay.</strong>
+              <span class="sub">HTML scrape of RRC well-status, NOVs, P-13 filings (no API per RRC docs).<sup class="cite"><a href="#s17">[17]</a></sup> ZombieWells dataset overlay. Map view per matter.</span></span>
+            </div>
+            <div class="plan-row">
+              <span class="plan-wk">Week 4</span>
+              <span class="plan-task"><strong>Morning brief generator + 3 paid pilots.</strong>
+              <span class="sub">Claude writes a daily brief in user's voice per watched topics. Pilot: you/Hawk, one Permian reporter, one environmental org.</span></span>
+            </div>
+            <div class="plan-row">
+              <span class="plan-wk"><em>Phase 2</em></span>
+              <span class="plan-task"><strong>NMOCD (New Mexico) + EPA Region 6 + Federal Register feeds.</strong>
+              <span class="sub">Adds adjacent jurisdictions and federal layer. Realistic at week 6–8, not week 4.</span></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="fw-section">
+          <h4>Why this is legally clean</h4>
+          <p>
+            <strong>Public records in, public analysis out.</strong> No PII storage, no UPL surface, no
+            client confidentiality issues. Texas Public Information Act (Gov Code Ch 552) is a public-records
+            regime; automating §552.221 requests is no different than selling a request template.<sup class="cite"><a href="#s8">[8]</a></sup>
+            §552.108 governs what agencies can withhold — not what investigators can ask for.<sup class="cite"><a href="#s9">[9]</a></sup>
+            Texas Bar Opinion 705's four obligations all apply to the lawyers using the tool, not the tool itself.<sup class="cite"><a href="#s7">[7]</a></sup>
+          </p>
+        </div>
+
+        <div class="ask">
+          <p class="lbl">What I'd ask of you</p>
+          <ol>
+            <li><strong>Can I use the ZombieWells dataset?</strong> The well-location data Lewis maintains is the moat. Without your + his OK, this becomes generic. With it, it's defensible.</li>
+            <li><strong>Who's the obvious first paying customer in your network?</strong> A reporter, a plaintiff firm, an environmental org — name 2-3 and I'll cold-test.</li>
+            <li><strong>What does a "bad" PIA refusal look like</strong> from your seat at the DA office — so the tool can flag it the moment it lands in a user's inbox?</li>
+          </ol>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <div class="rule-line"></div>
+
+  <!-- ===== FRAMEWORK 02 — VICTIM VOICE (Phase 2) ===== -->
+  <section class="section section-wide">
+    <div class="section-head">
+      <p class="kicker reveal"><span class="kicker-dot"></span> Phase 2 framework · needs your bench first</p>
+      <h2 class="display-2 reveal">The one your office<br /><em>actually needs.</em></h2>
+      <p class="section-sub reveal">
+        I want to build this. I'm honest enough to say: <em>not until your office's legal counsel signs off
+        on what a 3rd-party SaaS can lawfully touch under Texas victim-records rules.</em>
+      </p>
+    </div>
+
+    <article class="fw demoted reveal" id="f2">
+      <div class="fw-hd">
+        <span class="fw-num">Framework 02 · PHASE 2</span>
+        <h3 class="fw-title">Victim Voice — small-DA<br /><em>case &amp; witness backbone.</em></h3>
+        <span class="fw-tag phase2">Pending legal sign-off</span>
+      </div>
+      <div class="fw-strip">
+        <div><p class="k">Who buys</p><p class="v">Elected DAs of 1–4 attorney rural offices. TX first; scales to similar Permian/Plains states.</p></div>
+        <div><p class="k">Price logic</p><p class="v"><strong>$249–499/office/mo flat</strong>. Modeled on Smokeball's flat-rate-per-firm.<sup class="cite"><a href="#s18">[18]</a></sup></p></div>
+        <div><p class="k">Anthropic surface</p><p class="v">Cowork + Managed Agents. Setup interview pattern from repo's privacy-legal plugin.<sup class="cite"><a href="#s3">[3]</a></sup></p></div>
+      </div>
+      <div class="fw-body">
+        <div class="fw-section">
+          <h4>The problem · sized accurately this time</h4>
+          <p>
+            Texas Office of Court Administration built a <strong>free</strong> Uniform Case Management
+            System for counties under 20,000 population — covers Loving and possibly Ward.<sup class="cite"><a href="#s19">[19]</a></sup>
+            <em>But it only covers the court-clerk side.</em> No DA workflows. No Marsy's Law / Article 56A
+            victim notification engine. No Brady disclosure tracker. That gap is what Victim Voice fills.
+          </p>
+          <p>
+            Karpel's PROSECUTORbyKarpel and Journal Tech's eProsecutor both serve larger offices — neither
+            names a single Texas customer publicly.<sup class="cite"><a href="#s20">[20]</a><a href="#s21">[21]</a></sup> Matey AI <em>does</em> work for prosecutors despite the criminal-defense branding<sup class="cite"><a href="#s14">[14]</a></sup>
+            — so the question for you specifically is whether Matey covers Marsy's Law notification +
+            Brady tracking + multi-county calendar at flat-rate office pricing. <em>I'd want your read before
+            I'd claim it doesn't.</em>
+          </p>
+        </div>
+
+        <div class="fw-section">
+          <h4>Why this is Phase 2 — the load-bearing question</h4>
+          <p>
+            Your exact words Thursday night: <em>"I have rules and regulations on things like victim info
+            and criminal histories... Not allowed to share electronically... Not allowed to store
+            indefinitely."</em> That constraint is real and load-bearing. I tried to verify the specific
+            statute and could only get partway:
+          </p>
+          <p>
+            Texas Local Schedule PS confirms <em>retention</em> rules — DA case files "AV after final
+            disposition," historical files permanent, no destruction during open litigation/PIA on pain of
+            Class A misdemeanor under Penal Code §37.10.<sup class="cite"><a href="#s10">[10]</a></sup> Schedule PS does <em>not</em> directly
+            address whether a 3rd-party cloud SaaS may lawfully receive, store, and transmit those records.
+            That sits in: <strong>your office's policies, any state/county procurement rules, and Texas Gov
+            Code §552.108(b) on victim-address confidentiality</strong> — and I won't pretend to know that
+            without your bench. <em>This is the question I need answered before I'd touch a single line of code on the prosecutor side.</em>
+          </p>
+        </div>
+
+        <div class="fw-section">
+          <h4>What it would do (if green-lit)</h4>
+          <div class="flow"><span class="box">Charge filed</span><span class="arr">→</span><span class="box">Matter auto-created</span><span class="arr">→</span><span class="box accent">Victim identified</span><span class="arr">→</span><span class="box">56A clock starts</span>
+<span class="box">Notification per Art 56A.452/.453</span><span class="arr">→</span><span class="box">SMS/email send</span><span class="arr">→</span><span class="box">Receipt logged</span>
+<span class="box">Brady checklist per matter</span><span class="arr">→</span><span class="box">Manual court-date entry</span><span class="arr">→</span><span class="box">Weekly digest</span></div>
+        </div>
+
+        <div class="fw-section">
+          <h4>Architecture commitments — designed to your stated constraints</h4>
+          <div class="stack">
+            <div class="stack-row"><span class="stack-k">Tenant isolation</span><span class="stack-v">Per-office; no cross-tenant data access</span></div>
+            <div class="stack-row"><span class="stack-k">Encryption</span><span class="stack-v">AES-256 at rest, TLS 1.3 in transit</span></div>
+            <div class="stack-row"><span class="stack-k">Retention policy</span><span class="stack-v">Per record type, auto-purge with litigation hold</span></div>
+            <div class="stack-row"><span class="stack-k">No training</span><span class="stack-v">Data is never used to train any model</span></div>
+            <div class="stack-row"><span class="stack-k">Audit trail</span><span class="stack-v">Append-only, immutable, exportable</span></div>
+            <div class="stack-row"><span class="stack-k">eFileTexas</span><span class="stack-v">Manual entry day-1; OCA cert is Phase 3 (months)</span></div>
+            <div class="stack-row"><span class="stack-k">Vendor agreement</span><span class="stack-v">Texas-specific DPA / BAA-equivalent</span></div>
+            <div class="stack-row"><span class="stack-k">Self-host option</span><span class="stack-v">Available for offices that can't use cloud at all</span></div>
+          </div>
+        </div>
+
+        <div class="ask">
+          <p class="lbl">What I'd ask of you (Phase 2)</p>
+          <ol>
+            <li><strong>What does the 143rd actually use today?</strong> Matey? Karpel? Excel? Mix? Just real ground truth.</li>
+            <li><strong>Which Texas statute or office policy</strong> governs whether a 3rd-party SaaS can hold victim contact info? If you don't know off the top of your head, who in your network would?</li>
+            <li><strong>What's the single piece of paperwork</strong> that eats the most time per case for you or your staff? If it's not Marsy's Law notifications, I want to know what is.</li>
+          </ol>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <div class="rule-line"></div>
+
+  <!-- ===== BRIEF MENTIONS + CUT ===== -->
+  <section class="section">
+    <div class="section-head">
+      <p class="kicker reveal"><span class="kicker-dot"></span> Honest disposition of the other three</p>
+      <h2 class="display-2 reveal">Two I'd build with<br /><em>your sign-off. One I cut.</em></h2>
+    </div>
+
+    <div class="briefs">
+      <article class="brief reveal">
+        <p class="tag warn">Worth building · needs UPL guardrails</p>
+        <h4>Pro Se Compass</h4>
+        <p>
+          Firm-branded triage chatbot for plaintiffs' firms — pre-screens walk-ins, drafts matter-open
+          memo for the lawyer's first call. Anthropic's Courtroom 5 partnership is the precedent.<sup class="cite"><a href="#s15">[15]</a></sup>
+        </p>
+        <p>
+          <strong>Why not lead with it for you:</strong> you're not a plaintiffs' firm. You're the bench
+          perspective — the one who'd tell me whether the "is this a case?" disclaimer is enough to stay
+          on the right side of Texas Disc Rule 5.05 (UPL). <em>Your read on the UPL line would unlock this whole framework.</em>
+        </p>
+      </article>
+
+      <article class="brief reveal">
+        <p class="tag warn">Worth building · needs your pilot</p>
+        <h4>Permian Adversary Brief</h4>
+        <p>
+          Sister product to ZombieWells Engine, narrower scope: a daily 6am brief summarizing RRC filings,
+          EPA ECHO updates, and NOVs in a user-defined geofence. <em>The Pamela-pattern</em> from Anthropic's
+          webinar (~55:04),<sup class="cite"><a href="#s6">[6]</a></sup> but pointed at an adversarial use case.
+        </p>
+        <p>
+          Could ship as a free "v0" inside ZombieWells Engine and graduate to a paid tier once it's earning
+          its keep with reporters and AG investigators.
+        </p>
+      </article>
+
+      <article class="brief reveal">
+        <p class="tag cut">Cut from the lineup</p>
+        <h4>BriefRight (TX brief drafter)</h4>
+        <p>
+          The validation pass killed it. CourtListener has coverage gaps for Texas state courts — false
+          negatives on citation verification create the exact "naughty list" risk the webinar warned about (~49:28).<sup class="cite"><a href="#s6">[6]</a></sup>
+          Doing it right requires a Westlaw or LexisNexis feed I can't realistically secure solo in 90 days.
+        </p>
+        <p>
+          <em>Better as a feature inside a bigger play, not its own product.</em> Filing this one in the
+          parking lot.
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <div class="rule-line"></div>
+
+  <!-- ===== REALISTIC BUILD MATH ===== -->
+  <section class="section">
+    <div class="section-head">
+      <p class="kicker reveal"><span class="kicker-dot"></span> Realistic build math · what actually fits in 4 weeks solo</p>
+      <h2 class="display-2 reveal">No agency timelines.<br /><em>Just one builder.</em></h2>
+      <p class="section-sub reveal">
+        I build solo using Claude Code. No team. The numbers below are honest about what that means.
+      </p>
+    </div>
+
+    <div class="math reveal">
+      <div class="math-hd">
+        <div>Capability</div>
+        <div class="c">4 wks</div>
+        <div class="c">3 mo</div>
+        <div class="c">6+ mo</div>
+      </div>
+      <div class="math-row"><div class="name"><strong>ZombieWells Engine</strong> — PIA generator + tracker + RRC scraper + morning brief</div><div class="v yes">YES</div><div class="v">—</div><div class="v">—</div></div>
+      <div class="math-row"><div class="name">EPA / NMOCD / Federal Register feeds (additive)</div><div class="v no">No</div><div class="v yes">YES</div><div class="v">—</div></div>
+      <div class="math-row"><div class="name"><strong>Victim Voice</strong> — Marsy's Law engine + Brady tracker (after legal sign-off)</div><div class="v no">No</div><div class="v maybe">Maybe</div><div class="v yes">YES</div></div>
+      <div class="math-row"><div class="name">eFileTexas calendar sync (requires OCA / ECF 5.0 certification)<sup class="cite"><a href="#s22">[22]</a></sup></div><div class="v no">No</div><div class="v no">No</div><div class="v yes">YES</div></div>
+      <div class="math-row"><div class="name"><strong>Pro Se Compass</strong> — intake bot + matter memo for one practice area</div><div class="v yes">YES</div><div class="v">—</div><div class="v">—</div></div>
+      <div class="math-row"><div class="name">Pro Se across 4+ practice areas with statute-of-limitations check</div><div class="v no">No</div><div class="v yes">YES</div><div class="v">—</div></div>
+      <div class="math-row"><div class="name">CourtListener-backed citation verification (BriefRight — CUT)</div><div class="v no">No</div><div class="v no">No</div><div class="v no">No</div></div>
+    </div>
+  </section>
+
+  <div class="rule-line"></div>
+
+  <!-- ===== HONEST GAPS ===== -->
+  <section class="section">
+    <div class="section-head">
+      <p class="kicker reveal"><span class="kicker-dot"></span> Honest gaps · before you trust any of this</p>
+      <h2 class="display-2 reveal">The pitch isn't worth more<br /><em>than this list.</em></h2>
+    </div>
+
+    <div class="gap-card reveal">
+      <p class="lbl">What I can't yet prove · what I got wrong in v1</p>
+      <h3>Five things I want straight <em>before you pull a thread.</em></h3>
+      <ul>
+        <li><strong>Matey AI — I had it wrong in v1.</strong> I called Matey "criminal-defense focused" and said it didn't compete with Victim Voice. Re-check of matey.ai says they serve <em>both</em> defense and prosecution. Real competitive picture depends on which Matey features you actually use day-to-day.<sup class="cite"><a href="#s14">[14]</a></sup></li>
+        <li><strong>Victim-records SaaS legality.</strong> Texas Local Schedule PS governs retention, not whether a 3rd-party cloud SaaS can lawfully hold the records.<sup class="cite"><a href="#s10">[10]</a></sup> The answer lives in your office's policies + §552.108 + state/county procurement rules. <em>I won't claim I know it. That's the load-bearing question for Victim Voice.</em></li>
+        <li><strong>eFileTexas is months not weeks.</strong> OCA certification via ECF 5.0 is real and 22 vendors have done it, but the path is months, not a sprint.<sup class="cite"><a href="#s22">[22]</a></sup> v1's "4-week calendar sync" claim was optimistic. v2 removes it from MVP.</li>
+        <li><strong>RRC public-data posture.</strong> No public API per RRC's own docs.<sup class="cite"><a href="#s17">[17]</a></sup> HTML scraping is the realistic path; that means the tool breaks every time they redesign a page. Not a deal-breaker but a real ops cost.</li>
+        <li><strong>TX Bar Opinion 705 applies to lawyers, not the tool</strong> — but if the tool produces output a lawyer uses, the four obligations (competence, confidentiality, verification, fair billing) effectively constrain the tool's design.<sup class="cite"><a href="#s7">[7]</a></sup> Every framework above is designed to make Opinion 705 compliance easier, not harder.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===== SOURCES ===== -->
+  <section class="section sources-section">
+    <div class="section-head">
+      <p class="kicker reveal"><span class="kicker-dot"></span> Sources · every line, where it comes from</p>
+      <h2 class="display-2 reveal">Pull on any of these.<br /><em>I won't be surprised.</em></h2>
+    </div>
+
+    <div class="src-note reveal">
+      <p>
+        <strong>How to read this:</strong> superscript numbers in the body link down to this list.
+        <span class="typ">Verified this session</span> = I personally pulled it via tool this week.
+        <span class="typ">Tool-retrieved · not independently re-verified</span> = a research agent pulled it; I trusted but did not re-pull.
+        <span class="typ">Honest gap</span> = called out above; needs your bench or further work.
+      </p>
+    </div>
+
+    <ol class="src-list">
+      <li class="reveal" id="s1">
+        <div>
+          <p class="src-claim">Claude for Legal — May 12, 2026 launch · 12 plugins · 20+ MCP connectors</p>
+          <p class="src-where">
+            ABA Journal — <a href="https://www.abajournal.com/news/article/anthropic-launches-claude-for-legal-giving-lawyers-20-new-program-integrations-and-12-practice-area-plugins">abajournal.com</a>.
+            Cross-confirmed: LawSites, Bloomberg Law, Fortune, TechCrunch, Yahoo Finance, Artificial Lawyer, Global Legal Post.
+            <span class="typ">Verified this session</span>
+          </p>
+        </div>
+      </li>
+      <li class="reveal" id="s2">
+        <div>
+          <p class="src-claim">LawSites coverage with full plugin + connector list</p>
+          <p class="src-where">
+            <a href="https://www.lawnext.com/2026/05/anthropic-goes-all-in-on-legal-releasing-more-than-20-connectors-and-12-practice-area-plugins-for-claude.html">lawnext.com</a>.
+            <span class="typ">Verified this session</span>
+          </p>
+        </div>
+      </li>
+      <li class="reveal" id="s3">
+        <div>
+          <p class="src-claim">Source repo: anthropics/claude-for-legal (cloned locally and read)</p>
+          <p class="src-where">
+            <a href="https://github.com/anthropics/claude-for-legal">github.com/anthropics/claude-for-legal</a>.
+            6,400+ stars, created 2026-04-21, last updated 2026-05-16. All 12 plugin directories verified; "Reg Feed Watcher" cookbook confirmed in managed-agent-cookbooks/; "draft for attorney review" disclaimer language in README.md verbatim. Cloned to <code>~/Marketing/legal-webinar-2026-05-15/claude-for-legal/</code>.
+            <span class="typ">Verified this session via gh CLI + local clone</span>
+          </p>
+        </div>
+      </li>
+      <li class="reveal" id="s4">
+        <div>
+          <p class="src-claim">Texas zombie wells — 53% surge, 29 leaking wells/day, 11,000+ orphan backlog</p>
+          <p class="src-where">
+            Insurance Journal, April 24, 2026 — <a href="https://www.insurancejournal.com/news/southcentral/2026/04/24/867247.htm">insurancejournal.com</a>.
+            Cross-confirmed: Bloomberg, Texas Tribune, Bloomberg Law.
+            <span class="typ">Verified this session</span>
+          </p>
+        </div>
+      </li>
+      <li class="reveal" id="s5">
+        <div>
+          <p class="src-claim">$254M federal grant + $100M state appropriation for orphan-well plugging</p>
+          <p class="src-where">
+            Railroad Commission of Texas — <a href="https://www.rrc.texas.gov/news/plugging-orphaned-wells-is-a-top-priority-for-railroad-commission-of-texas-opinion/">rrc.texas.gov</a>.
+            <span class="typ">Verified this session</span>
+          </p>
+        </div>
+      </li>
+      <li class="reveal" id="s6">
+        <div>
+          <p class="src-claim">Webinar quotes — Mark Pike, Harry, Sonia Ebron · all timestamps</p>
+          <p class="src-where">
+            "How legal teams put Claude to work," Anthropic, 2026-05-15. Recording downloaded from Goldcast; transcribed locally with mlx-whisper turbo. Transcript + JSON at <code>~/Marketing/legal-webinar-2026-05-15/</code>.
+            <span class="typ">Verified this session — raw transcript on disk</span>
+          </p>
+        </div>
+      </li>
+      <li class="reveal" id="s7">
+        <div>
+          <p class="src-claim">Texas Bar Opinion 705 (Feb 2025) — 4 obligations for lawyers using gen AI</p>
+          <p class="src-where">
+            <a href="https://www.legalethicstexas.com/resources/opinions/opinion-705/">legalethicstexas.com/resources/opinions/opinion-705/</a>. Four obligations: competence, confidentiality, verification, fair billing. Issued by Texas Committee on Professional Ethics.
+            <span class="typ">Verified this session — direct fetch</span>
+          </p>
+        </div>
+      </li>
+      <li class="reveal" id="s8">
+        <div>
+          <p class="src-claim">Texas Gov Code §552.221 — 10-business-day TPIA response timeline</p>
+          <p class="src-where">
+            <a href="https://statutes.capitol.texas.gov/Docs/GV/htm/GV.552.htm#552.221">statutes.capitol.texas.gov — §552.221</a>. If records can't be produced in 10 business days, officer must certify in writing and set a reasonable date.
+            <span class="typ">Verified this session — direct fetch</span>
+          </p>
+        </div>
+      </li>
+      <li class="reveal" id="s9">
+        <div>
+          <p class="src-claim">Texas Gov Code §552.108 — law-enforcement / prosecution exception</p>
+          <p class="src-where">
+            <a href="https://statutes.capitol.texas.gov/Docs/GV/htm/GV.552.htm#552.108">statutes.capitol.texas.gov — §552.108</a>. Records that would interfere with detection/investigation/prosecution may be withheld. Attorney work product is protected. Basic arrest info cannot be withheld.
+            <span class="typ">Verified this session — direct fetch</span>
+          </p>
+        </div>
+      </li>
+      <li class="reveal" id="s10">
+        <div>
+          <p class="src-claim">Texas Local Schedule PS — Public Safety Agencies retention</p>
+          <p class="src-where">
+            <a href="https://www.tsl.texas.gov/slrm/localretention/schedule_ps">tsl.texas.gov/slrm/localretention/schedule_ps</a>. DA case files: AV after final disposition; historical files permanent (item PS2575-01). Victim impact statements: part of offense investigation records (PS4125-05). No destruction during open litigation/PIA/audit — Class A misdemeanor under Penal Code §37.10.
+            <span class="typ">Verified this session</span>
+          </p>
+        </div>
+      </li>
+      <li class="reveal" id="s11">
+        <div>
+          <p class="src-claim">Reeves County, Texas — 14,748 (2020 Census)</p>
+          <p class="src-where">
+            <a href="https://en.wikipedia.org/wiki/Reeves_County,_Texas">Wikipedia — Reeves County</a>, citing U.S. Census 2020.
+            <span class="typ">Verified this session</span>
+          </p>
+        </div>
+      </li>
+      <li class="reveal" id="s12">
+        <div>
+          <p class="src-claim">Loving County, Texas — 64 (2020) · least-populous U.S. county</p>
+          <p class="src-where">
+            <a href="https://en.wikipedia.org/wiki/Loving_County,_Texas">Wikipedia — Loving County</a>, citing U.S. Census 2020.
+            <span class="typ">Verified this session</span>
+          </p>
+        </div>
+      </li>
+      <li class="reveal" id="s13">
+        <div>
+          <p class="src-claim">Ward County, Texas — 11,644 (2020 Census)</p>
+          <p class="src-where">
+            <a href="https://en.wikipedia.org/wiki/Ward_County,_Texas">Wikipedia — Ward County</a>, citing U.S. Census 2020.
+            <span class="typ">Verified this session</span>
+          </p>
+        </div>
+      </li>
+      <li class="reveal" id="s14">
+        <div>
+          <p class="src-claim">Matey AI — serves both defense and prosecution (v1 correction)</p>
+          <p class="src-where">
+            <a href="https://www.matey.ai/">matey.ai</a>. v1 of this page called Matey "defense-focused." Re-verification by the legal-validity agent confirmed Matey markets to "every case" and uses general "attorney" language — not defense-only. $7.5M seed funding, Aug 2025. <em>Honest correction.</em>
+            <span class="typ">Verified this session — error corrected</span>
+          </p>
+        </div>
+      </li>
+      <li class="reveal" id="s15">
+        <div>
+          <p class="src-claim">Anthropic's "Wanted connectors" — including state e-filing + Courtroom 5 launch partner</p>
+          <p class="src-where">
+            <a href="https://github.com/anthropics/claude-for-legal/blob/main/CONNECTORS.md">CONNECTORS.md</a>. Verbatim: <em>"Court e-filing systems (PACER write, state e-filing) — with a hard irreversibility gate, obviously."</em> Confirmed shipped connectors include Slack, Google Drive, Box, iManage, DocuSign, Ironclad, Everlaw, CourtListener, Solve Intelligence, Courtroom5, Free Law Project.
+            <span class="typ">Verified this session — local clone</span>
+          </p>
+        </div>
+      </li>
+      <li class="reveal" id="s16">
+        <div>
+          <p class="src-claim">ZombieWells project — 100+ leaking wells documented, partnership with Hawk Dunlap</p>
+          <p class="src-where">
+            Profile and project background — Odessa American, Fast Company, Commission Shift, US News, Insurance Journal, Bloomberg Law. <a href="https://www.fastcompany.com/91172863/zombie-oil-wells-springing-back-to-life-texas">fastcompany.com</a>.
+            <span class="typ">Verified this session</span>
+          </p>
+        </div>
+      </li>
+      <li class="reveal" id="s17">
+        <div>
+          <p class="src-claim">Texas RRC — GIS Viewer + Online Research Queries, no public API for filings</p>
+          <p class="src-where">
+            <a href="https://www.rrc.texas.gov/oil-and-gas/">rrc.texas.gov/oil-and-gas</a>. HTML scraping is the realistic integration path; this is a known ops cost.
+            <span class="typ">Tool-retrieved · re-verify before pilot promise</span>
+          </p>
+        </div>
+      </li>
+      <li class="reveal" id="s18">
+        <div>
+          <p class="src-claim">Smokeball flat-rate pricing — $149/mo unlimited users (comparable model)</p>
+          <p class="src-where">
+            <a href="https://www.smokeball.com/pricing">smokeball.com/pricing</a>. Used as the precedent for flat-rate-per-office pricing in Framework 02.
+            <span class="typ">Tool-retrieved via researcher agent</span>
+          </p>
+        </div>
+      </li>
+      <li class="reveal" id="s19">
+        <div>
+          <p class="src-claim">Texas Uniform Case Management System (UCMS) — free for counties &lt;20K population, court-clerk side only</p>
+          <p class="src-where">
+            <a href="https://www.txcourts.gov/programs-services/uniform-case-management-system/">txcourts.gov — UCMS</a>. Built by iDocket, Catalis, Tyler Technologies. Contracts executed Aug 2021. Covers court clerks; does NOT cover DA prosecution workflows or victim notifications.
+            <span class="typ">Verified this session</span>
+          </p>
+        </div>
+      </li>
+      <li class="reveal" id="s20">
+        <div>
+          <p class="src-claim">Karpel Solutions / PROSECUTORbyKarpel — no Texas customers publicly named</p>
+          <p class="src-where">
+            <a href="https://www.karpel.com/">karpel.com</a>. Public customers: DeKalb GA, Merced CA, King County KS. Texas-customer absence is publicly-named-only; could be wrong, settled by one TDCAA call.
+            <span class="typ">Verified this session</span>
+          </p>
+        </div>
+      </li>
+      <li class="reveal" id="s21">
+        <div>
+          <p class="src-claim">Journal Technologies eProsecutor — "eProsecutor Online" tier for smaller offices</p>
+          <p class="src-where">
+            <a href="https://www.journaltech.com/">journaltech.com</a>. Subsidiary of Daily Journal Corporation.
+            <span class="typ">Verified this session via researcher agent</span>
+          </p>
+        </div>
+      </li>
+      <li class="reveal" id="s22">
+        <div>
+          <p class="src-claim">eFileTexas API — ECF 5.0 · OCA certification path · 22 certified providers</p>
+          <p class="src-where">
+            <a href="https://www.efiletexas.gov/">efiletexas.gov</a>. Vendor certification via Texas Office of Court Administration Director of Information Services. Realistic timeline: months, not weeks.
+            <span class="typ">Verified this session</span>
+          </p>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <p class="mq reveal">
+      Sarah — you've got the bench-time and the credibility I don't. I've got build skill and the
+      time to ship. <em>The frameworks are the offer; your read is the ask.</em>
+    </p>
+    <a href="tel:+15024080064" class="footer-cta reveal">
+      Whenever you've got 20 min <span class="m">502-408-0064</span>
+    </a>
+    <p class="footer-sig reveal">Jason Walls · Master Electrician · IBEW Local 369 · NORA Group LLC</p>
+    <p class="micro">Prepared for Sarah Stogner · 143rd Judicial District · v2 · May 16, 2026</p>
+  </footer>
+
+</main>
+
+<script>
+  // Nav: transparent -> solid on scroll
+  (function () {
+    var nav = document.getElementById('nav');
+    var onScroll = function () {
+      if (window.scrollY > 24) nav.classList.add('solid');
+      else nav.classList.remove('solid');
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  })();
+
+  // Reveal on viewport entry — staggered, gentle
+  (function () {
+    if (!('IntersectionObserver' in window)) {
+      document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('in'); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e, i) {
+        if (e.isIntersecting) {
+          var el = e.target;
+          setTimeout(function () { el.classList.add('in'); }, Math.min(i * 55, 220));
+          io.unobserve(el);
+        }
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.06 });
+    document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+  })();
+
+  // For print/PDF rendering: force reveals visible if the page is being printed
+  // or if the user navigates with ?print=1 (headless Chrome)
+  (function () {
+    var forcePrint = window.matchMedia && window.matchMedia('print').matches;
+    var queryPrint = location.search.indexOf('print=1') >= 0;
+    if (forcePrint || queryPrint) {
+      document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('in'); });
+    }
+    window.addEventListener('beforeprint', function () {
+      document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('in'); });
+    });
+  })();
+</script>
+
+</body>
+</html>
