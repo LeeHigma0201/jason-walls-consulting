@@ -27,7 +27,7 @@ const BUILDS = [
     icon: "phone",
     title: "iOS apps",
     body: "Native iOS build, App Store ready. Same codebase as the website, your customers get a real app on the truck or in the pocket.",
-    examples: "Examples: ChargeRight iOS · InspectRight · BendRight",
+    examples: "Live on the App Store: ChargeRight · BendRight",
   },
   {
     num: "03",
@@ -68,9 +68,9 @@ const PROOF = [
   },
   {
     name: "ZombieWells",
-    sub: "Public-interest tool · 45-minute build",
-    body: "Exposes abandoned, contaminated oil wells in Texas. Partnership with attorney Sarah Stogner. From idea to deployed in under an hour.",
-    href: null,
+    sub: "Public-interest map · built with attorney Sarah Stogner",
+    body: "A public map exposing Texas's abandoned, contaminated oil wells — built with Texas attorney Sarah Stogner (@Sarah4Texas). Idea to deployed in under an hour. Live at zombiewells.com.",
+    href: "https://zombiewells.com",
   },
   {
     name: "Cortex",
@@ -83,6 +83,39 @@ const PROOF = [
     sub: "Master Electrician · license on file",
     body: "NEC, panel calculations, EV charging infrastructure. 20 years pulling wire. Licensed, not bluffed. Still on the books.",
     href: null,
+  },
+];
+
+const APPS = [
+  {
+    slug: "chargeright",
+    name: "ChargeRight",
+    icon: "/apps/chargeright.jpg",
+    category: "Utilities · iPhone & iPad",
+    meta: "680K+ views · ★★★★★",
+    tagline: "Can your panel take an EV charger?",
+    blurb:
+      "A professional NEC 220.82 load calculation in minutes — no electrician visit. Built by a Master Electrician, not an installation broker.",
+    price: "Free",
+    href: "https://apps.apple.com/us/app/chargeright/id6755695416",
+    accent: "clay",
+    isNew: false,
+    newDate: "",
+  },
+  {
+    slug: "bendright",
+    name: "BendRight",
+    icon: "/apps/bendright.jpg",
+    category: "Utilities · iPhone & iPad",
+    meta: "For working electricians",
+    tagline: "Conduit bends that land where you marked.",
+    blurb:
+      "A bending calculator tuned to your bender — not a generic take-up. Made to pull out on the job site, in the dark, with dirty gloves.",
+    price: "$6.99",
+    href: "https://apps.apple.com/us/app/bendright/id6779847124",
+    accent: "teal",
+    isNew: true,
+    newDate: "July 2026",
   },
 ];
 
@@ -101,6 +134,41 @@ export default function Home() {
     return () => clearTimeout(t);
   }, []);
 
+  // Scroll-reveal for below-the-fold sections. Respects reduced-motion:
+  // if the user opts out (or IO is unavailable), reveal everything at once.
+  useEffect(() => {
+    const els = Array.from(
+      document.querySelectorAll<HTMLElement>("[data-reveal]")
+    );
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce || !("IntersectionObserver" in window)) {
+      els.forEach((el) => el.classList.add("in"));
+      return;
+    }
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add("in");
+            io.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.12, rootMargin: "0px 0px -8% 0px" }
+    );
+    els.forEach((el) => {
+      // Anything already in or above the viewport on mount (e.g. a deep-link
+      // to #apps, or a fast initial scroll) reveals immediately so it can
+      // never get stuck invisible; everything below the fold reveals on scroll.
+      if (el.getBoundingClientRect().top < window.innerHeight) {
+        el.classList.add("in");
+      } else {
+        io.observe(el);
+      }
+    });
+    return () => io.disconnect();
+  }, []);
+
   return (
     <div data-theme="home">
       <nav className={"nav " + (scrolled ? "nav--solid" : "")}>
@@ -111,6 +179,7 @@ export default function Home() {
           </Link>
           <div className="nav-right">
             <a href="#what-i-build" className="nav-link">What I build</a>
+            <a href="#apps" className="nav-link">Apps</a>
             <Link href="/templates" className="nav-link">Templates</Link>
             <a href="#receipts" className="nav-link">Receipts</a>
             <a href="#pricing" className="nav-link">Pricing</a>
@@ -322,6 +391,69 @@ export default function Home() {
           </div>
         </section>
 
+        {/* APPS — the two shipped iOS apps, front and center */}
+        <section className="section apps-section" id="apps">
+          <div className="section-head sr" data-reveal>
+            <p className="section-kicker">— On the App Store</p>
+            <h2 className="display-2">
+              Two apps.<br /><em>Both shipped.</em>
+            </h2>
+            <p className="section-sub">
+              Not mockups, not &ldquo;coming soon.&rdquo; Two native iOS tools I
+              designed, built, and put on the App Store myself — the same way I&apos;ll
+              build yours.
+            </p>
+          </div>
+          <div className="apps-grid">
+            {APPS.map((a, i) => (
+              <a
+                key={a.slug}
+                href={a.href}
+                target="_blank"
+                rel="noopener"
+                className={"app-card sr app-card--" + a.accent}
+                data-reveal
+                style={{ "--sd": `${i * 120}ms` } as React.CSSProperties}
+              >
+                {a.isNew && <span className="app-new">New · {a.newDate}</span>}
+                <div className="app-top">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    className="app-icon"
+                    src={a.icon}
+                    alt={`${a.name} app icon`}
+                    width={76}
+                    height={76}
+                    loading="lazy"
+                  />
+                  <div className="app-id">
+                    <h3 className="app-name">{a.name}</h3>
+                    <p className="app-cat">{a.category}</p>
+                    <p className="app-meta">{a.meta}</p>
+                  </div>
+                </div>
+                <p className="app-tagline">{a.tagline}</p>
+                <p className="app-blurb">{a.blurb}</p>
+                <div className="app-foot">
+                  <span className="app-price">{a.price}</span>
+                  <span className="app-store">
+                    <AppleGlyph /> View on the App Store →
+                  </span>
+                </div>
+              </a>
+            ))}
+          </div>
+          <p className="apps-devlink">
+            <a
+              href="https://apps.apple.com/us/developer/jason-lloyd-walls/id1855640312"
+              target="_blank"
+              rel="noopener"
+            >
+              All apps by Jason Walls on the App Store ↗
+            </a>
+          </p>
+        </section>
+
         {/* PAIN */}
         <section className="section pain-section">
           <div className="section-head">
@@ -433,7 +565,7 @@ export default function Home() {
               Shipped.<br /><em>Not promised.</em>
             </h2>
             <p className="section-sub">
-              Five live receipts. Plus 50+ Claude tools, four apps wired for iOS, and zero lines of code I wrote myself.
+              Five live receipts. Plus two apps on the App Store, 50+ Claude tools, and zero lines of code I wrote myself.
             </p>
           </div>
           <div className="proof-list">
@@ -650,6 +782,40 @@ export default function Home() {
         .ongoing-cta { display: inline-flex; align-self: flex-start; padding: 9px 18px; font-family: var(--font-plex), sans-serif; font-weight: 600; font-size: 13px; color: var(--text); border: 1px solid var(--text); border-radius: 999px; text-decoration: none; transition: all 0.2s; }
         .ongoing-cta:hover { background: var(--clay); border-color: var(--clay); color: var(--surface); }
 
+        /* ===== APPS ===== */
+        .apps-grid { display: grid; grid-template-columns: 1fr; gap: 20px; max-width: 1000px; margin: 0 auto; }
+        @media (min-width: 820px) { .apps-grid { grid-template-columns: 1fr 1fr; gap: 24px; } }
+        .app-card { position: relative; display: flex; flex-direction: column; background: var(--surface); border: 1px solid var(--rule); border-radius: 18px; padding: 32px 30px 26px; text-decoration: none; color: inherit; overflow: hidden; box-shadow: 0 1px 0 rgba(255, 255, 255, 0.6) inset, 0 12px 32px -14px rgba(26, 22, 18, 0.10); transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s, border-color 0.25s; }
+        .app-card::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 3px; background: var(--clay); transform: scaleX(0); transform-origin: left; transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1); }
+        .app-card--teal::before { background: var(--teal); }
+        .app-card:hover { transform: translateY(-4px); border-color: var(--clay); box-shadow: 0 1px 0 rgba(255, 255, 255, 0.6) inset, 0 28px 56px -18px rgba(26, 22, 18, 0.20); }
+        .app-card--teal:hover { border-color: var(--teal); }
+        .app-card:hover::before { transform: scaleX(1); }
+        .app-new { position: absolute; top: 18px; right: 18px; font-family: var(--font-jbm), monospace; font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: #fff; background: var(--teal); padding: 5px 10px; border-radius: 999px; }
+        .app-top { display: flex; align-items: center; gap: 18px; margin-bottom: 22px; }
+        .app-icon { width: 76px; height: 76px; border-radius: 17px; box-shadow: 0 6px 18px -6px rgba(26, 22, 18, 0.35), 0 0 0 1px rgba(26, 22, 18, 0.06); transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1); }
+        .app-card:hover .app-icon { transform: scale(1.05) rotate(-1.5deg); }
+        .app-id { min-width: 0; }
+        .app-name { font-family: var(--font-fraunces), serif; font-weight: 600; font-size: 26px; letter-spacing: -0.014em; color: var(--text); margin: 0 0 4px; }
+        .app-cat { font-family: var(--font-jbm), monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-faint); margin: 0 0 6px; }
+        .app-meta { font-family: var(--font-jbm), monospace; font-size: 11px; letter-spacing: 0.04em; color: var(--clay-deep); margin: 0; }
+        .app-card--teal .app-meta { color: var(--teal); }
+        .app-tagline { font-family: var(--font-fraunces), serif; font-style: italic; font-weight: 500; font-size: 19px; line-height: 1.35; color: var(--text); margin: 0 0 12px; }
+        .app-blurb { font-family: var(--font-plex), sans-serif; font-size: 14px; line-height: 1.6; color: var(--text-mid); margin: 0 0 24px; flex: 1; }
+        .app-foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 18px; border-top: 1px solid var(--rule-soft); }
+        .app-price { font-family: var(--font-jbm), monospace; font-size: 13px; font-weight: 500; color: var(--text); letter-spacing: 0.02em; }
+        .app-store { display: inline-flex; align-items: center; gap: 7px; font-family: var(--font-plex), sans-serif; font-weight: 600; font-size: 13px; color: var(--clay-deep); }
+        .app-card--teal .app-store { color: var(--teal); }
+        .app-store svg { width: 14px; height: 14px; transform: translateY(-1px); }
+        .apps-devlink { text-align: center; margin: 36px 0 0; }
+        .apps-devlink a { font-family: var(--font-jbm), monospace; font-size: 12px; letter-spacing: 0.06em; color: var(--text-mid); text-decoration: none; border-bottom: 1px dotted var(--text-faint); padding-bottom: 2px; transition: color 0.2s; }
+        .apps-devlink a:hover { color: var(--clay-deep); }
+
+        /* ===== SCROLL REVEAL (below-the-fold) ===== */
+        .sr { opacity: 0; transform: translateY(20px); transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1); transition-delay: var(--sd, 0ms); }
+        .sr.in { opacity: 1; transform: none; }
+        @media (prefers-reduced-motion: reduce) { .sr { opacity: 1; transform: none; transition: none; } }
+
         /* ===== PROOF ===== */
         .proof-list { display: flex; flex-direction: column; }
         .proof-row { display: grid; grid-template-columns: 1fr; gap: 12px; padding: 36px 0; border-bottom: 1px solid var(--rule); align-items: baseline; }
@@ -672,6 +838,14 @@ export default function Home() {
         @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
       `}</style>
     </div>
+  );
+}
+
+function AppleGlyph() {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M16.365 12.9c.02 2.17 1.9 2.89 1.92 2.9-.016.05-.3 1.04-.99 2.06-.6.88-1.22 1.76-2.2 1.78-.96.02-1.27-.57-2.37-.57-1.1 0-1.44.55-2.35.59-.94.04-1.66-.95-2.27-1.83-1.24-1.8-2.19-5.08-.92-7.3.63-1.1 1.76-1.8 2.99-1.82.93-.02 1.8.63 2.37.63.57 0 1.63-.78 2.75-.66.47.02 1.78.19 2.63 1.43-.07.04-1.57.92-1.55 2.74M14.6 6.3c.5-.62.85-1.48.75-2.35-.73.03-1.6.48-2.12 1.1-.47.54-.88 1.42-.77 2.26.81.06 1.64-.41 2.14-1.01" />
+    </svg>
   );
 }
 

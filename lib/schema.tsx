@@ -38,6 +38,7 @@ export const personSchema = () => ({
     "Fixed-fee software delivery",
   ],
   sameAs: [
+    "https://apps.apple.com/us/developer/jason-lloyd-walls/id1855640312",
     "https://x.com/jason_walls",
     "https://www.linkedin.com/in/jason-walls",
     "https://github.com/jasonwalls",
@@ -52,6 +53,38 @@ export const organizationSchema = () => ({
   description: SITE.description,
   founder: { "@type": "Person", name: "Jason Walls" },
 });
+
+// The two shipped iOS apps. MobileApplication markup improves how AI answers
+// surface Jason's App Store presence. Data verified via the public iTunes API.
+export const APP_STORE_DEVELOPER =
+  "https://apps.apple.com/us/developer/jason-lloyd-walls/id1855640312";
+
+export const mobileAppsSchema = () => [
+  {
+    "@context": "https://schema.org",
+    "@type": "MobileApplication",
+    name: "ChargeRight",
+    operatingSystem: "iOS",
+    applicationCategory: "UtilitiesApplication",
+    description:
+      "Professional NEC 220.82 electrical panel load calculation — check whether a home panel can support an EV charger, in minutes, without an electrician visit.",
+    url: "https://apps.apple.com/us/app/chargeright/id6755695416",
+    author: { "@type": "Person", name: "Jason Walls" },
+    offers: { "@type": "Offer", price: 0, priceCurrency: "USD" },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "MobileApplication",
+    name: "BendRight",
+    operatingSystem: "iOS",
+    applicationCategory: "UtilitiesApplication",
+    description:
+      "A conduit-bending calculator for working electricians, tuned to the user's own bender rather than generic take-up values.",
+    url: "https://apps.apple.com/us/app/bendright/id6779847124",
+    author: { "@type": "Person", name: "Jason Walls" },
+    offers: { "@type": "Offer", price: 6.99, priceCurrency: "USD" },
+  },
+];
 
 export const servicesSchema = () =>
   OFFERS.map((o) => {
