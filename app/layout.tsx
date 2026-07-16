@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { JetBrains_Mono, IBM_Plex_Sans, Newsreader, Fraunces } from "next/font/google";
 import "./globals.css";
 
-import { JsonLd, personSchema, organizationSchema, servicesSchema, SITE } from "@/lib/schema";
+import { JsonLd, personSchema, organizationSchema, servicesSchema, mobileAppsSchema, SITE } from "@/lib/schema";
 
 const jbm = JetBrains_Mono({
   subsets: ["latin"],
@@ -59,7 +59,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={`${jbm.variable} ${plex.variable} ${newsreader.variable} ${fraunces.variable}`}
     >
       <body>
-        <JsonLd data={[personSchema(), organizationSchema(), ...servicesSchema()]} />
+        <JsonLd data={[personSchema(), organizationSchema(), ...servicesSchema(), ...mobileAppsSchema()]} />
         {children}
       </body>
     </html>
