@@ -81,7 +81,7 @@ const PROOF = [
   {
     name: "IBEW Local 369",
     sub: "Master Electrician · license on file",
-    body: "NEC, panel calculations, EV charging infrastructure. 20 years pulling wire. Licensed, not bluffed. Still on the books.",
+    body: "NEC, panel calculations, EV charging infrastructure. 12 years pulling wire. Licensed, not bluffed. Still on the books.",
     href: null,
   },
 ];

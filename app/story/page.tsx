@@ -1,8 +1,10 @@
 "use client";
 
 // THE WORKSHOP — /story · editorial / magazine
-// Sunday Times feature about a working-class hero. For press, journalists,
+// Magazine-feature *styling* for a working-class-hero story. For press, journalists,
 // peer-curious founders. Mission gate: passes — editorial honesty, peer voice.
+// No outlet published this: the Sunday Times contact was outreach only, so the copy
+// says "a call from", never "a piece in" (memory: feedback-sunday-times-not-a-story).
 
 import { useEffect, useRef } from "react";
 import Link from "next/link";
@@ -35,9 +37,9 @@ export default function StoryPage() {
             <div>
               <p className="kicker">a feature</p>
               <p className="lede">
-                Jason Walls had spent twenty years pulling wire when AI handed him a{" "}
+                Jason Walls had spent twelve years pulling wire when AI handed him a{" "}
                 <em>second tool belt.</em> Ninety-seven days later, his side project had
-                Mark Cuban's attention, a piece in the Sunday Times, and 680,000 views.
+                Mark Cuban's attention, a call from the Sunday Times, and 680,000 views.
               </p>
               <div className="meta-row">
                 <a className="read-cta" href="#piece">Read the full piece</a>
