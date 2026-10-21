@@ -12,6 +12,7 @@ import { Reveal } from "@/components/Reveal";
 
 // Self-hosted (latin subsets from Google Fonts, variable files): no third-party font request at runtime.
 const jbm = localFont({ src: "./fonts/JetBrainsMono.woff2", weight: "100 800", variable: "--font-jbm", display: "swap" });
+const slab = localFont({ src: "./fonts/RobotoSlab.woff2", weight: "300 900", variable: "--font-slab", display: "swap" });
 const plex = localFont({ src: "./fonts/IBMPlexSans.woff2", weight: "100 700", variable: "--font-plex", display: "swap" });
 const fraunces = localFont({
   src: [
@@ -36,7 +37,7 @@ export const viewport: Viewport = { themeColor: "#0b1526", width: "device-width"
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" data-look="blueprint" className={`${jbm.variable} ${plex.variable} ${fraunces.variable}`}>
+    <html lang="en" data-look="blueprint" className={`${jbm.variable} ${plex.variable} ${fraunces.variable} ${slab.variable}`}>
       <body className="has-bottom-nav">
         <a href="#main" className="skip">Skip to content</a>
         <JsonLd data={[personSchema(), professionalServiceSchema(), ...mobileAppsSchema()]} />

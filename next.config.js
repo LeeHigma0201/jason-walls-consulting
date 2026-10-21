@@ -1,6 +1,13 @@
 /** @type {import('next').NextConfig} */
 module.exports = {
   reactStrictMode: true,
+  images: {
+    remotePatterns: [
+      { protocol: "https", hostname: "evchargeright.com" },
+      { protocol: "https", hostname: "zombiewells.com" },
+      { protocol: "https", hostname: "**.mzstatic.com" },
+    ],
+  },
   async redirects() {
     // Old "doors" from the 2026-05 site. Keep inbound links alive.
     return [

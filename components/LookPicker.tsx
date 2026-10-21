@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useSyncExternalStore } from "react";
+import { usePathname } from "next/navigation";
 
 // Preview-only: `?look=blueprint|paper|shop` switches the token set so Jason can pick on his phone,
 // and `?pick` shows the picker. The choice is remembered in localStorage. Remove once a look is chosen.
@@ -25,15 +26,18 @@ function getShow(): boolean {
     return localStorage.getItem("pick") === "1";
   } catch { return false; }
 }
-function applyLook(l: Look) { document.documentElement.dataset.look = l; }
+function applyLook(l: string) { document.documentElement.dataset.look = l; }
 function choose(l: Look) { try { localStorage.setItem("look", l); } catch {} emit(); }
 
 export function LookPicker() {
   const look = useSyncExternalStore(subscribe, getLook, () => "blueprint" as Look);
   const show = useSyncExternalStore(subscribe, getShow, () => false);
-  useEffect(() => { applyLook(look); }, [look]);
+  // Direction previews (/v/a, /v/b, /v/c) carry their own token set; everything else uses the picked look.
+  const path = usePathname();
+  const dir = /^\/v\/(a|b|c)(\/|$)/.exec(path ?? "")?.[1];
+  useEffect(() => { applyLook(dir ? `dir-${dir}` : look); }, [look, dir]);
 
-  if (!show) return null;
+  if (!show || dir) return null;
   return (
     <div role="group" aria-label="Preview look" style={{ position: "fixed", top: 68, right: 12, zIndex: 50, display: "flex", gap: 6, background: "var(--surface)", border: "1px solid var(--rule)", padding: 6, borderRadius: 999, boxShadow: "var(--shadow)" }}>
       {LOOKS.map((l) => (
