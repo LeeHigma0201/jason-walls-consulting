@@ -103,6 +103,13 @@ If the first weekly preview doesn't match the brief, stop there and pay only for
 | Care plan | Maintenance $25–600/mo; most small sites $50–500/mo; AI monitoring $100–300/mo | [apexure](https://www.apexure.com/blog/website-maintenance-cost), [ueni](https://ueni.com/blog/website-maintenance-cost/), [taskip](https://taskip.net/ai-automation-agency-pricing/) | $400/mo: upper-mid, because 3 hours of real changes are included, not just backups |
 | Day rate | US mid full-stack $85–135/hr; AI/automation freelance $50–150/hr; Toptal senior $100–150/hr | [secondtalent](https://www.secondtalent.com/cost-to-hire/full-stack-developer/), [adsnipper](https://adsnipper.com/blog/cost-to-hire-ai-developer/) | $1,200/day (≈$150/hr): Toptal-senior level, which the shipped work supports |
 
+## Market signal check (2026-10-21, Jason's ask: what people need)
+Vendor surveys, so directional: contractors rank price-calculation accuracy (71%), mobile experience (58%) and QuickBooks
+integration (52%) highest ([estimatorsuite survey, n=287](https://estimatorsuite.com/research/2026-contractor-software-adoption-survey/));
+74% want simpler pricing without add-ons and use only 31% of paid features ([Clockwork index, n=1,247](https://runclockwork.com/research/contractor-software-satisfaction-index-2026));
+about 47% of contractors offer online booking and 52% of home-service firms are investing in AI tools ([schedulingkit roundup](https://schedulingkit.com/statistics/home-services-statistics), sources unclear).
+Applied: packages now name estimates/invoices, QuickBooks and phone-in-the-truck use; pricing stays flat with no add-on modules.
+
 ## Changes from the current site (lib/offers.ts, 2026-05-10)
 - Strategy Hour $300 → dropped; the discovery call is free and short. (Keep if Jason wants a paid working session.)
 - Workflow in a Week $2,500 → Your Business on Claude $4,500 (2 weeks, 1–3 workflows, training, guardrails).

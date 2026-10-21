@@ -1,158 +1,164 @@
-// Single source of truth for the offer tiers.
-// Reorganized 2026-05-10: 4 one-time tiers + 2 ongoing tiers.
-// "Starts at" language on upper tiers — site does the asking, not Jason.
-// All upper-tier engagements include a discovery call: scope first, quote after.
+// Single source of truth for packages and prices. See OFFER.md for the research.
+// PRICING_STATUS is "proposed" until Jason approves the numbers; the site shows a marker while so.
+
+export const PRICING_STATUS: "proposed" | "approved" = "proposed";
 
 export type OfferTier = {
   id: string;
   name: string;
   priceLabel: string;
-  priceNum?: number;
-  priceMin?: number;
-  recurring?: "month";
+  priceNum?: number; // fixed price
+  priceMin?: number; // "from" price
+  recurring?: "month" | "day";
   duration: string;
   short: string;
+  bestFor: string;
   whatYouGet: string[];
-  bookHref: string;
+  youProvide: string[];
+  notForThis: string[];
   featured?: boolean;
   group: "one-time" | "ongoing";
-  // Risk reversal shown under every tier. Defaults applied below.
-  guarantee?: string;
-  // Honest scope limits. 2-3 lines per tier. Mirror of templates' notForThis.
-  notForThis?: string[];
+  bookHref: string;
 };
-
-const DEFAULT_GUARANTEE =
-  "Not happy in the first 30 days? Full refund. You keep what's shipped.";
 
 export const OFFERS: OfferTier[] = [
   {
-    id: "strategy-hour",
-    name: "Strategy Hour",
-    priceLabel: "$300",
-    priceNum: 300,
-    duration: "1 call · 60 min",
-    short: "Cheaper than one billable electrician hour. Walk away with a workflow you can actually run.",
+    id: "launch-site",
+    name: "Launch Site",
+    priceLabel: "$3,500",
+    priceNum: 3500,
+    duration: "1 week · fixed price",
+    short: "A site that books work. Up to five pages, live in a week, on your own domain.",
+    bestFor: "A trade or local business whose site doesn't bring in calls.",
     whatYouGet: [
-      "One sharp call, no fluff",
-      "A specific workflow tailored to your actual work",
-      "30 days of email follow-up if you get stuck",
+      "Up to 5 pages: home, services, about, contact or booking, one more",
+      "Copy drafted from a 30-minute interview with you",
+      "Mobile-first design; a booking or quote form that emails you",
+      "Schema and Google Business basics so search and AI answers find you",
+      "Analytics, fast hosting, your domain connected",
+      "One round of revisions and a recorded walkthrough",
     ],
+    youProvide: ["Logo and 10+ real photos", "Services and prices", "Domain login", "One call"],
     notForThis: [
-      "Not for \"I just want a quote\" — a call is for naming the right scope, not pricing a guess",
-      "Not for \"rewrite my stack in an hour\" — that's an audit; this is a working session",
+      "Logo or brand design, photography, paid ads",
+      "Online store catalogs or customer accounts (that's the MVP package)",
     ],
-    bookHref: "/book?tier=strategy-hour",
     group: "one-time",
+    bookHref: "/contact?package=launch-site",
   },
   {
-    id: "workflow-week",
-    name: "Workflow in a Week",
-    priceLabel: "$2,500",
-    priceNum: 2500,
-    duration: "1 week · fixed",
-    short: "One AI workflow that solves a repeated task. Documented, deployed, yours to keep.",
+    id: "business-on-claude",
+    name: "Your Business on Claude",
+    priceLabel: "$4,500",
+    priceNum: 4500,
+    duration: "2 weeks · fixed price",
+    short: "One to three AI workflows that do the paperwork, installed where your crew already works.",
+    bestFor: "A small business whose owner does quotes, summaries and replies at night.",
     whatYouGet: [
-      "A single AI workflow built for your real job",
-      "Deployed where you work (Slack, browser, phone, CLI)",
-      "Walk-through video + plain-English docs",
+      "Half-day session to map the paperwork that eats your evenings",
+      "1 to 3 workflows built and installed: estimates from site notes, invoices chased, a photo of a timesheet into a spreadsheet, job summaries, replies in your voice",
+      "A guardrail check so it never invents a price or a code citation",
+      "Plain-English docs and two training sessions for the team",
+      "30 days of fixes",
     ],
+    youProvide: ["10+ examples of the real paperwork", "Access to the tools you use", "A Claude plan in the business's name (set up together)"],
     notForThis: [
-      "Not for \"5 stakeholders need to approve every change\" — decisions get made on the call, not in committee",
-      "Not for \"I don't know what problem I'm solving yet\" — start with the Strategy Hour; we name the problem first",
+      "Custom software with a database (MVP package)",
+      "Ongoing monitoring (Care Plan)",
     ],
-    bookHref: "/book?tier=workflow-week",
     group: "one-time",
+    bookHref: "/contact?package=business-on-claude",
   },
   {
-    id: "custom-build",
-    name: "Custom Build",
-    priceLabel: "starts at $5,000",
-    priceMin: 5000,
-    duration: "2–3 weeks · scoped first",
-    short: "A real thing — a website, an iOS app, an AI tool, a custom dashboard. Scoped on a discovery call, then fixed-fee.",
+    id: "mvp",
+    name: "MVP Web App or Internal Tool",
+    priceLabel: "from $12,000",
+    priceMin: 12000,
+    duration: "3 weeks · scoped first",
+    short: "Accounts, data, payments, one AI feature if it earns its place. Live on your accounts in three weeks.",
+    bestFor: "A founder with one idea, or an owner replacing the spreadsheet that runs the company.",
     whatYouGet: [
-      "Production sites, payments wired, live · Native iOS build, App Store ready · AI that reads the spec the way you would",
-      "Full handoff: code, docs, walk-through video",
-      "30 days of bug-fix support after delivery",
+      "Written scope and a fixed quote before any money moves",
+      "Login, database, admin view, Stripe payments if you sell",
+      "One AI feature where it pays: vision, extraction, an assistant",
+      "QuickBooks, your calendar or the tools you already pay for, connected",
+      "Works on a phone in the truck, not just at a desk",
+      "Tests on the money and data paths",
+      "A preview link updated every week",
+      "Launch on your own accounts; you own code, domain and data",
+      "Handover docs, recorded walkthrough, 30 days of fixes",
     ],
-    notForThis: [
-      "Not for \"match this agency proposal but cheaper\" — I don't bid against slide decks",
-      "Not for half-finished handoffs from a previous developer — that's a separate audit",
-    ],
-    bookHref: "/book?tier=custom-build",
+    youProvide: ["A decision maker available weekly", "Example data", "Accounts in your name; third-party fees are yours"],
+    notForThis: ["Native mobile (iOS package)", "Ongoing feature work (Care Plan or day rate)", "Marketing"],
     featured: true,
     group: "one-time",
+    bookHref: "/contact?package=mvp",
   },
   {
-    id: "full-mvp",
-    name: "Idea → Live MVP",
-    priceLabel: "starts at $15,000",
-    priceMin: 15000,
-    duration: "14 days · scoped first",
-    short: "Working product live on Day 15. Same craft that built ChargeRight to 680K+ views. Domain, hosting, payments — the whole thing.",
+    id: "ios-app",
+    name: "iOS App to the App Store",
+    priceLabel: "from $10,000",
+    priceMin: 10000,
+    duration: "4 weeks · scoped first",
+    short: "From idea to approved listing. Purchases, privacy page, screenshots and the submission handled.",
+    bestFor: "A product your customers will reach for on a job site or in a driveway.",
     whatYouGet: [
-      "Full mini-MVP shipped, deployed, payment-ready",
-      "Domain + hosting + Stripe wired end-to-end",
-      "Plain-English handoff so you can keep going on your own",
+      "Capacitor (web + iOS from one codebase) or native SwiftUI, chosen on the call",
+      "In-app purchases through StoreKit if you sell",
+      "Privacy page and policy; App Store listing and screenshots",
+      "Weekly TestFlight builds; submission handled through approval",
+      "30 days of fixes after approval",
     ],
-    notForThis: [
-      "Not for \"I want to invest in software but won't ship for 6 months\" — 14 days, live",
-      "Not for \"build me what Uber has but for X\" — that's a Series A, not a sprint",
-      "Not for a CTO replacement — this is a build, not a co-founder seat",
-    ],
-    bookHref: "/book?tier=full-mvp",
+    youProvide: ["An Apple Developer account in your name ($99/yr to Apple)", "App name and icon direction", "A tester with an iPhone"],
+    notForThis: ["Android (quoted separately)", "A large backend (MVP package)", "Ongoing releases (Care Plan)"],
     group: "one-time",
+    bookHref: "/contact?package=ios-app",
   },
   {
-    id: "tool-tune-up",
-    name: "Tool + Tune-up",
-    priceLabel: "$299 / mo",
-    priceNum: 299,
+    id: "care",
+    name: "Care Plan",
+    priceLabel: "$400 / mo",
+    priceNum: 400,
     recurring: "month",
     duration: "monthly · cancel anytime",
-    short: "Keep a tool I built for you alive and improving. Hosting, monitoring, and one hour of my time every month.",
+    short: "Anything I built for you, kept alive and improving.",
+    bestFor: "Clients who want it watched and nudged forward without a project.",
     whatYouGet: [
-      "Hosting + uptime monitoring on anything I built for you",
-      "1 hour of my time per month for tweaks, fixes, additions",
-      "First crack at new AI features as they ship",
+      "Hosting and uptime watch",
+      "Dependency and security updates",
+      "Up to 3 hours of changes a month",
+      "A one-page monthly report",
+      "Reply within one business day",
     ],
-    notForThis: [
-      "Not for tools I didn't build — I can't reliably keep someone else's stack alive",
-      "Not for major rewrites — that's a Workflow in a Week, not an hour of tweaks",
-    ],
-    bookHref: "/book?tier=tool-tune-up",
+    youProvide: ["A short list of what you'd like changed each month"],
+    notForThis: ["Hours don't roll over", "New products (a package instead)"],
     group: "ongoing",
+    bookHref: "/contact?package=care",
   },
   {
-    id: "embedded",
-    name: "Embedded Builder",
-    priceLabel: "$4,000 / mo",
-    priceNum: 4000,
-    recurring: "month",
-    duration: "monthly · 90-day minimum",
-    short: "Ongoing access. I ship 1–2 things a month for you. The way a tradesperson keeps a job — being available when needed.",
-    whatYouGet: [
-      "1–2 builds shipped per month, scoped together",
-      "Slack or phone access for fast calls",
-      "First priority on new ideas + AI features",
-    ],
-    notForThis: [
-      "Not for full-time engineer replacement — I'm running my own jobs too",
-      "Not for nights and weekends paging — business-hours availability only",
-      "Not for \"I'll figure out what I want as we go\" — we scope monthly, top-down",
-    ],
-    bookHref: "/book?tier=embedded",
+    id: "day",
+    name: "Extra Day",
+    priceLabel: "$1,200 / day",
+    priceNum: 1200,
+    recurring: "day",
+    duration: "booked a week ahead",
+    short: "A full day on one scoped list. Clients and former clients only.",
+    bestFor: "Changes outside a package or plan.",
+    whatYouGet: ["One written list, worked top to bottom", "A note at the end of the day on what shipped"],
+    youProvide: ["The list, a week ahead"],
+    notForThis: ["Open-ended retainers", "First-time work (start with a package)"],
     group: "ongoing",
+    bookHref: "/contact?package=day",
   },
 ];
-
-// Apply the default guarantee anywhere it isn't already set.
-for (const o of OFFERS) {
-  if (o.guarantee === undefined) o.guarantee = DEFAULT_GUARANTEE;
-}
 
 export const ONE_TIME_OFFERS = OFFERS.filter((o) => o.group === "one-time");
 export const ONGOING_OFFERS = OFFERS.filter((o) => o.group === "ongoing");
 
-export const formatPrice = (n: number) => "$" + n.toLocaleString("en-US");
+export const PAYMENT_TERMS =
+  "50% to start, 50% at launch. On the MVP and iOS packages: 40% to start, 30% at the mid-build preview, 30% at launch.";
+
+// Proposed wording; shown only while GUARANTEE_APPROVED is true. Jason decides.
+export const GUARANTEE_APPROVED = false;
+export const GUARANTEE =
+  "The quote is the price. If scope changes, you get a written change order before anything is billed. If the first weekly preview doesn't match the brief, stop there and pay only for that week.";

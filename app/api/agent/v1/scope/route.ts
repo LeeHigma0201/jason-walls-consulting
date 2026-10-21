@@ -11,7 +11,7 @@
  * same way, and so the brief can never invent an engagement that isn't sold.
  */
 import { NextRequest, NextResponse } from 'next/server';
-import { OFFERS } from '@/lib/offers';
+import { OFFERS, PAYMENT_TERMS, PRICING_STATUS } from '@/lib/offers';
 import { TEMPLATES } from '@/lib/templates';
 import { authorize, commit, meterHeaders } from '@/lib/agent-meter';
 
@@ -93,7 +93,9 @@ export async function POST(req: NextRequest) {
           duration: tier.duration,
           includes: tier.whatYouGet,
           outOfScope: tier.notForThis ?? [],
-          guarantee: tier.guarantee ?? "Not happy in the first 30 days? Full refund. You keep what's shipped.",
+          youProvide: tier.youProvide,
+          terms: PAYMENT_TERMS,
+          pricingStatus: PRICING_STATUS,
           bookUrl: `${baseUrl()}${tier.bookHref}`,
         }
       : null,

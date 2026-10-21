@@ -160,3 +160,12 @@ The site doubles as TikTok / YouTube content. Design with that in mind:
 | 2026-07-16 | Wire ZombieWells → https://zombiewells.com in Receipts; name Sarah Stogner (Texas attorney) | The ".com site" Jason references is zombiewells.com — the public-interest oil-well map built with attorney Sarah Stogner (@Sarah4Texas). Was `href:null`. |
 | 2026-07-16 | Add scroll-reveal motion (`.sr` + IntersectionObserver) with staggered app-card entrance | One orchestrated reveal per section on viewport entry, DESIGN.md easing `cubic-bezier(0.16,1,0.3,1)`. Fully disabled under `prefers-reduced-motion` (reveals everything at once). Card accent bar + icon tilt on hover. |
 | 2026-07-16 | Add `MobileApplication` JSON-LD for both apps + App Store developer URL in Person `sameAs` | AEO: surfaces the App Store presence in AI answers. Data verified via iTunes API, not fabricated. |
+
+## v2 decisions (2026-10-21, branch feat/consulting-v2)
+- Purpose: a consulting site that sells four fixed-price packages to trades, local businesses and founders; the home page must prove "ships" in one screen (hero + live agent crew panel + App Store proof) before any pitch.
+- Three candidate looks ship behind `data-look` on `<html>`: `blueprint` (navy + amber, default), `paper` (cream + clay), `shop` (charcoal + amber). Jason picks on his phone with `?pick&look=<name>`; the two losers get deleted after the pick, along with `components/LookPicker.tsx`.
+- Type: Fraunces (display, SOFT/opsz axes), IBM Plex Sans (body), JetBrains Mono (specs/kickers). Self-hosted from `app/fonts` via `next/font/local`; the OG image reads TTF copies from the same folder. No runtime request to Google Fonts.
+- Mobile first: sticky top nav plus a five-tab bottom thumb bar under 900px (TASTE "Web UI"). Sections are one job per screen; reveal motion is opacity + 12px and respects reduced motion.
+- Claims: `lib/site.ts`, `lib/offers.ts`, `lib/work.ts` are the only sources for names, numbers and prices. Prices carry `PRICING_STATUS = "proposed"` and a visible marker until approved. No testimonials, logos, "Master Electrician" or unsourced view counts anywhere.
+- Contact works with no paid tool: `/api/contact` sends through Resend when `RESEND_API_KEY` is set, otherwise the form opens a prefilled mailto. Optional Cal embed via `NEXT_PUBLIC_CAL_LINK`.
+- Removed from v1: sandbox pages, templates catalog, trades/story/lab/concepts routes, lead-magnet signup, the "full refund" guarantee and all old prices (redirects in `next.config.js`).

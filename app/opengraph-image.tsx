@@ -3,34 +3,24 @@ import { ImageResponse } from "next/og";
 // Site-wide Open Graph / social-share card. Cascades to every route
 // (/, /trades, /story, /lab, /concepts) unless a segment overrides it.
 export const alt =
-  "Jason Walls — Sites, iOS apps, and AI tools, built by a Master Electrician";
+  "Jason Walls — Sites, iOS apps, and AI tools, built by an electrician who ships";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-// Superset of glyphs so font subsetting never drops a character on copy tweaks.
-const GLYPHS =
-  "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 .,·—-/:'";
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
 
-async function loadGoogleFont(family: string, weight: number) {
-  const url = `https://fonts.googleapis.com/css2?family=${family.replace(
-    / /g,
-    "+",
-  )}:wght@${weight}&text=${encodeURIComponent(GLYPHS)}`;
-  const css = await (await fetch(url)).text();
-  const resource = css.match(
-    /src: url\((.+)\) format\('(opentype|truetype)'\)/,
-  );
-  if (!resource) throw new Error(`OG font load failed: ${family} ${weight}`);
-  const res = await fetch(resource[1]);
-  if (res.status !== 200) throw new Error(`OG font fetch failed: ${family}`);
-  return res.arrayBuffer();
+// Fonts are read from app/fonts at build time (self-hosted TTF copies of the Google Fonts
+// latin set) so the image renders without a network call.
+function loadFont(file: string) {
+  return readFile(join(process.cwd(), "app", "fonts", file));
 }
 
 export default async function Image() {
   const [frauncesSemi, frauncesReg, mono] = await Promise.all([
-    loadGoogleFont("Fraunces", 600),
-    loadGoogleFont("Fraunces", 400),
-    loadGoogleFont("JetBrains Mono", 500),
+    loadFont("Fraunces-600.ttf"),
+    loadFont("Fraunces-400.ttf"),
+    loadFont("JetBrainsMono-500.ttf"),
   ]);
 
   return new ImageResponse(
@@ -59,7 +49,7 @@ export default async function Image() {
               color: "#5A5048",
             }}
           >
-            AI FOR THE TRADES · IBEW LOCAL 369
+            ELECTRICIAN · IBEW LOCAL 369 · LOUISVILLE
           </div>
         </div>
 
@@ -86,7 +76,7 @@ export default async function Image() {
               marginTop: 30,
             }}
           >
-            Sites. iOS apps. AI tools.
+            Websites. iOS apps. AI workflows.
           </div>
           <div
             style={{
@@ -97,7 +87,7 @@ export default async function Image() {
               color: "#1A1612",
             }}
           >
-            Built by a Master Electrician.
+            Built by an electrician who ships.
           </div>
         </div>
 
