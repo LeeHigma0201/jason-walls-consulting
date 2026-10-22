@@ -22,7 +22,7 @@ export function CtaCard({
       <div className="actions">
         <Link href="/contact" className="btn btn-primary btn-lg">{label}</Link>
       </div>
-      {showEmail && (
+      {showEmail && SITE.email && (
         <p style={{ margin: 0, color: "var(--text-mid)", fontSize: 16 }}>
           Or write to <a className="text-link" href={`mailto:${SITE.email}`}>{SITE.email}</a>
         </p>

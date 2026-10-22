@@ -1,14 +1,16 @@
 import Link from "next/link";
 import type { OfferTier } from "@/lib/offers";
+import { payLink } from "@/lib/payments";
 import { Price } from "@/components/ui/Price";
 import { Fold } from "@/components/ui/Fold";
 
 // One package. compact (Home, previews): name, price with marker, timeline, short line, best for, and
 // "See this package" to /services#id. Full (/services): same plus three Fold blocks (closed on phone,
-// open at 820+) and "Ask about this one" to bookHref. The featured package (MVP) gets the accent ring and
+// open at 820+), "Ask about this one" to bookHref, and a Stripe pay button when lib/payments has a link for it. The featured package (MVP) gets the accent ring and
 // the pill. Ids (#launch-site, #care, ...) are on the full card only.
 export function PackageCard({ o, compact = false, delay = 0 }: { o: OfferTier; compact?: boolean; delay?: number }) {
   const label = compact ? "See this package" : "Ask about this one";
+  const pay = compact ? null : payLink(o);
   return (
     <article id={compact ? undefined : o.id} className={`card pkg sr ${o.featured ? "card-featured" : ""}`} style={{ ["--d" as string]: `${delay}ms` }}>
       {o.featured && <span className="pill pill-accent">Where I’d start with one idea</span>}
@@ -29,10 +31,15 @@ export function PackageCard({ o, compact = false, delay = 0 }: { o: OfferTier; c
           <Fold summary="Not included" label={o.name}><ul className="check-list x-list">{o.notForThis.map((w) => <li key={w}>{w}</li>)}</ul></Fold>
         </div>
       )}
-      <div style={{ marginTop: "auto", paddingTop: 4 }}>
+      <div style={{ marginTop: "auto", paddingTop: 4, display: "grid", gap: 8 }}>
         <Link href={compact ? `/services#${o.id}` : o.bookHref} className={`btn ${o.featured ? "btn-primary" : "btn-ghost"}`} style={{ width: "100%" }} aria-label={`${label}: ${o.name}`}>
           {label}
         </Link>
+        {pay && (
+          <a href={pay.href} className="btn btn-ghost" style={{ width: "100%" }} rel="noopener" aria-label={`${pay.label}: ${o.name}, opens Stripe checkout`}>
+            {pay.label}
+          </a>
+        )}
       </div>
     </article>
   );

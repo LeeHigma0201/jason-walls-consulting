@@ -58,7 +58,7 @@ export function ContactForm({ initialPackage = "" }: { initialPackage?: string }
       const res = await fetch("/api/contact", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) });
       const data = await res.json().catch(() => ({}));
       if (res.ok && data.ok) { setState("sent"); form.reset(); return; }
-      if (data.fallback === "mailto") {
+      if (data.fallback === "mailto" && SITE.email) {
         const body = `Name: ${payload.name}\nEmail: ${payload.email}\nPackage: ${payload.pkg}\n\n${payload.message}\n\nFrom: ${payload.page}\n${Object.entries(utm).map(([k, v]) => `${k}=${v}`).join(" ")}`;
         window.location.href = `mailto:${SITE.email}?subject=${encodeURIComponent(`Project: ${payload.pkg || "not sure yet"} from ${payload.name}`)}&body=${encodeURIComponent(body)}`;
         setState("mailto");
@@ -110,7 +110,11 @@ export function ContactForm({ initialPackage = "" }: { initialPackage?: string }
       </div>
       <div id="form-status" role="status" aria-live="polite">
         {state === "mailto" && <p style={{ margin: 0 }}>Your mail app should have opened with your message in it. If it did not, write to {SITE.email} and tell me what you wrote here.</p>}
-        {state === "error" && <p style={{ margin: 0, color: "var(--accent-text)" }}>That didn’t send. Email me directly at {SITE.email}.</p>}
+        {state === "error" && (
+          <p style={{ margin: 0, color: "var(--accent-text)" }}>
+            That didn’t send. {SITE.email ? `Email me directly at ${SITE.email}.` : <>Message me on <a className="text-link" href={SITE.x} rel="noopener">X</a> and I will reply from there.</>}
+          </p>
+        )}
       </div>
     </form>
   );

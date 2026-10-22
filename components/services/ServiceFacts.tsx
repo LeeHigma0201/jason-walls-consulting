@@ -1,4 +1,5 @@
 import { PAYMENT_TERMS } from "@/lib/offers";
+import { HAS_PAY_LINKS } from "@/lib/payments";
 
 // Short plain paragraphs on /services. The payment line is PAYMENT_TERMS verbatim. The $99 is Apple's
 // own fee, paid to Apple, so it is plain text with no proposed marker. Server component.
@@ -7,6 +8,7 @@ export function PaymentFacts() {
   return (
     <div className="stack measure">
       <p style={{ margin: 0 }}>{PAYMENT_TERMS}</p>
+      {HAS_PAY_LINKS && <p style={{ margin: 0 }}>Pay by card or bank account through Stripe from the package itself, or ask for an invoice.</p>}
       <p style={{ margin: 0 }}>On iOS jobs the Apple Developer account is in your name and costs $99 a year, paid to Apple.</p>
     </div>
   );

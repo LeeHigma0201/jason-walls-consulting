@@ -4,7 +4,7 @@ import { PROPOSED_NOTE } from "@/lib/offers";
 
 export function Footer() {
   const elsewhere: { href: string; label: string; external?: boolean; rel?: string }[] = [
-    { href: `mailto:${SITE.email}`, label: SITE.email },
+    ...(SITE.email ? [{ href: `mailto:${SITE.email}`, label: SITE.email }] : []),
     { href: SITE.appStoreDeveloper, label: "App Store developer page", external: true },
     { href: "https://evchargeright.com", label: "evchargeright.com", external: true },
     { href: SITE.x, label: "X", external: true, rel: "me" },

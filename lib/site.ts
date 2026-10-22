@@ -6,7 +6,9 @@ export const SITE = {
   tagline: "Software built by an electrician who ships.",
   description:
     "I'm an electrician in Louisville. I build websites, AI workflows, web apps and iOS apps for trades and small businesses, and I have two apps on the App Store.",
-  email: "hi@jasonwalls.work", // UNVERIFIED: Jason must confirm this mailbox receives mail; the contact form is the primary route until then
+  // Public address, from the environment only. Empty = no address shown; the form is the only route.
+  // (hi@jasonwalls.work is not live: the domain is unregistered, so no default is hard-coded.)
+  email: process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "",
   // Set to a Cal.com / Calendly URL to show the booking embed on /contact. Empty = email-only.
   calLink: process.env.NEXT_PUBLIC_CAL_LINK ?? "",
   location: "Louisville, Kentucky",

@@ -50,9 +50,11 @@ export default async function ContactPage({ searchParams }: { searchParams: Prom
                 <p style={{ margin: 0 }}>
                   We have a 20-minute call. Then I send a written scope with a fixed price, and nothing starts until you agree to it.
                 </p>
-                <p style={{ margin: 0 }}>
-                  Prefer email? Write to <a className="text-link" href={`mailto:${SITE.email}`}>{SITE.email}</a>
-                </p>
+                {SITE.email ? (
+                  <p style={{ margin: 0 }}>
+                    Prefer email? Write to <a className="text-link" href={`mailto:${SITE.email}`}>{SITE.email}</a>
+                  </p>
+                ) : null}
                 {SITE.calLink ? (
                   <div className="embed">
                     <iframe src={SITE.calLink} title="Book a free 20-minute call" loading="lazy" style={{ height: 560 }} />
