@@ -31,7 +31,7 @@ export const OFFERS: OfferTier[] = [
     priceLabel: "$3,500",
     priceNum: 3500,
     duration: "1 week · fixed price",
-    short: "A site that books work. Up to five pages, live in a week, on your own domain. Paid once, no monthly plan.",
+    short: "A site that books work. Up to five pages, live in a week, on your own domain. One fixed price, no monthly plan.",
     bestFor: "A trade or local business whose site doesn't bring in calls.",
     whatYouGet: [
       "Up to 5 pages: home, services, about, contact or booking, one more",

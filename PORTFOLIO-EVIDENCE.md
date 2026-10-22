@@ -39,7 +39,7 @@ Fields (excluded, see §5).
   calculation (220.83(A) existing dwelling; 220.87 measured load)", but 220.87 is not in the engine
   (`~/dev/nec-reference/sections/220.87-determining-existing-loads.md`, re-verified 2026-07-29; `grep 220.87 src/`
   outside blog copy returns nothing on 2026-10-22; `calculator.ts:223-227` binds 220.83(A) by default, 220.83(B)
-  with new HVAC, 220.82 for a service change). This site says "220.83(A) for an existing home adding load" only.
+  with new HVAC, 220.82 for a service change). This site says "220.83 for an existing home adding load" (subsection not named, since (A) and (B) both apply by case).
   Never cite 220.82 in copy (claims.json ban). The claims.json phrase needs fixing at its owner.
 - Tests: 88 test files under `src/` and `scripts/`; NEC-specific `it()` counts: nec-calculators 15,
   nec-annex-d 16, capacity-verdict 10, nec-parity 8. `package.json` gates: `verify:nec`, `verify:claims`,

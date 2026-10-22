@@ -22,7 +22,7 @@ export const WORK: Work[] = [
     kicker: "EV charger panel check · web + iOS",
     stage: ["Live", "App Store"],
     summary:
-      "A homeowner who wants an EV charger needs to know whether the panel has room before paying for an upgrade. ChargeRight answers that with an NEC Article 220 load calculation (220.83(A) for an existing home adding load). I wrote the engine, with edition tables from 2017 to 2026, and built the web app with Stripe checkout and a native SwiftUI iOS app. It is live at evchargeright.com and on the App Store as version 4.0.1.",
+      "A homeowner who wants an EV charger needs to know whether the panel has room before paying for an upgrade. ChargeRight answers that with an NEC Article 220 load calculation (220.83 for an existing home adding load). I wrote the engine, with edition tables from 2017 to 2026, and built the web app with Stripe checkout and a native SwiftUI iOS app. It is live at evchargeright.com and on the App Store as version 4.0.1.",
     links: [
       { label: "evchargeright.com", href: "https://evchargeright.com" },
       { label: "ChargeRight on the App Store", href: "https://apps.apple.com/us/app/chargeright/id6755695416" },
