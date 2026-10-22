@@ -397,3 +397,114 @@ details.faq p { margin: 4px 0 12px; color: var(--text-mid); max-width: 62ch; }
 .pick-nav { position: fixed; top: 68px; left: 50%; transform: translateX(-50%); z-index: 50; display: flex; gap: 4px; background: var(--surface); border: 1px solid var(--rule); padding: 4px; border-radius: 999px; box-shadow: var(--shadow); }
 .pick-nav a { font-family: var(--font-jbm), monospace; font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; min-width: 44px; min-height: 44px; display: inline-flex; align-items: center; justify-content: center; padding: 0 12px; border-radius: 999px; text-decoration: none; color: var(--text-mid); }
 .pick-nav a[aria-current="page"] { background: var(--accent); color: var(--accent-ink); }
+
+/* ---------- hero options (preview at /v/hero/1-3 until Jason picks one) ----------
+   Shared frame on phones: the photo fills the top 68svh under the nav, fades into navy with an
+   Electric Blue glow at the bottom, and the copy starts on the faded part. Desktop: copy left on
+   navy, photo right. Motion (breakers, slow zoom, screen strip) stops under reduced motion. */
+.hx { position: relative; margin-top: -60px; overflow: hidden; isolation: isolate; background: var(--bg); }
+.hx-media { position: absolute; top: 0; left: 0; right: 0; height: 60svh; z-index: -2; }
+.hx-media img { object-position: 50% 30%; }
+.hx-shade {
+  position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(16,32,61,0.6) 0px, rgba(16,32,61,0) 130px),
+    linear-gradient(180deg, rgba(16,32,61,0) calc(60svh - 240px), rgba(16,32,61,0.86) calc(60svh - 70px), var(--bg) 60svh),
+    radial-gradient(110% 38% at 70% 100%, rgba(42,109,244,0.34), rgba(42,109,244,0) 72%);
+}
+.hx-body { position: relative; display: grid; gap: 16px; padding-top: calc(60svh - 110px); padding-bottom: 44px; }
+.hx-kicker { margin: 0; color: var(--text); text-shadow: 0 1px 12px rgba(5,12,28,0.6); }
+.hx-h1 { margin: 0; font-size: clamp(40px, 10.6vw, 76px); line-height: 1.02; letter-spacing: -0.02em; text-shadow: 0 2px 28px rgba(5,12,28,0.5); }
+.hx-lede { margin: 0; color: var(--text); max-width: 46ch; }
+.hx-actions { padding-top: 4px; }
+.hx-actions .btn-ghost { background: rgba(16,32,61,0.55); }
+@media (max-width: 559px) { .hx-actions { grid-template-columns: 1fr 1fr; } .hx-actions .btn { padding-left: 10px; padding-right: 10px; } }
+
+/* 1. Lift: headline beside a real screen tilted in 3D, app icons as chips */
+.hx-lift-row { position: relative; padding-right: 33vw; }
+.hx-lift .hx-h1 { font-size: clamp(36px, 9.4vw, 76px); }
+.hx-lift .hx-media img { object-position: 50% 62%; }
+.hx-tilt { position: absolute; right: -4px; bottom: -10px; width: 31vw; max-width: 200px; perspective: 900px; }
+.hx-tilt .phone { border-radius: 22px; border-width: 4px; transform: rotateY(-22deg) rotateX(6deg) rotateZ(4deg); transform-origin: 50% 100%; box-shadow: 0 30px 60px rgba(2,10,30,0.7), 0 0 90px rgba(42,109,244,0.45); }
+.hx-chips { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.hx-chips a { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 6px 14px 6px 6px; border-radius: 999px; background: rgba(255,255,255,0.07); border: 1px solid var(--rule); text-decoration: none; font-weight: 600; font-size: 15px; }
+.hx-chips a:hover { border-color: var(--text-dim); }
+.hx-chips img { width: 30px; height: 30px; border-radius: 8px; }
+.hx-chip-note { font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-mid); padding-left: 4px; }
+
+/* 2. Panel: brand duotone photo, packages as breakers that flip on in turn */
+.hx-duo { background: linear-gradient(180deg, #3d7bff 0%, #2a5fd0 45%, #10203d 100%); }
+.hx-duo img { mix-blend-mode: luminosity; filter: contrast(1.12); }
+.hx-panel .hx-media img { object-position: 50% 60%; }
+.pd { background: linear-gradient(180deg, #232c3d, #171e2b); border: 1px solid #36435e; border-radius: 10px; padding: 8px 10px 4px; box-shadow: inset 0 1px 0 rgba(255,255,255,0.07), 0 24px 48px rgba(2,10,30,0.55); }
+.pd-head { display: flex; justify-content: space-between; gap: 12px; padding: 4px 4px 10px; border-bottom: 1px dashed #3b4a68; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-mid); }
+.pd-hint { color: var(--accent-text); }
+.pd-rows { list-style: none; margin: 0; padding: 0; }
+.pd-row { display: grid; grid-template-columns: 18px 44px minmax(0, 1fr) 12px; align-items: center; gap: 12px; min-height: 60px; padding: 8px 4px; text-decoration: none; color: var(--text); border-bottom: 1px solid rgba(255,255,255,0.06); }
+.pd-rows li:last-child .pd-row { border-bottom: 0; }
+.pd-row:hover strong, .pd-row:focus-visible strong { color: var(--accent-text); }
+.pd-ckt { font-size: 12px; color: var(--text-dim); text-align: right; }
+.brk { position: relative; width: 44px; height: 26px; border-radius: 4px; background: #0a0f19; border: 1px solid #3f4d6b; box-shadow: inset 0 2px 5px rgba(0,0,0,0.7); }
+.brk-handle { position: absolute; top: 3px; left: 3px; width: 18px; height: 18px; border-radius: 3px; background: linear-gradient(180deg, #f2f5fa, #a9b3c4); box-shadow: 0 1px 3px rgba(0,0,0,0.6); transform: translateX(20px); }
+.pd-label { display: grid; gap: 2px; min-width: 0; }
+.pd-label strong { font-size: 16px; line-height: 1.25; font-weight: 600; }
+.pd-label .mono { font-size: 12px; letter-spacing: 0.04em; color: var(--text-mid); }
+.pd-led { width: 10px; height: 10px; border-radius: 50%; background: var(--signal); box-shadow: 0 0 10px var(--signal); }
+/* On by default (no script, reduced motion, sr-off). With script: off until Reveal adds .in as the
+   panel scrolls into view, then each breaker flips in turn. The panel itself does not fade (.sr). */
+html.js .pd.sr { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: no-preference) {
+  html.js:not(.sr-off) .pd:not(.in) .brk-handle { transform: translateX(0); }
+  html.js:not(.sr-off) .pd:not(.in) .pd-led { background: #34405a; box-shadow: none; }
+  html.js .pd.in .brk-handle { animation: brk-on 280ms cubic-bezier(0.3, 1.5, 0.5, 1) both; animation-delay: calc(250ms + var(--i, 0) * 340ms); }
+  html.js .pd.in .pd-led { animation: led-on 120ms linear both; animation-delay: calc(400ms + var(--i, 0) * 340ms); }
+}
+@keyframes brk-on { from { transform: translateX(0); } to { transform: translateX(20px); } }
+@keyframes led-on { from { background: #34405a; box-shadow: none; } to { background: var(--signal); box-shadow: 0 0 10px var(--signal); } }
+
+/* 3. Jobsite: full-bleed photo that settles in, caption-style headline, rolling screen strip */
+.hx-job { display: flex; align-items: flex-end; min-height: calc(100svh - 56px - env(safe-area-inset-bottom)); }
+/* Sized to the photo's own 3:4 so the face sits in the top half; the navy below it carries the copy. */
+.hx-job .hx-media { top: -40px; height: calc(100vw * 4 / 3); }
+@media (max-width: 899px) { .hx-job .hx-media { -webkit-mask-image: linear-gradient(180deg, #000 62%, transparent 100%); mask-image: linear-gradient(180deg, #000 62%, transparent 100%); } }
+.hx-job .hx-media img { object-position: 30% 30%; }
+.hx-job .hx-shade { background: linear-gradient(180deg, rgba(16,32,61,0.6) 0px, rgba(16,32,61,0) 130px), linear-gradient(180deg, rgba(16,32,61,0) 38%, rgba(16,32,61,0.86) 64%, var(--bg) 94%); }
+.hx-job .hx-body { padding-top: 46svh; padding-bottom: 28px; }
+.hx-zoom img { animation: hx-zoom 14s cubic-bezier(0.2, 0.6, 0.2, 1) both; transform-origin: 30% 30%; }
+@keyframes hx-zoom { from { transform: scale(1.14); } to { transform: scale(1); } }
+.hx-cap { font-size: clamp(40px, 11vw, 80px); line-height: 1.08; }
+.hx-cap mark { background: var(--accent); color: #fff; padding: 0 0.12em; border-radius: 4px; -webkit-box-decoration-break: clone; box-decoration-break: clone; text-shadow: none; }
+.reel { padding: 20px 0 12px; overflow: hidden; background: var(--bg-2); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+.reel-lede { margin: 0 0 20px; color: var(--text); }
+.reel-label { margin: 0 0 12px; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-mid); }
+.reel-track { display: flex; gap: 12px; width: max-content; padding-left: 16px; animation: reel 54s linear infinite; }
+.reel .phone { flex: 0 0 132px; border-radius: 22px; border-width: 4px; box-shadow: 0 16px 32px rgba(2,10,30,0.5); }
+.reel:hover .reel-track, .reel:focus-within .reel-track { animation-play-state: paused; }
+@keyframes reel { to { transform: translateX(calc(-50% - 6px)); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .hx-zoom img { animation: none; }
+  .reel { overflow-x: auto; }
+  .reel-track { animation: none; }
+}
+
+@media (min-width: 900px) {
+  .hx { display: flex; align-items: center; min-height: 680px; }
+  .hx-media { inset: 0 0 0 36%; height: auto; }
+  .hx-shade, .hx-job .hx-shade { background: linear-gradient(90deg, var(--bg) 0%, var(--bg) 36%, rgba(16,32,61,0.55) 50%, rgba(16,32,61,0) 72%), radial-gradient(50% 60% at 85% 100%, rgba(42,109,244,0.3), rgba(42,109,244,0) 70%); }
+  .hx-body, .hx-job .hx-body { padding: 132px 32px 96px; max-width: 1200px; }
+  .hx-body > * { max-width: 600px; }
+  /* Desktop: the phone straddles the seam between the copy and the photo, clear of the face. */
+  .hx-lift .hx-body { position: static; }
+  .hx-lift-row { position: static; padding-right: 0; }
+  .hx-lift .hx-body > * { max-width: 470px; }
+  .hx-lift .hx-shade { background: linear-gradient(180deg, rgba(16,32,61,0) 78%, var(--bg) 100%), linear-gradient(90deg, var(--bg) 0%, var(--bg) 46%, rgba(16,32,61,0.62) 54%, rgba(16,32,61,0) 74%), radial-gradient(50% 60% at 85% 100%, rgba(42,109,244,0.3), rgba(42,109,244,0) 70%); }
+  .hx-lift .hx-media { left: 46%; }
+  .hx-lift .hx-media img { object-position: 60% 30%; }
+  .hx-tilt { left: calc(max(32px, (100% - 1200px) / 2 + 32px) + 500px); right: auto; bottom: 56px; width: 170px; }
+  .hx-cap { font-size: 64px; }
+  .hx-media img, .hx-lift .hx-media img, .hx-panel .hx-media img { object-position: 50% 30%; }
+  .hx-lift .hx-h1 { font-size: 64px; }
+  .hx-job .hx-media { top: 0; height: auto; }
+  .reel .phone { flex-basis: 180px; }
+}

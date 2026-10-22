@@ -12,6 +12,9 @@ const REMOTE = {
   hardhat: `${CR}/jason-hardhat.jpg`,
   homeEvening: `${CR}/home-evening.jpg`,
   blueprint: `${CR}/blueprint-texture.jpg`,
+  // Not on evchargeright.com: the inline preview has to upload these two (see make_manifest).
+  lift: "/photos/jason-lift.jpg",
+  jobsite: "/photos/jason-jobsite.jpg",
   cr01: `${MZ}/PurpleSource211/v4/7d/c6/26/7dc62657-9dfb-f67d-9376-f44acf39711f/01_iphone67.png/800x1734bb.jpg`,
   cr02: `${MZ}/PurpleSource221/v4/b3/b6/fd/b3b6fd56-353e-b6ec-4220-9d53518bffe1/02_iphone67.png/800x1734bb.jpg`,
   cr03: `${MZ}/PurpleSource221/v4/f5/9d/b1/f59db1a5-8f90-ebf8-24f9-e7205eecd573/03_iphone67.png/800x1734bb.jpg`,
@@ -26,6 +29,8 @@ const LOCAL: typeof REMOTE = {
   hardhat: "/photos/jason-hardhat.jpg",
   homeEvening: "/photos/home-evening.jpg",
   blueprint: "/photos/blueprint-texture.jpg",
+  lift: "/photos/jason-lift.jpg",
+  jobsite: "/photos/jason-jobsite.jpg",
   cr01: "/screens/cr-01.jpg",
   cr02: "/screens/cr-02.jpg",
   cr03: "/screens/cr-03.jpg",
@@ -42,6 +47,8 @@ export const SIZE = {
   electrician: { w: 800, h: 1779 },
   hardhat: { w: 800, h: 1067 },
   homeEvening: { w: 1600, h: 893 },
+  lift: { w: 1200, h: 1600 },
+  jobsite: { w: 1200, h: 1600 },
   screen: { w: 800, h: 1734 },
 };
 
