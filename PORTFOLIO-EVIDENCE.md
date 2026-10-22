@@ -35,8 +35,12 @@ Fields (excluded, see §5).
 - NEC engine: `src/lib/nec-calculators.ts` (+ `calculator.ts`, `nec-tables.ts`, `nec-adoption.ts` for
   editions 2017/2020/2023/2026, `capacity-verdict.ts`, `charging-calculator.ts`). Methods present in code:
   220.82 optional method, 220.83(A)/(B) existing dwelling, Article 220 Part III standard method, NEC 2026
-  "120.82", Annex D examples (test file `nec-annex-d.test.ts`). Public wording must follow claims.json:
-  "NEC Article 220 load calculation (220.83(A) existing dwelling; 220.87 measured load)". Never cite 220.82 in copy.
+  "120.82", Annex D examples (test file `nec-annex-d.test.ts`). claims.json approves "NEC Article 220 load
+  calculation (220.83(A) existing dwelling; 220.87 measured load)", but 220.87 is not in the engine
+  (`~/dev/nec-reference/sections/220.87-determining-existing-loads.md`, re-verified 2026-07-29; `grep 220.87 src/`
+  outside blog copy returns nothing on 2026-10-22; `calculator.ts:223-227` binds 220.83(A) by default, 220.83(B)
+  with new HVAC, 220.82 for a service change). This site says "220.83(A) for an existing home adding load" only.
+  Never cite 220.82 in copy (claims.json ban). The claims.json phrase needs fixing at its owner.
 - Tests: 88 test files under `src/` and `scripts/`; NEC-specific `it()` counts: nec-calculators 15,
   nec-annex-d 16, capacity-verdict 10, nec-parity 8. `package.json` gates: `verify:nec`, `verify:claims`,
   `verify:method-copy`, `verify:seo`. (Counted, not run.)
