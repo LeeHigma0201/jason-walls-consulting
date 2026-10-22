@@ -13,6 +13,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { OFFERS, PAYMENT_TERMS, PRICING_STATUS } from '@/lib/offers';
 import { TEMPLATES } from '@/lib/templates';
+import { SITE } from '@/lib/site';
 import { authorize, commit, meterHeaders } from '@/lib/agent-meter';
 
 export const runtime = 'nodejs';
@@ -21,12 +22,13 @@ const PRICE_CENTS = 200;
 const TOOL = 'scope_brief';
 
 function baseUrl(): string {
-  return process.env.AGENT_API_BASE_URL || process.env.NEXT_PUBLIC_SITE_URL || '';
+  return process.env.AGENT_API_BASE_URL || process.env.NEXT_PUBLIC_SITE_URL || SITE.url;
 }
 
 /** Cheapest tier whose entry price the stated budget actually covers. */
 function tierForBudget(budgetUsd: number, ongoing: boolean) {
-  const pool = OFFERS.filter((o) => (ongoing ? o.group === 'ongoing' : o.group === 'one-time'));
+  // Extra Day is for existing clients only, so a brief for a new customer never lands on it.
+  const pool = OFFERS.filter((o) => o.id !== 'day' && (ongoing ? o.group === 'ongoing' : o.group === 'one-time'));
   const affordable = pool.filter((o) => (o.priceNum ?? o.priceMin ?? Infinity) <= budgetUsd);
   if (!affordable.length) return null;
   return affordable.reduce((best, o) =>
@@ -59,7 +61,8 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  const body = (await req.json().catch(() => ({}))) as Record<string, unknown>;
+  const raw: unknown = await req.json().catch(() => ({}));
+  const body = (raw && typeof raw === 'object' && !Array.isArray(raw) ? raw : {}) as Record<string, unknown>;
   const goal = String(body.goal ?? '').trim();
   if (!goal) {
     return NextResponse.json(
@@ -117,7 +120,7 @@ export async function POST(req: NextRequest) {
         }
       : null,
     otherTemplates: templateMatches.map((t) => ({ id: t.id, name: t.name, priceLabel: t.priceLabel })),
-    nextStep: `${baseUrl()}/book`,
+    nextStep: `${baseUrl()}/contact`,
   };
 
   return NextResponse.json(

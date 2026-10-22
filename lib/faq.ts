@@ -23,7 +23,7 @@ export const FAQ: Faq[] = [
   },
   {
     q: "What happens after launch?",
-    a: `The Your Business on Claude, MVP and iOS packages include 30 days of fixes. After that, the Care Plan ($${carePrice} a month, ${PROPOSED_NOTE}) watches your hosting, keeps dependencies updated and includes up to three hours of changes a month. Or you can book a day when you need one.`,
+    a: `The Your Business on Claude, MVP and iOS packages include 30 days of fixes. After that, the Care Plan ($${carePrice} a month, ${PROPOSED_NOTE}) watches your hosting, keeps dependencies updated and includes up to three hours of changes a month. If you are already a client, you can also book a day when you need one.`,
   },
   {
     q: "What do you need from me?",

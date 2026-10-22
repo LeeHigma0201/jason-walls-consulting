@@ -2,7 +2,9 @@
 // environment (NEXT_PUBLIC_STRIPE_LINK_<PACKAGE>) once scripts/stripe-setup.mjs has created it;
 // an empty value means no pay button. MVP and iOS jobs are scoped first and quoted in writing, so
 // they never get a link. Amounts shown on the buttons derive from lib/offers.ts, never typed here.
-import { OFFERS, type OfferTier } from "@/lib/offers";
+// No button shows until PRICING_STATUS is "approved", so nothing sells at a proposed price. Extra Day
+// is for clients and former clients, so its link is sent to them directly and never shown on the site.
+import { OFFERS, PRICING_STATUS, type OfferTier } from "@/lib/offers";
 
 const LINKS: Record<string, string | undefined> = {
   "launch-site": process.env.NEXT_PUBLIC_STRIPE_LINK_LAUNCH_SITE,
@@ -14,6 +16,7 @@ const LINKS: Record<string, string | undefined> = {
 const usd = (n: number) => "$" + n.toLocaleString("en-US");
 
 export function payLink(o: OfferTier): { href: string; label: string } | null {
+  if (PRICING_STATUS !== "approved" || o.id === "day") return null;
   const href = LINKS[o.id];
   if (!href) return null;
   if (o.recurring === "month") return { href, label: o.priceNum ? `Subscribe · ${usd(o.priceNum)} a month` : "Subscribe" };

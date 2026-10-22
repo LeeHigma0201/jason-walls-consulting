@@ -79,7 +79,7 @@ async function listAll(path) {
 const META = { site: "jason-walls-consulting" };
 
 async function ensureProduct(p) {
-  const found = await api("GET", `/v1/products/search?query=${encodeURIComponent(`active:'true' AND metadata['package']:'${p.id}'`)}`);
+  const found = await api("GET", `/v1/products/search?query=${encodeURIComponent(`active:'true' AND metadata['site']:'${META.site}' AND metadata['package']:'${p.id}'`)}`);
   if (found.data[0]) return found.data[0];
   return api("POST", "/v1/products", {
     name: p.name, type: "service", description: p.description, url: `${SITE_URL}/services`,
@@ -102,7 +102,7 @@ async function ensurePrice(product, p, kind) {
 }
 
 async function ensureLink(links, price, p, kind) {
-  const have = links.find((l) => l.active && l.metadata.package === p.id && l.metadata.kind === kind);
+  const have = links.find((l) => l.active && l.metadata.site === META.site && l.metadata.package === p.id && l.metadata.kind === kind);
   if (have) return have;
   const oneTime = !p.recurring;
   const submit = kind === "deposit" ? "This is the 50% to start. The other 50% is due at launch."

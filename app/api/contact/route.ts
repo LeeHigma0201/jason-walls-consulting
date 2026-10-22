@@ -31,11 +31,12 @@ async function sendResend(apiKey: string, m: Mail) {
 export async function POST(req: Request) {
   let body: Payload;
   try { body = (await req.json()) as Payload; } catch { return Response.json({ error: "bad json" }, { status: 400 }); }
+  if (!body || typeof body !== "object" || Array.isArray(body)) return Response.json({ error: "bad json" }, { status: 400 });
 
   const name = clean(body.name, 120);
   const email = clean(body.email, 200);
   const message = clean(body.message, 4000);
-  if (!name || !email || !message || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+  if (!name || !email || !message || !/^[^@\s,;<>"]+@[^@\s,;<>"]+\.[^@\s,;<>"]+$/.test(email)) {
     return Response.json({ error: "name, email and message are required" }, { status: 400 });
   }
 
