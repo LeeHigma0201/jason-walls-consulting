@@ -1,46 +1,66 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { ContactForm } from "@/components/ContactForm";
-import { JsonLd, breadcrumb } from "@/lib/schema";
+import { JsonLd, breadcrumb, contactJsonLd } from "@/lib/schema";
 import { SITE } from "@/lib/site";
+import { A } from "@/lib/assets";
 
 export const metadata: Metadata = {
-  title: "Book a call",
-  description: "A 20-minute call, then a written brief with a fixed quote. Tell me the job.",
+  title: "Contact",
+  description: "Tell me about the job. We have a free 20-minute call, then I send a written scope with a fixed price.",
   alternates: { canonical: "/contact" },
 };
 
 export default async function ContactPage({ searchParams }: { searchParams: Promise<{ package?: string }> }) {
   const sp = await searchParams;
-  const initialPackage = sp.package ?? "";
+  const initialPackage = typeof sp.package === "string" ? sp.package : "";
   return (
     <>
-      <JsonLd data={breadcrumb([{ name: "Home", path: "/" }, { name: "Contact", path: "/contact" }])} />
-      <section className="section" style={{ paddingBottom: 24 }}>
-        <div className="wrap grid-2" style={{ alignItems: "start" }}>
-          <div style={{ display: "grid", gap: 16 }}>
-            <p className="kicker sr">Book a call</p>
-            <h1 className="display h1 sr" style={{ margin: 0, fontSize: "clamp(36px, 6vw, 64px)", ["--d" as string]: "60ms" }}>
-              Tell me the job. <em>I’ll tell you the price.</em>
-            </h1>
-            <p className="lede sr" style={{ margin: 0, ["--d" as string]: "120ms" }}>
-              Write a paragraph below. I reply within one business day with a few times for a 20-minute call. After the call you get a written brief with a fixed quote.
-            </p>
-            <ul className="check-list sr" style={{ ["--d" as string]: "160ms" }}>
-              <li>No retainer talk, no sales deck</li>
-              <li>If a package isn’t right for you, I’ll say so</li>
-              <li>Your idea stays yours; I don’t shop it around</li>
-            </ul>
-            <p className="mono sr" style={{ margin: 0, fontSize: 12, color: "var(--text-mid)", ["--d" as string]: "200ms" }}>
-              Prefer email? <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
-            </p>
-          </div>
-          <div className="sr" style={{ ["--d" as string]: "140ms" }}>
-            {SITE.calLink ? (
-              <div className="embed" style={{ marginBottom: 20 }}>
-                <iframe src={SITE.calLink} title="Book a 20-minute call" loading="lazy" style={{ height: 640 }} />
+      <JsonLd data={[contactJsonLd(), breadcrumb([{ name: "Home", path: "/" }, { name: "Contact", path: "/contact" }])]} />
+      <style>{`
+        .contact-avatar { position: relative; flex: none; width: 80px; height: 80px; border-radius: 50%; overflow: hidden; }
+        @media (max-width: 559px) { .contact-avatar { width: 56px; height: 56px; } }
+      `}</style>
+      <section className="section" style={{ paddingTop: 40 }}>
+        <div className="wrap">
+          <div className="split">
+            <div className="span-7">
+              <p className="kicker">Contact</p>
+              <div style={{ display: "flex", alignItems: "center", gap: 14, margin: "12px 0 0" }}>
+                <div className="contact-avatar">
+                  <Image
+                    src={A.hardhat}
+                    alt="Jason Walls in sunglasses and a gray hoodie under a hard hat covered in stickers"
+                    width={160}
+                    height={213}
+                    sizes="160px"
+                    style={{ position: "absolute", width: "190.5%", height: "auto", maxWidth: "none", left: "-35.7%", top: "-81%" }}
+                  />
+                </div>
+                <h1 className="display h1" style={{ margin: 0 }}>Tell me about the job.</h1>
               </div>
-            ) : null}
-            <ContactForm initialPackage={initialPackage} />
+              <p className="lede" style={{ margin: "16px 0 24px" }}>
+                Write a few lines and pick the package closest to it, or say you aren’t sure. I read every message myself.
+              </p>
+              <ContactForm initialPackage={initialPackage} />
+            </div>
+            <aside className="span-5">
+              <div className="card sr stack">
+                <h2 className="display h3" style={{ margin: 0 }}>What happens next</h2>
+                <p style={{ margin: 0 }}>
+                  We have a 20-minute call. Then I send a written scope with a fixed price, and nothing starts until you agree to it.
+                </p>
+                <p style={{ margin: 0 }}>
+                  Prefer email? Write to <a className="text-link" href={`mailto:${SITE.email}`}>{SITE.email}</a>
+                </p>
+                {SITE.calLink ? (
+                  <div className="embed">
+                    <iframe src={SITE.calLink} title="Book a free 20-minute call" loading="lazy" style={{ height: 560 }} />
+                  </div>
+                ) : null}
+                <p style={{ margin: 0, color: "var(--text-mid)" }}>I’m in Louisville and happy to meet around here.</p>
+              </div>
+            </aside>
           </div>
         </div>
       </section>

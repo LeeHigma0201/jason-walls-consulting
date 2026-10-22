@@ -1,31 +1,38 @@
-# Jason Walls · software built by an electrician who ships
+# Jason Walls
 
-> Websites, iOS apps, internal tools and AI workflows for trades, local businesses and founders.
-> Fixed price, weekly previews, weeks not quarters. Louisville, Kentucky; works remotely across the US.
+> I'm an electrician in IBEW Local 369 in Louisville, Kentucky, and I build software with Claude Code and a crew of AI agents. I have two apps on the App Store and a web product that takes payments. I build websites, iOS apps, internal tools and AI workflows for trades, local businesses and founders, and I work remotely across the US.
 
-## Who
-Jason Walls is an electrician (IBEW Local 369) who builds software with Claude Code and parallel agents.
-Shipped: ChargeRight (web at https://evchargeright.com and iOS, App Store id 6755695416), BendRight
-(iOS, App Store id 6779847124, $6.99), ZombieWells (https://zombiewells.com, with attorney Sarah Stogner).
-Public tooling: https://github.com/LeeHigma0201/claude-code-mods
+## Prices
+Every job starts with a written scope and a fixed quote, and the quote is the price. Every price below is proposed and not yet approved.
+- Launch Site: $3,500, 1 week. Up to five pages, a booking or quote form, analytics, on your own domain. (proposed · awaiting approval)
+- Your Business on Claude: $4,500, 2 weeks. One to three AI workflows for your paperwork, installed where your crew already works, with training. (proposed · awaiting approval)
+- MVP Web App or Internal Tool: from $12,000, 3 weeks, scoped first. Login, database, payments, one AI feature if it earns its place, and a preview link every week. (proposed · awaiting approval)
+- iOS App to the App Store: from $10,000, 4 weeks, scoped first. Purchases, privacy page, screenshots and the App Store submission handled. (proposed · awaiting approval)
+- Care Plan: $400 a month, up to 3 hours of changes, cancel anytime. (proposed · awaiting approval)
+- Extra Day: $1,200 a day, for clients and former clients. (proposed · awaiting approval)
 
-## Packages (prices proposed, 2026-10)
-- Launch Site: $3,500, 1 week. Up to 5 pages, booking form, schema, analytics, your domain.
-- Your Business on Claude: $4,500, 2 weeks. 1–3 AI workflows installed where the crew works, training, guardrails.
-- MVP Web App or Internal Tool: from $12,000, 3 weeks. Login, database, payments, one AI feature, tests, weekly preview.
-- iOS App to the App Store: from $10,000, 4 weeks. Capacitor or SwiftUI, StoreKit, submission handled.
-- Care Plan: $400/month, 3 hours of changes, cancel anytime. Extra day: $1,200.
+Payment is 50% to start and 50% at launch. On the MVP and iOS packages it is 40% to start, 30% at the mid-build preview and 30% at launch.
 
-## Process
-Discovery call (20 min, free) → scoped brief → fixed quote (50% to start) → build with a preview link every week → launch on the client's own accounts (they own code, domain, data) → 30 days of fixes, then Care if wanted.
+## What I have built
+- [ChargeRight on the App Store](https://apps.apple.com/us/app/chargeright/id6755695416): free, version 4.0.1. A homeowner finds out whether the panel has room for an EV charger before paying for an upgrade. I wrote the NEC Article 220 load calculation engine it runs on. The web version is at [evchargeright.com](https://evchargeright.com).
+- [BendRight on the App Store](https://apps.apple.com/us/app/bendright/id6779847124): $6.99, version 1.1. Offsets, saddles and kicks for conduit bending, with an AR measure and no account.
+- [ZombieWells](https://zombiewells.com): a public site about abandoned, leaking oil wells in the Permian Basin, built with attorney Sarah Stogner.
+- [Claude Code mods](https://github.com/LeeHigma0201/claude-code-mods): the mods I published.
+
+## How a job runs
+A free 20-minute call, then a written brief, then a fixed quote. On MVP and iOS jobs you get a preview every week, a link for web or a TestFlight build for iOS. Everything launches on accounts in your name, and you own the code, the domain and the data. An independent verifier checks the work before it ships.
 
 ## Contact
-https://jason-walls.vercel.app/contact · hi@jasonwalls.work
-Agent API (free catalog): https://jason-walls.vercel.app/api/agent/v1/openapi.json
+- Email: hi@jasonwalls.work
+- [Contact page](https://jason-walls.vercel.app/contact)
+- [Agent API, free catalog](https://jason-walls.vercel.app/api/agent/v1/openapi.json)
+- [App Store developer page](https://apps.apple.com/us/developer/jason-lloyd-walls/id1855640312)
+- [X](https://x.com/walls_jason1)
+- [GitHub](https://github.com/LeeHigma0201)
 
 ## Pages
-- https://jason-walls.vercel.app/work
-- https://jason-walls.vercel.app/services
-- https://jason-walls.vercel.app/process
-- https://jason-walls.vercel.app/about
-- https://jason-walls.vercel.app/faq
+- [Prices](https://jason-walls.vercel.app/services): six packages, each marked proposed · awaiting approval
+- [Work](https://jason-walls.vercel.app/work): the apps and sites I have built
+- [Process](https://jason-walls.vercel.app/process): how a job runs, from the first call to launch
+- [About](https://jason-walls.vercel.app/about): who I am and how I work
+- [FAQ](https://jason-walls.vercel.app/faq): common questions before a job starts

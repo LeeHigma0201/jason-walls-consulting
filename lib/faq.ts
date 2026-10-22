@@ -1,5 +1,13 @@
+import { OFFERS, PROPOSED_NOTE } from "./offers";
+
 export type Faq = { q: string; a: string };
 
+// The Care Plan price comes from OFFERS so it cannot drift from /services.
+const careTier = OFFERS.find((o) => o.id === "care");
+const carePrice = careTier?.priceNum ?? 0;
+
+// Order follows the objections owners raise: price, time, ownership, what if it goes wrong
+// (after launch), then the rest. Any string that contains a price carries the proposed note.
 export const FAQ: Faq[] = [
   {
     q: "Is the price really fixed?",
@@ -7,11 +15,15 @@ export const FAQ: Faq[] = [
   },
   {
     q: "How can one person build this fast?",
-    a: "I build with Claude Code and run parallel agent sessions from my phone, with an independent verifier that checks the builder's work. About 40 sessions and 250 agent runs a week. That's the same way ChargeRight, BendRight and ZombieWells were built. You get a preview link every week so the speed is visible, not claimed.",
+    a: "I build with Claude Code on my phone, a second check reviews the work, and on MVP and iOS jobs you see a preview every week. It's how I built ChargeRight, BendRight and ZombieWells.",
   },
   {
     q: "Do I own the code?",
-    a: "Yes. Everything is built on accounts in your name (hosting, domain, payments, app store). At launch you have the repo, the docs and a recorded walkthrough. You can take it to anyone.",
+    a: "Yes. Everything is built on accounts in your name (hosting, domain, payments, app store). On the MVP package you get the code, the handover docs and a recorded walkthrough at launch, so you can hand it to another developer. Each package lists what you receive.",
+  },
+  {
+    q: "What happens after launch?",
+    a: `The Your Business on Claude, MVP and iOS packages include 30 days of fixes. After that, the Care Plan ($${carePrice} a month, ${PROPOSED_NOTE}) watches your hosting, keeps dependencies updated and includes up to three hours of changes a month. Or you can book a day when you need one.`,
   },
   {
     q: "What do you need from me?",
@@ -23,19 +35,15 @@ export const FAQ: Faq[] = [
   },
   {
     q: "Are you an electrician or a developer?",
-    a: "Both. I'm an electrician, IBEW Local 369, and I wrote the NEC Article 220 engine that ChargeRight runs on. That's why trades and home-service businesses are the people I build for first: I know what the job actually needs.",
+    a: "I'm an electrician in IBEW Local 369, and I also wrote the NEC Article 220 engine that ChargeRight runs on. That's why I build for trades and home-service businesses first, because I know what the job actually needs.",
   },
   {
     q: "Web app or iOS app?",
     a: "If your customers use it at a desk or from a link, web. If they reach for it on a job site or in a driveway, iOS. Many builds are web first with an iOS wrapper (Capacitor) later, from one codebase. We decide on the call.",
   },
   {
-    q: "What happens after launch?",
-    a: "Every package includes 30 days of fixes. After that, the Care Plan ($400 a month) watches hosting, keeps dependencies updated and includes three hours of changes. Or book a day when you need one.",
-  },
-  {
     q: "Do you work with businesses outside Kentucky?",
-    a: "Yes. The work is remote; the weekly preview and the walkthrough recordings work anywhere. I'm in Louisville and happy to meet in person around here.",
+    a: "Yes. The work is remote, and the previews and the walkthrough recordings work anywhere. I'm in Louisville and happy to meet in person around here.",
   },
   {
     q: "What's not a fit?",

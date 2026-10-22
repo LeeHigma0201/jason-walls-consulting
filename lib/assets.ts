@@ -48,10 +48,10 @@ export const SIZE = {
 export const SCREENS = [
   { src: A.cr01, alt: "ChargeRight on iPhone: panel utilization gauge, 200A panel, 54A available, Ready for EV Charger" },
   { src: A.br01, alt: "BendRight on iPhone: offset bend, rise from strut to box knockout, 1 1/8 inch" },
-  { src: A.cr02, alt: "ChargeRight on iPhone: second screen of the live app" },
-  { src: A.br02, alt: "BendRight on iPhone: offset marks" },
-  { src: A.cr03, alt: "ChargeRight on iPhone: third screen of the live app" },
-  { src: A.br03, alt: "BendRight on iPhone: ninety-degree bend" },
+  { src: A.cr02, alt: "ChargeRight on iPhone: the assessment step that asks for a photo of the electrical panel, showing a panel with the door open." },
+  { src: A.br02, alt: "BendRight on iPhone: offset marks, 2 1/4 inches between marks, with the finished offset and the marks on the stick." },
+  { src: A.cr03, alt: "ChargeRight on iPhone: the home questions screen with panel size, square footage, heating type and appliances." },
+  { src: A.br03, alt: "BendRight on iPhone: the 90 degree stub-up screen with a 12 inch stub and a mark at 7 inches from the end." },
 ];
 
 export const STORE = {

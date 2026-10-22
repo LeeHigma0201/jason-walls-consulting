@@ -1,35 +1,37 @@
 import Link from "next/link";
 import type { OfferTier } from "@/lib/offers";
-import { PRICING_STATUS } from "@/lib/offers";
+import { Price } from "@/components/ui/Price";
+import { Fold } from "@/components/ui/Fold";
 
+// One package. compact (Home, previews): name, price with marker, timeline, short line, best for, and
+// "See this package" to /services#id. Full (/services): same plus three Fold blocks (closed on phone,
+// open at 820+) and "Ask about this one" to bookHref. The featured package (MVP) gets the accent ring and
+// the pill. Ids (#launch-site, #care, ...) are on the full card only.
 export function PackageCard({ o, compact = false, delay = 0 }: { o: OfferTier; compact?: boolean; delay?: number }) {
+  const label = compact ? "See this package" : "Ask about this one";
   return (
-    <article id={o.id} className={`card card-hover sr ${o.featured ? "card-featured" : ""}`} style={{ ["--d" as string]: `${delay}ms`, display: "flex", flexDirection: "column", gap: 14 }}>
-      {o.featured && <span className="pill pill-accent" style={{ position: "absolute", top: -12, left: 24 }}>Most asked for</span>}
+    <article id={compact ? undefined : o.id} className={`card pkg sr ${o.featured ? "card-featured" : ""}`} style={{ ["--d" as string]: `${delay}ms` }}>
+      {o.featured && <span className="pill pill-accent">Where I’d start with one idea</span>}
       <div>
-        <p className="kicker" style={{ marginBottom: 8 }}>{o.duration}</p>
+        <p className="kicker" style={{ margin: "0 0 8px" }}>{o.duration}</p>
         <h3 className="display h3" style={{ margin: 0 }}>{o.name}</h3>
       </div>
-      <p className="display" style={{ margin: 0, fontSize: 36, lineHeight: 1 }}>
-        {o.priceLabel}
-        {PRICING_STATUS === "proposed" && <span className="proposed" style={{ display: "block", marginTop: 6 }}>proposed · awaiting approval</span>}
-      </p>
-      <p style={{ margin: 0, color: "var(--text-mid)", fontSize: 15 }}>{o.short}</p>
+      <Price o={o} />
+      <p className="pkg-short">{o.short}</p>
+      <div>
+        <p className="kicker" style={{ margin: "0 0 4px" }}>Best for</p>
+        <p className="pkg-meta">{o.bestFor}</p>
+      </div>
       {!compact && (
-        <>
-          <p className="kicker" style={{ marginTop: 6 }}>Best for</p>
-          <p style={{ margin: 0, fontSize: 15 }}>{o.bestFor}</p>
-          <p className="kicker" style={{ marginTop: 6 }}>Included</p>
-          <ul className="check-list">{o.whatYouGet.map((w) => <li key={w}>{w}</li>)}</ul>
-          <p className="kicker" style={{ marginTop: 6 }}>You provide</p>
-          <ul className="check-list x-list">{o.youProvide.map((w) => <li key={w}>{w}</li>)}</ul>
-          <p className="kicker" style={{ marginTop: 6 }}>Not included</p>
-          <ul className="check-list x-list">{o.notForThis.map((w) => <li key={w}>{w}</li>)}</ul>
-        </>
+        <div>
+          <Fold summary="You get" label={o.name}><ul className="check-list">{o.whatYouGet.map((w) => <li key={w}>{w}</li>)}</ul></Fold>
+          <Fold summary="You provide" label={o.name}><ul className="check-list">{o.youProvide.map((w) => <li key={w}>{w}</li>)}</ul></Fold>
+          <Fold summary="Not included" label={o.name}><ul className="check-list x-list">{o.notForThis.map((w) => <li key={w}>{w}</li>)}</ul></Fold>
+        </div>
       )}
-      <div style={{ marginTop: "auto", paddingTop: 8 }}>
-        <Link href={o.bookHref} className={`btn ${o.featured ? "btn-primary" : "btn-ghost"}`} style={{ width: "100%" }}>
-          {o.group === "ongoing" ? "Ask about it" : "Scope it on a call"}
+      <div style={{ marginTop: "auto", paddingTop: 4 }}>
+        <Link href={compact ? `/services#${o.id}` : o.bookHref} className={`btn ${o.featured ? "btn-primary" : "btn-ghost"}`} style={{ width: "100%" }} aria-label={`${label}: ${o.name}`}>
+          {label}
         </Link>
       </div>
     </article>

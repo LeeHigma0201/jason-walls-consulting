@@ -1,15 +1,22 @@
 User-agent: *
 Allow: /
+Disallow: /v/
 
 # AI crawlers welcome; the offer is in plain text and in /llms.txt
 User-agent: GPTBot
 Allow: /
+Disallow: /v/
+
 User-agent: ClaudeBot
 Allow: /
+Disallow: /v/
+
 User-agent: PerplexityBot
 Allow: /
+Disallow: /v/
+
 User-agent: Google-Extended
 Allow: /
+Disallow: /v/
 
 Sitemap: https://jason-walls.vercel.app/sitemap.xml
-Disallow: /v/

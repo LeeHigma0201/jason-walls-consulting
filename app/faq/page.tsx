@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { FAQ } from "@/lib/faq";
 import { JsonLd, breadcrumb, faqSchema } from "@/lib/schema";
+import { CtaCard } from "@/components/ui/CtaCard";
 
 export const metadata: Metadata = {
   title: "FAQ",
-  description: "Is the price fixed? Do I own the code? How can one person build this fast? Web or iOS? What happens after launch?",
+  description:
+    "Is the price fixed, how long does it take, who owns it, what happens after launch, and who actually does the work. Answers from Jason Walls, an electrician in Louisville.",
   alternates: { canonical: "/faq" },
 };
 
@@ -14,24 +15,27 @@ export default function FaqPage() {
     <>
       <JsonLd data={[faqSchema(), breadcrumb([{ name: "Home", path: "/" }, { name: "FAQ", path: "/faq" }])]} />
       <section className="section" style={{ paddingBottom: 24 }}>
-        <div className="wrap" style={{ display: "grid", gap: 16, maxWidth: 860 }}>
-          <p className="kicker sr">FAQ</p>
-          <h1 className="display h1 sr" style={{ margin: 0, fontSize: "clamp(36px, 6vw, 64px)", ["--d" as string]: "60ms" }}>
-            Straight answers, <em>before the call.</em>
-          </h1>
+        <div className="wrap narrow stack">
+          <p className="kicker">FAQ</p>
+          <h1 className="display h1" style={{ margin: 0 }}>Questions owners ask me.</h1>
+          <p className="lede">
+            Price, time, who owns it, and what happens if something goes wrong, in that order.
+          </p>
         </div>
       </section>
       <section className="section" style={{ paddingTop: 8 }}>
-        <div className="wrap" style={{ maxWidth: 860 }}>
+        <div className="wrap narrow">
           {FAQ.map((f, i) => (
-            <details className="faq sr" key={f.q} style={{ ["--d" as string]: `${i * 40}ms` }} open={i === 0}>
+            <details className={i < 4 ? "faq" : "faq sr"} key={f.q} style={i < 4 ? undefined : { ["--d" as string]: `${Math.min(i - 4, 6) * 40}ms` }}>
               <summary>{f.q}</summary>
               <p>{f.a}</p>
             </details>
           ))}
-          <div style={{ marginTop: 40 }}>
-            <Link href="/contact" className="btn btn-primary btn-lg">Ask the rest on a call</Link>
-          </div>
+        </div>
+      </section>
+      <section className="section" style={{ paddingTop: 8 }}>
+        <div className="wrap narrow">
+          <CtaCard title="Not answered here? Ask me." />
         </div>
       </section>
     </>

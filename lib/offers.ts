@@ -3,6 +3,9 @@
 
 export const PRICING_STATUS: "proposed" | "approved" = "proposed";
 
+// The marker text shown with every price. Same wording in strings that contain a price: "(" + PROPOSED_NOTE + ")".
+export const PROPOSED_NOTE = "proposed · awaiting approval";
+
 export type OfferTier = {
   id: string;
   name: string;

@@ -1,37 +1,77 @@
 import Image from "next/image";
-import Link from "next/link";
-import type { Work } from "@/lib/work";
+import { StoreBadge } from "@/components/ui/StoreBadge";
+import { Phones } from "@/components/ui/Phones";
 
-export function StagePills({ stage }: { stage: Work["stage"] }) {
+// Honest-state pills. Accepts any label; known ones get a style. "Lab" displays as "Prototype".
+const PILL: Record<string, { cls: string; text?: string }> = {
+  Live: { cls: "pill-live" },
+  "App Store": { cls: "pill-store" },
+  Beta: { cls: "pill-beta" },
+  Prototype: { cls: "pill-proto" },
+  Lab: { cls: "pill-proto", text: "Prototype" },
+  Private: { cls: "" },
+};
+
+export function StagePills({ stage }: { stage: readonly string[] }) {
   return (
     <span style={{ display: "inline-flex", gap: 6, flexWrap: "wrap" }}>
       {stage.map((s) => (
-        <span key={s} className={`pill ${s === "Live" || s === "App Store" ? "pill-live" : ""}`}>{s}</span>
+        <span key={s} className={`pill ${PILL[s]?.cls ?? ""}`}>{PILL[s]?.text ?? s}</span>
       ))}
     </span>
   );
 }
 
-export function WorkCard({ w, delay = 0 }: { w: Work; delay?: number }) {
+// Structural subset of lib/work.ts Work, so a Work entry can be passed straight in.
+export type WorkCardData = {
+  slug: string;
+  name: string;
+  kicker: string;
+  stage: readonly string[];
+  summary?: string;
+  icon?: string;
+  links?: readonly { label: string; href: string }[];
+};
+
+// One product entry on /work: app icon if there is one, StagePills, h3, kicker, one paragraph,
+// links (App Store links show the badge), optional real screens. wide = full width at 900+ (ChargeRight).
+// body defaults to w.summary.
+export function WorkCard({
+  w, body, screens, wide = false, delay = 0,
+}: {
+  w: WorkCardData;
+  body?: string;
+  screens?: { src: string; alt: string }[];
+  wide?: boolean;
+  delay?: number;
+}) {
   return (
-    <article className="card card-hover sr" style={{ ["--d" as string]: `${delay}ms`, padding: 0, overflow: "hidden", display: "flex", flexDirection: "column" }}>
-      {w.image ? (
-        <Image src={w.image.src} alt={w.image.alt} width={w.image.w} height={w.image.h} sizes="(min-width: 820px) 400px, 100vw" style={{ width: "100%", height: "auto", borderBottom: "1px solid var(--rule)" }} />
-      ) : w.icon ? (
-        <div style={{ padding: "28px 24px 0", display: "flex", alignItems: "center", gap: 16 }}>
-          <Image src={w.icon} alt={`${w.name} app icon`} width={72} height={72} style={{ borderRadius: 16, width: 72, height: 72 }} />
-          <Image src="/apps/app-store-badge.svg" alt="Download on the App Store" width={120} height={40} style={{ width: 120, height: 40 }} />
+    <article id={w.slug} className={`card work-card sr${wide ? " wide" : ""}`} style={{ ["--d" as string]: `${delay}ms` }}>
+      {w.icon && (
+        <div className="work-media work-icon">
+          <Image src={w.icon} alt="" width={72} height={72} style={{ borderRadius: 16, width: 72, height: 72 }} />
         </div>
-      ) : (
-        <div style={{ padding: "28px 24px 0" }}><span className="kicker">{w.year}</span></div>
       )}
-      <div style={{ padding: 24, display: "grid", gap: 10, flex: 1 }}>
+      <div className="work-body">
         <StagePills stage={w.stage} />
         <h3 className="display h3" style={{ margin: 0 }}>{w.name}</h3>
         <p className="kicker" style={{ margin: 0 }}>{w.kicker}</p>
-        <p style={{ margin: 0, color: "var(--text-mid)", fontSize: 15 }}>{w.summary}</p>
-        <Link href={`/work#${w.slug}`} className="nav-link" style={{ fontSize: 12, marginTop: "auto", alignSelf: "start" }}>Read the case →</Link>
+        <p style={{ margin: 0, color: "var(--text-mid)", maxWidth: "62ch" }}>{body ?? w.summary}</p>
+        {w.links && w.links.length > 0 && (
+          <div className="work-links">
+            {w.links.map((l) =>
+              l.href.includes("apps.apple.com") ? (
+                <StoreBadge key={l.href} href={l.href} label={l.label} />
+              ) : (
+                <a key={l.href} className="text-link" href={l.href} rel="noopener">{l.label}</a>
+              ),
+            )}
+          </div>
+        )}
       </div>
+      {screens && screens.length > 0 && (
+        <div className="work-screens"><Phones screens={screens} /></div>
+      )}
     </article>
   );
 }

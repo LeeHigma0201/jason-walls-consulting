@@ -6,7 +6,7 @@ import { SITE } from "@/lib/site";
 
 export const runtime = "nodejs";
 
-type Payload = { name?: string; email?: string; business?: string; pkg?: string; message?: string; utm?: Record<string, string>; page?: string };
+type Payload = { name?: string; email?: string; pkg?: string; message?: string; utm?: Record<string, string>; page?: string };
 
 const clean = (s: unknown, max = 2000) => String(s ?? "").replace(/[\r\n]+/g, "\n").slice(0, max).trim();
 
@@ -30,7 +30,6 @@ export async function POST(req: Request) {
   const text = [
     `Name: ${name}`,
     `Email: ${email}`,
-    `Business: ${clean(body.business, 200)}`,
     `Package: ${clean(body.pkg, 60) || "not sure yet"}`,
     "",
     message,

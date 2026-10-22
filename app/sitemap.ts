@@ -1,16 +1,22 @@
 import type { MetadataRoute } from "next";
 import { SITE } from "@/lib/site";
 
+// Seven public routes. The /v preview picker is deliberately left out (noindex, Disallow: /v/).
+// lastModified is the date each page's source last changed (git log on its page.tsx). Update a
+// route's date when its content changes; no changeFrequency or priority, since neither is a fact.
+const ROUTES: [string, string][] = [
+  ["/", "2026-10-21"],
+  ["/services", "2026-10-21"],
+  ["/work", "2026-10-21"],
+  ["/contact", "2026-10-21"],
+  ["/process", "2026-10-21"],
+  ["/about", "2026-10-21"],
+  ["/faq", "2026-10-21"],
+];
+
 export default function sitemap(): MetadataRoute.Sitemap {
-  const now = new Date();
-  const routes: [string, number][] = [
-    ["/", 1.0],
-    ["/services", 0.95],
-    ["/work", 0.9],
-    ["/process", 0.8],
-    ["/about", 0.7],
-    ["/faq", 0.7],
-    ["/contact", 0.9],
-  ];
-  return routes.map(([path, priority]) => ({ url: SITE.url + path, lastModified: now, changeFrequency: "weekly", priority }));
+  return ROUTES.map(([path, modified]) => ({
+    url: SITE.url + path,
+    lastModified: new Date(modified),
+  }));
 }

@@ -1,6 +1,7 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { OFFERS } from "@/lib/offers";
+import { Price } from "@/components/ui/Price";
 import { SITE } from "@/lib/site";
 
 // Posts to /api/contact. If no email provider is configured there, the API answers with
@@ -20,20 +21,33 @@ function readUtm(): Record<string, string> {
   } catch { return {}; }
 }
 
+const noopSubscribe = () => () => {};
+
 export function ContactForm({ initialPackage = "" }: { initialPackage?: string }) {
-  const [pkg, setPkg] = useState(initialPackage);
-  const [state, setState] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const [pkg, setPkg] = useState(OFFERS.some((o) => o.id === initialPackage) ? initialPackage : "");
+  const [state, setState] = useState<"idle" | "sending" | "sent" | "mailto" | "error">("idle");
   const [utm] = useState<Record<string, string>>(() => (typeof window === "undefined" ? {} : readUtm()));
+
+  const sentRef = useRef<HTMLHeadingElement>(null);
+
+  // Until React has hydrated, the submit button is disabled so an early tap cannot fall back to a native submit.
+  const ready = useSyncExternalStore(noopSubscribe, () => true, () => false);
+
+  // After a real send the form is replaced by a shorter card: bring it into view and move focus there.
+  useEffect(() => {
+    if (state !== "sent") return;
+    sentRef.current?.scrollIntoView({ block: "start" });
+    sentRef.current?.focus();
+  }, [state]);
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const form = e.currentTarget;
     const fd = new FormData(form);
-    if ((fd.get("company_site") as string)?.length) return; // honeypot
+    if ((fd.get("hp_note") as string)?.length) { setState("sent"); return; } // honeypot: a bot or an autofill gets the normal card, no API call
     const payload = {
       name: String(fd.get("name") || ""),
       email: String(fd.get("email") || ""),
-      business: String(fd.get("business") || ""),
       pkg: String(fd.get("pkg") || ""),
       message: String(fd.get("message") || ""),
       utm,
@@ -45,9 +59,9 @@ export function ContactForm({ initialPackage = "" }: { initialPackage?: string }
       const data = await res.json().catch(() => ({}));
       if (res.ok && data.ok) { setState("sent"); form.reset(); return; }
       if (data.fallback === "mailto") {
-        const body = `Name: ${payload.name}\nEmail: ${payload.email}\nBusiness: ${payload.business}\nPackage: ${payload.pkg}\n\n${payload.message}\n\nFrom: ${payload.page}\n${Object.entries(utm).map(([k, v]) => `${k}=${v}`).join(" ")}`;
-        window.location.href = `mailto:${SITE.email}?subject=${encodeURIComponent(`Project: ${payload.pkg || "not sure yet"} — ${payload.name}`)}&body=${encodeURIComponent(body)}`;
-        setState("sent");
+        const body = `Name: ${payload.name}\nEmail: ${payload.email}\nPackage: ${payload.pkg}\n\n${payload.message}\n\nFrom: ${payload.page}\n${Object.entries(utm).map(([k, v]) => `${k}=${v}`).join(" ")}`;
+        window.location.href = `mailto:${SITE.email}?subject=${encodeURIComponent(`Project: ${payload.pkg || "not sure yet"} from ${payload.name}`)}&body=${encodeURIComponent(body)}`;
+        setState("mailto");
         return;
       }
       setState("error");
@@ -56,41 +70,48 @@ export function ContactForm({ initialPackage = "" }: { initialPackage?: string }
 
   if (state === "sent") {
     return (
-      <div className="card" role="status">
-        <p className="kicker" style={{ marginBottom: 8 }}>Got it</p>
-        <p style={{ margin: 0 }}>I read every one of these myself and reply within one business day, usually with two or three times for a 20-minute call.</p>
+      <div className="card" role="status" style={{ scrollMarginTop: 96 }}>
+        <p className="kicker" style={{ margin: "0 0 8px" }}>Got it</p>
+        <h2 ref={sentRef} tabIndex={-1} className="display h3" style={{ margin: "0 0 12px", outline: "none" }}>Here is what happens now.</h2>
+        <ol style={{ margin: 0, paddingLeft: 24, listStyle: "decimal", display: "block" }}>
+          <li style={{ marginBottom: 8 }}>I read your message myself and write back with a few times for a 20-minute call.</li>
+          <li style={{ marginBottom: 8 }}>After the call I send a written scope with a fixed price.</li>
+          <li>Nothing starts until you agree to it.</li>
+        </ol>
       </div>
     );
   }
 
+  const chosen = OFFERS.find((o) => o.id === pkg);
+
   return (
-    <form onSubmit={onSubmit} className="card" style={{ display: "grid", gap: 16 }}>
+    <form method="post" onSubmit={onSubmit} className="card" style={{ display: "grid", gap: 16 }}>
       <div className="grid-2">
         <div><label className="label" htmlFor="name">Your name</label><input className="input" id="name" name="name" required autoComplete="name" /></div>
         <div><label className="label" htmlFor="email">Email</label><input className="input" id="email" name="email" type="email" required autoComplete="email" /></div>
       </div>
-      <div className="grid-2">
-        <div><label className="label" htmlFor="business">Business or idea</label><input className="input" id="business" name="business" placeholder="e.g. HVAC company, 6 trucks" /></div>
-        <div>
-          <label className="label" htmlFor="pkg">What are you after?</label>
-          <select className="input" id="pkg" name="pkg" value={pkg} onChange={(e) => setPkg(e.target.value)}>
-            <option value="">Not sure yet</option>
-            {OFFERS.map((o) => <option key={o.id} value={o.id}>{o.name} · {o.priceLabel}</option>)}
-          </select>
-        </div>
+      <div>
+        <label className="label" htmlFor="pkg">Closest package</label>
+        <select className="input" id="pkg" name="pkg" value={pkg} onChange={(e) => setPkg(e.target.value)}>
+          <option value="">Not sure yet</option>
+          {OFFERS.filter((o) => o.id !== "day" || initialPackage === "day").map((o) => <option key={o.id} value={o.id}>{o.name}</option>)}
+        </select>
+        <div aria-live="polite" style={{ marginTop: 8 }}>{chosen ? <Price o={chosen} /> : null}</div>
       </div>
       <div>
-        <label className="label" htmlFor="message">What does it need to do?</label>
-        <textarea className="input" id="message" name="message" rows={5} required placeholder="One paragraph is plenty. What’s the job, who uses it, what’s slow or broken today?" />
+        <label className="label" htmlFor="message" style={{ fontFamily: "var(--font-plex), system-ui, sans-serif", fontSize: 17, lineHeight: 1.4, letterSpacing: 0, textTransform: "none", color: "var(--text)", marginBottom: 8 }}>What is the one thing you would pay never to do by hand again?</label>
+        <textarea className="input" id="message" name="message" rows={4} required />
       </div>
-      <input type="text" name="company_site" tabIndex={-1} autoComplete="off" style={{ position: "absolute", left: -9999 }} aria-hidden="true" />
-      <div style={{ display: "flex", gap: 12, alignItems: "center", flexWrap: "wrap" }}>
-        <button className="btn btn-primary btn-lg" type="submit" disabled={state === "sending"}>
+      <input type="text" name="hp_note" tabIndex={-1} autoComplete="off" style={{ position: "absolute", left: -9999 }} aria-hidden="true" />
+      <div className="actions">
+        <button className="btn btn-primary btn-lg" type="submit" disabled={!ready || state === "sending"} aria-describedby="form-status">
           {state === "sending" ? "Sending…" : "Send it"}
         </button>
-        <span className="mono" style={{ fontSize: 11, color: "var(--text-mid)" }}>or email {SITE.email}</span>
       </div>
-      {state === "error" && <p role="alert" style={{ margin: 0, color: "var(--accent)" }}>That didn’t send. Email me directly at {SITE.email}.</p>}
+      <div id="form-status" role="status" aria-live="polite">
+        {state === "mailto" && <p style={{ margin: 0 }}>Your mail app should have opened with your message in it. If it did not, write to {SITE.email} and tell me what you wrote here.</p>}
+        {state === "error" && <p style={{ margin: 0, color: "var(--accent-text)" }}>That didn’t send. Email me directly at {SITE.email}.</p>}
+      </div>
     </form>
   );
 }

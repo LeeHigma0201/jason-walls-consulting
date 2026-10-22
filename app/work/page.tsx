@@ -1,94 +1,73 @@
 import type { Metadata } from "next";
-import Image from "next/image";
-import Link from "next/link";
+import { A } from "@/lib/assets";
 import { WORK } from "@/lib/work";
-import { StagePills } from "@/components/WorkCard";
-import { JsonLd, breadcrumb } from "@/lib/schema";
+import { WorkCard } from "@/components/WorkCard";
+import { WorkBoard } from "@/components/work/WorkBoard";
+import { CtaCard } from "@/components/ui/CtaCard";
+import { JsonLd, breadcrumb, workJsonLd } from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: "Work",
-  description: "Real projects, honest about stage: ChargeRight (web + iOS), BendRight (iOS), ZombieWells (web), and the AI tooling that runs a one-person shop.",
+  description:
+    "What I have built and where each one stands: ChargeRight (web and iOS), BendRight (iOS), ZombieWells (web), and the tooling behind a one-person shop.",
   alternates: { canonical: "/work" },
 };
 
+const bySlug = (slug: string) => WORK.find((w) => w.slug === slug)!;
+
+const CR_SCREENS = [
+  { src: A.cr01, alt: "ChargeRight on iPhone: a 200A panel at 52% utilization with 54A available and the label Ready for EV Charger." },
+  { src: A.cr02, alt: "ChargeRight on iPhone: the assessment step that asks for a photo of the electrical panel, showing a panel with the door open." },
+  { src: A.cr03, alt: "ChargeRight on iPhone: the home questions screen with panel size, square footage, heating type and appliances." },
+];
+const BR_SCREENS = [
+  { src: A.br01, alt: "BendRight on iPhone: the offset bend screen with a strut to box knockout rise of 1 1/8 inch at a 30 degree angle." },
+  { src: A.br02, alt: "BendRight on iPhone: offset marks, 2 1/4 inches between marks, with the finished offset and the marks on the stick." },
+  { src: A.br03, alt: "BendRight on iPhone: the 90 degree stub-up screen with a 12 inch stub and a mark at 7 inches from the end." },
+];
+
 export default function WorkPage() {
+  const cr = bySlug("chargeright");
+  const br = bySlug("bendright");
+  const zw = bySlug("zombiewells");
+  const board = ["shop-tooling", "inspectright", "lab"].map(bySlug);
+
   return (
     <>
-      <JsonLd data={breadcrumb([{ name: "Home", path: "/" }, { name: "Work", path: "/work" }])} />
-      <section className="section" style={{ paddingBottom: 32 }}>
-        <div className="wrap" style={{ display: "grid", gap: 16, maxWidth: 860 }}>
-          <p className="kicker sr">Work</p>
-          <h1 className="display h1 sr" style={{ margin: 0, fontSize: "clamp(36px, 6vw, 64px)", ["--d" as string]: "60ms" }}>
-            Problem, what got built, <em>what happened.</em>
+      <JsonLd data={[breadcrumb([{ name: "Home", path: "/" }, { name: "Work", path: "/work" }]), workJsonLd(WORK)]} />
+
+      <section className="section" style={{ paddingBottom: 24 }}>
+        <div className="wrap narrow" style={{ display: "grid", gap: 16 }}>
+          <p className="kicker">Work</p>
+          <h1 className="display h1" style={{ margin: 0 }}>
+            What I have built, and where <em>each one stands.</em>
           </h1>
-          <p className="lede sr" style={{ margin: 0, ["--d" as string]: "120ms" }}>
-            Every project below is real and the stage is labelled. Live means you can open it right now. Beta and lab mean exactly that.
-          </p>
         </div>
       </section>
 
-      {WORK.map((w, i) => (
-        <section key={w.slug} id={w.slug} className="section" style={{ paddingTop: 24, scrollMarginTop: 80 }}>
-          <div className="wrap">
-            <hr className="rule" style={{ marginBottom: 40 }} />
+      <section className="section" style={{ paddingTop: 24 }}>
+        <div className="wrap" style={{ display: "grid", gap: 32 }}>
+          <h2 className="display h2" style={{ margin: 0 }}>Three you can open today.</h2>
+          <div className="stack-lg">
+            <WorkCard w={cr} wide screens={CR_SCREENS} />
             <div className="grid-2" style={{ alignItems: "start" }}>
-              <div className="sr" style={{ display: "grid", gap: 14 }}>
-                <StagePills stage={w.stage} />
-                <h2 className="display h2" style={{ margin: 0 }}>{w.name}</h2>
-                <p className="kicker" style={{ margin: 0 }}>{w.kicker} · {w.year}</p>
-                <p style={{ margin: 0, color: "var(--text-mid)" }}>{w.summary}</p>
-                {w.links.length > 0 && (
-                  <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
-                    {w.links.map((l) => (
-                      <a key={l.href} href={l.href} rel="noopener" className="btn btn-ghost" style={{ minHeight: 40, padding: "8px 14px" }}>{l.label} ↗</a>
-                    ))}
-                  </div>
-                )}
-                <p className="mono" style={{ margin: 0, fontSize: 11, color: "var(--text-dim)" }}>{w.stack.join(" · ")}</p>
-              </div>
-              <div className="sr" style={{ ["--d" as string]: "120ms", display: "grid", gap: 16 }}>
-                {w.embed ? (
-                  <div className="embed">
-                    <iframe src={w.embed} title={`${w.name}, live`} loading="lazy" sandbox="allow-scripts allow-same-origin allow-popups" />
-                    <p className="mono" style={{ margin: 0, padding: "8px 12px", fontSize: 11, color: "#444", background: "#f4f4f4" }}>live embed of {w.links[0]?.label}</p>
-                  </div>
-                ) : w.image ? (
-                  <Image src={w.image.src} alt={w.image.alt} width={w.image.w} height={w.image.h} sizes="(min-width: 820px) 560px, 100vw" style={{ borderRadius: 8, border: "1px solid var(--rule)", boxShadow: "var(--shadow)" }} />
-                ) : w.icon ? (
-                  <div className="card" style={{ display: "flex", alignItems: "center", gap: 20 }}>
-                    <Image src={w.icon} alt={`${w.name} app icon`} width={96} height={96} style={{ borderRadius: 22, width: 96, height: 96 }} />
-                    <div style={{ display: "grid", gap: 8 }}>
-                      <span className="kicker">On the App Store</span>
-                      <a href={w.links[0]?.href} rel="noopener"><Image src="/apps/app-store-badge.svg" alt="Download on the App Store" width={140} height={47} style={{ width: 140, height: 47 }} /></a>
-                    </div>
-                  </div>
-                ) : null}
-              </div>
-            </div>
-            <div className="grid-3" style={{ marginTop: 32 }}>
-              <div className="card sr" style={{ ["--d" as string]: "80ms" }}>
-                <p className="kicker" style={{ marginBottom: 10 }}>Problem</p>
-                <p style={{ margin: 0, fontSize: 15 }}>{w.problem}</p>
-              </div>
-              <div className="card sr" style={{ ["--d" as string]: "160ms" }}>
-                <p className="kicker" style={{ marginBottom: 10 }}>What got built</p>
-                <ul className="check-list">{w.built.map((b) => <li key={b}>{b}</li>)}</ul>
-              </div>
-              <div className="card sr" style={{ ["--d" as string]: "240ms" }}>
-                <p className="kicker" style={{ marginBottom: 10 }}>What happened</p>
-                <ul className="check-list">{w.result.map((b) => <li key={b}>{b}</li>)}</ul>
-              </div>
+              <WorkCard w={br} screens={BR_SCREENS} delay={60} />
+              <WorkCard w={zw} delay={120} />
             </div>
           </div>
-        </section>
-      ))}
+        </div>
+      </section>
 
-      <section className="section" style={{ paddingTop: 0 }}>
-        <div className="wrap">
-          <div className="card card-featured sr" style={{ textAlign: "center", display: "grid", gap: 14, padding: "40px 24px" }}>
-            <h2 className="display h2" style={{ margin: 0 }}>Yours could be next on this page.</h2>
-            <div><Link href="/contact" className="btn btn-primary btn-lg">Book a call</Link></div>
-          </div>
+      <section className="section" style={{ paddingTop: 24 }}>
+        <div className="wrap narrow" style={{ display: "grid", gap: 24 }}>
+          <h2 className="display h2" style={{ margin: 0 }}>The rest of the shop.</h2>
+          <WorkBoard items={board} />
+        </div>
+      </section>
+
+      <section className="section" style={{ paddingTop: 24 }}>
+        <div className="wrap narrow">
+          <CtaCard title="Have something like one of these in mind?" />
         </div>
       </section>
     </>

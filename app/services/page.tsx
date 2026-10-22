@@ -1,80 +1,71 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { PackageCard } from "@/components/PackageCard";
-import { ONE_TIME_OFFERS, ONGOING_OFFERS, PAYMENT_TERMS, GUARANTEE, GUARANTEE_APPROVED, PRICING_STATUS } from "@/lib/offers";
-import { JsonLd, breadcrumb } from "@/lib/schema";
+import { CtaCard } from "@/components/ui/CtaCard";
+import { FixesFact, PaymentFacts } from "@/components/services/ServiceFacts";
+import { ONE_TIME_OFFERS, ONGOING_OFFERS, OFFERS, PROPOSED_NOTE } from "@/lib/offers";
+import { JsonLd, breadcrumb, servicesJsonLd } from "@/lib/schema";
+
+// Lowest one-time price, read from OFFERS at render time (never typed here).
+const lowest = Math.min(...ONE_TIME_OFFERS.map((o) => o.priceNum ?? o.priceMin ?? Infinity));
+const lowestLabel = `$${lowest.toLocaleString("en-US")}`;
 
 export const metadata: Metadata = {
-  title: "Services and pricing",
-  description: "Launch Site $3,500. Your Business on Claude $4,500. MVP web app from $12,000. iOS app to the App Store from $10,000. Care Plan $400/mo. Fixed price, scoped first.",
+  title: "Prices: sites, AI workflows, MVPs, iOS apps",
+  description: `Fixed-price packages from ${lowestLabel} for trades and small shops. Prices are ${PROPOSED_NOTE}.`,
   alternates: { canonical: "/services" },
 };
 
 export default function ServicesPage() {
   return (
     <>
-      <JsonLd data={breadcrumb([{ name: "Home", path: "/" }, { name: "Services", path: "/services" }])} />
+      <JsonLd
+        data={[
+          breadcrumb([{ name: "Home", path: "/" }, { name: "Prices", path: "/services" }]),
+          servicesJsonLd(OFFERS),
+        ]}
+      />
+
       <section className="section" style={{ paddingBottom: 32 }}>
-        <div className="wrap" style={{ display: "grid", gap: 16, maxWidth: 860 }}>
-          <p className="kicker sr">Services and pricing</p>
-          <h1 className="display h1 sr" style={{ margin: 0, fontSize: "clamp(36px, 6vw, 64px)", ["--d" as string]: "60ms" }}>
-            Pay for the build, <em>not the build time.</em>
-          </h1>
-          <p className="lede sr" style={{ margin: 0, ["--d" as string]: "120ms" }}>
-            Four packages with a fixed price and a timeline. Every one starts with a 20-minute call and a written brief, so you know what you’re buying before you buy it.
+        <div className="wrap narrow stack">
+          <p className="kicker">Prices</p>
+          <h1 className="display h1" style={{ margin: 0 }}>What it costs, what you get, and what I need from you.</h1>
+          <p className="lede" style={{ margin: 0 }}>
+            Every job starts with a written scope and a fixed quote, and the price only changes if you approve a written change order. Every price here is {PROPOSED_NOTE}.
           </p>
-          {PRICING_STATUS === "proposed" && (
-            <p className="mono sr" style={{ margin: 0, fontSize: 11, color: "var(--accent)", ["--d" as string]: "160ms" }}>
-              Preview note: prices are proposed and awaiting approval.
-            </p>
-          )}
         </div>
       </section>
 
-      <section className="section" style={{ paddingTop: 16 }}>
-        <div className="wrap" style={{ display: "grid", gap: 20 }}>
-          <div style={{ display: "grid", gap: 20, gridTemplateColumns: "repeat(auto-fit, minmax(290px, 1fr))", paddingTop: 12 }}>
-            {ONE_TIME_OFFERS.map((o, i) => <PackageCard key={o.id} o={o} delay={i * 80} />)}
+      <section className="section" style={{ paddingTop: 16, paddingBottom: 48 }}>
+        <div className="wrap narrow stack-lg">
+          <h2 className="display h2" style={{ margin: 0 }}>The four packages.</h2>
+          <div className="stack-lg" style={{ paddingTop: 12 }}>
+            {ONE_TIME_OFFERS.map((o, i) => <PackageCard key={o.id} o={o} delay={i * 60} />)}
           </div>
         </div>
       </section>
 
-      <section className="section" style={{ paddingTop: 0 }}>
-        <div className="wrap" style={{ display: "grid", gap: 20 }}>
-          <div className="sr">
-            <p className="kicker" style={{ marginBottom: 10 }}>After launch</p>
-            <h2 className="display h2" style={{ margin: 0 }}>Kept alive, <em>kept improving.</em></h2>
+      <section className="section" style={{ paddingTop: 0, paddingBottom: 48 }}>
+        <div className="wrap narrow stack-lg">
+          <div className="stack">
+            <h2 className="display h2" style={{ margin: 0 }}>After launch.</h2>
+            <FixesFact />
           </div>
-          <div className="grid-2">
-            {ONGOING_OFFERS.map((o, i) => <PackageCard key={o.id} o={o} delay={i * 80} />)}
+          <div className="grid-2" style={{ alignItems: "stretch" }}>
+            {ONGOING_OFFERS.map((o, i) => <PackageCard key={o.id} o={o} delay={i * 60} />)}
           </div>
         </div>
       </section>
 
-      <section className="section" style={{ paddingTop: 0 }}>
-        <div className="wrap grid-2" style={{ alignItems: "start" }}>
-          <div className="card sr">
-            <p className="kicker" style={{ marginBottom: 10 }}>Payment</p>
-            <p style={{ margin: 0, fontSize: 15 }}>{PAYMENT_TERMS}</p>
-            <p style={{ margin: "12px 0 0", fontSize: 15, color: "var(--text-mid)" }}>Third-party costs (hosting, domains, Apple’s $99 developer fee, API usage) are billed to your own accounts, so nothing is marked up and nothing is hidden.</p>
-          </div>
-          <div className="card sr" style={{ ["--d" as string]: "100ms" }}>
-            <p className="kicker" style={{ marginBottom: 10 }}>{GUARANTEE_APPROVED ? "The promise" : "How scope is protected"}</p>
-            {GUARANTEE_APPROVED ? (
-              <p style={{ margin: 0, fontSize: 15 }}>{GUARANTEE}</p>
-            ) : (
-              <p style={{ margin: 0, fontSize: 15 }}>The written brief is the contract. If scope changes mid-build, you get a written change order before anything is billed, and you decide.</p>
-            )}
-          </div>
+      <section className="section" style={{ paddingTop: 0, paddingBottom: 48 }}>
+        <div className="wrap narrow stack">
+          <h2 className="display h2" style={{ margin: 0 }}>How payment works.</h2>
+          <PaymentFacts />
         </div>
       </section>
 
       <section className="section" style={{ paddingTop: 0 }}>
-        <div className="wrap">
-          <div className="card card-featured sr" style={{ textAlign: "center", display: "grid", gap: 14, padding: "40px 24px" }}>
-            <h2 className="display h2" style={{ margin: 0 }}>Not sure which one? <em>That’s what the call is for.</em></h2>
-            <div><Link href="/contact" className="btn btn-primary btn-lg">Book a 20-minute call</Link></div>
-          </div>
+        <div className="wrap narrow">
+          <CtaCard title="Tell me which package is closest." />
         </div>
       </section>
     </>

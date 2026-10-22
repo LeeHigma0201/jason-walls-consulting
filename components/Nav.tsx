@@ -1,13 +1,14 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { NAV } from "@/lib/site";
+import { NAV, NAV_CTA } from "@/lib/site";
 
+// Inline stroke icons for the phone bar. Keys are routes.
 const ICONS: Record<string, React.ReactNode> = {
-  "/": <path d="M3 11.5 12 4l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z" />,
-  "/work": <path d="M4 7h16v12H4zM9 7V4h6v3M4 12h16" />,
   "/services": <path d="M12 3v18M5 8h9a3 3 0 0 1 0 6H6a3 3 0 0 0 0 6h13" />,
+  "/work": <path d="M4 7h16v12H4zM9 7V4h6v3M4 12h16" />,
   "/process": <path d="M4 6h6v6H4zM14 12h6v6h-6zM10 9h4M17 12V9h-3" />,
+  "/about": <path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM4 21a8 8 0 0 1 16 0" />,
   "/contact": <path d="M3 6h18v12H3zM3 7l9 6 9-6" />,
 };
 
@@ -20,21 +21,17 @@ function Icon({ d }: { d: React.ReactNode }) {
 }
 
 export function Nav() {
-  const path = usePathname();
+  const path = usePathname() ?? "/";
   const cur = (href: string) => (href === "/" ? path === "/" : path.startsWith(href)) ? "page" : undefined;
-  const bottom = [
-    { href: "/", label: "Home" },
-    { href: "/work", label: "Work" },
-    { href: "/services", label: "Pricing" },
-    { href: "/process", label: "Process" },
-    { href: "/contact", label: "Contact" },
-  ];
+  // Phone bar: Prices, Work, Process, About, Call. Call is accent-filled and goes to /contact.
+  const tabs = [...NAV.map((n) => ({ href: n.href, label: n.label })), { href: NAV_CTA.href, label: "Call" }];
   return (
     <>
       <header className="nav-top">
         <div className="wrap nav-inner">
-          <Link href="/" className="mono" style={{ textDecoration: "none", fontSize: 13, letterSpacing: "0.06em", fontWeight: 700 }}>
-            JASON WALLS <span style={{ color: "var(--text-dim)", fontWeight: 400 }}>/ builds</span>
+          <Link href="/" className="wordmark" aria-label="Jason Walls, home" style={{ minHeight: 44, alignContent: "center" }}>
+            <b>Jason Walls</b>
+            <small style={{ fontSize: 13 }}>Electrician, Louisville</small>
           </Link>
           <nav className="nav-links" aria-label="Primary">
             {NAV.map((n) => (
@@ -43,14 +40,20 @@ export function Nav() {
               </Link>
             ))}
           </nav>
-          <Link href="/contact" className="btn btn-primary" style={{ minHeight: 40, padding: "10px 16px" }}>
-            Book a call
+          <Link href={NAV_CTA.href} className="btn btn-primary nav-cta">
+            {NAV_CTA.label}
           </Link>
         </div>
       </header>
       <nav className="nav-bottom" aria-label="Mobile">
-        {bottom.map((b) => (
-          <Link key={b.href} href={b.href} aria-current={cur(b.href)}>
+        {tabs.map((b) => (
+          <Link
+            key={b.href}
+            href={b.href}
+            aria-current={cur(b.href)}
+            aria-label={b.label === "Call" ? "Free 20-minute call, contact page" : undefined}
+            className={b.label === "Call" ? "tab-call" : undefined}
+          >
             <Icon d={ICONS[b.href]} />
             {b.label}
           </Link>

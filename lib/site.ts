@@ -2,12 +2,11 @@
 
 export const SITE = {
   name: "Jason Walls",
-  legalName: "Jason Walls",
   url: "https://jason-walls.vercel.app", // no custom domain yet (Vercel project `jason-walls`)
   tagline: "Software built by an electrician who ships.",
   description:
-    "Websites, iOS apps, internal tools and AI workflows for trades, local businesses and founders. Fixed price, weekly previews, weeks not quarters. Built by an electrician (IBEW Local 369) with two apps on the App Store.",
-  email: "hi@jasonwalls.work",
+    "I'm an electrician in Louisville. I build websites, AI workflows, web apps and iOS apps for trades and small businesses, and I have two apps on the App Store.",
+  email: "hi@jasonwalls.work", // UNVERIFIED: Jason must confirm this mailbox receives mail; the contact form is the primary route until then
   // Set to a Cal.com / Calendly URL to show the booking embed on /contact. Empty = email-only.
   calLink: process.env.NEXT_PUBLIC_CAL_LINK ?? "",
   location: "Louisville, Kentucky",
@@ -17,19 +16,20 @@ export const SITE = {
   appStoreDeveloper: "https://apps.apple.com/us/developer/jason-lloyd-walls/id1855640312",
 };
 
+// Top bar and phone bar share this order. The label is "Prices"; the route stays /services.
 export const NAV = [
+  { href: "/services", label: "Prices" },
   { href: "/work", label: "Work" },
-  { href: "/services", label: "Services" },
   { href: "/process", label: "Process" },
   { href: "/about", label: "About" },
-  { href: "/faq", label: "FAQ" },
 ] as const;
 
-// Checkable numbers (PORTFOLIO-EVIDENCE.md §3). Each has a source line.
-export const PROOF = [
-  { n: "2", label: "apps on the App Store", src: "iTunes lookup API, 2026-10-21" },
-  { n: "40", label: "Claude Code sessions a week", src: "OPERATING-MANUAL.md v1.1" },
-  { n: "250", label: "agent runs a week", src: "OPERATING-MANUAL.md v1.1" },
-  { n: "48", label: "repos in the shop", src: "find ~/dev -maxdepth 2 -name .git | wc -l" },
-  { n: "1", label: "person", src: "" },
+// Last item in the top bar. The phone bar's accent "Call" tab points at the same href.
+export const NAV_CTA = { href: "/contact", label: "Free 20-min call" } as const;
+
+// Footer column 2.
+export const FOOTER_NAV = [
+  ...NAV,
+  { href: "/faq", label: "FAQ" },
+  { href: "/contact", label: "Contact" },
 ] as const;
