@@ -433,26 +433,42 @@ details.faq p { margin: 4px 0 12px; color: var(--text-mid); max-width: 62ch; }
 .hx-chip-note { font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-mid); padding-left: 4px; }
 
 /* 2. Panel: brand duotone photo, packages as breakers that flip on in turn */
-.hx-duo { background: linear-gradient(180deg, #3d7bff 0%, #2a5fd0 45%, #10203d 100%); }
-.hx-duo img { mix-blend-mode: luminosity; filter: contrast(1.12); }
+/* Brighter than the first cut (Jason, 2026-10-22: "too dark"): a mid-navy ground under the copy that
+   only reaches --bg at the bottom, a lighter duotone, a shorter shade and a navy card, not near-black. */
+.hx-panel { --pg: #22427e; background: radial-gradient(90% 40% at 80% 62svh, rgba(42,109,244,0.38), rgba(42,109,244,0) 70%), linear-gradient(180deg, var(--pg) 0, var(--pg) calc(60svh + 260px), var(--bg) 100%); }
+.hx-panel .hx-shade { background: linear-gradient(180deg, rgba(16,32,61,0.45) 0px, rgba(16,32,61,0) 110px), linear-gradient(180deg, rgba(34,66,126,0) calc(60svh - 220px), rgba(34,66,126,0.5) calc(60svh - 130px), rgba(34,66,126,0.86) calc(60svh - 60px), var(--pg) 60svh); }
+.hx-panel .hx-kicker { text-shadow: 0 0 2px rgba(5,12,28,0.9), 0 1px 10px rgba(5,12,28,0.75); }
+.hx-duo { background: linear-gradient(180deg, #74a4ff 0%, #4a86f5 50%, #3a73e6 100%); }
+.hx-duo img { mix-blend-mode: luminosity; filter: brightness(1.42) contrast(1.04); }
+.tone-color .hx-duo { background: none; }
+.tone-color .hx-duo img { mix-blend-mode: normal; filter: brightness(1.4) saturate(1.05); }
 .hx-panel .hx-media img { object-position: 50% 60%; }
-.pd { background: linear-gradient(180deg, #232c3d, #171e2b); border: 1px solid #36435e; border-radius: 10px; padding: 8px 10px 4px; box-shadow: inset 0 1px 0 rgba(255,255,255,0.07), 0 24px 48px rgba(2,10,30,0.55); }
-.pd-head { display: flex; justify-content: space-between; gap: 12px; padding: 4px 4px 10px; border-bottom: 1px dashed #3b4a68; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-mid); }
-.pd-hint { color: var(--accent-text); }
+.pd { background: linear-gradient(180deg, #2e5190, #26467f); border: 1px solid #4a6fae; border-radius: 10px; padding: 8px 10px 4px; box-shadow: inset 0 1px 0 rgba(255,255,255,0.07), 0 24px 48px rgba(2,10,30,0.55); }
+.pd-head { display: flex; justify-content: space-between; gap: 12px; padding: 4px 4px 10px; border-bottom: 1px dashed #4d6ca3; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #cfd8e7; }
+.pd-hint { color: #c4d7ff; }
 .pd-rows { list-style: none; margin: 0; padding: 0; }
 .pd-row { display: grid; grid-template-columns: 18px 44px minmax(0, 1fr) 12px; align-items: center; gap: 12px; min-height: 60px; padding: 8px 4px; text-decoration: none; color: var(--text); border-bottom: 1px solid rgba(255,255,255,0.06); }
 .pd-rows li:last-child .pd-row { border-bottom: 0; }
-.pd-row:hover strong, .pd-row:focus-visible strong { color: var(--accent-text); }
-.pd-ckt { font-size: 12px; color: var(--text-dim); text-align: right; }
+.pd-row:hover strong, .pd-row:focus-visible strong { color: #c4d7ff; text-decoration: underline; text-underline-offset: 3px; }
+.pd-ckt { font-size: 12px; color: #c4cede; text-align: right; }
 .brk { position: relative; width: 44px; height: 26px; border-radius: 4px; background: #0a0f19; border: 1px solid #3f4d6b; box-shadow: inset 0 2px 5px rgba(0,0,0,0.7); }
 .brk-handle { position: absolute; top: 3px; left: 3px; width: 18px; height: 18px; border-radius: 3px; background: linear-gradient(180deg, #f2f5fa, #a9b3c4); box-shadow: 0 1px 3px rgba(0,0,0,0.6); transform: translateX(20px); }
 .pd-label { display: grid; gap: 2px; min-width: 0; }
 .pd-label strong { font-size: 16px; line-height: 1.25; font-weight: 600; }
-.pd-label .mono { font-size: 12px; letter-spacing: 0.04em; color: var(--text-mid); }
+.pd-label .mono { font-size: 12px; letter-spacing: 0.04em; color: #cfd8e7; }
 .pd-led { width: 10px; height: 10px; border-radius: 50%; background: var(--signal); box-shadow: 0 0 10px var(--signal); }
 /* On by default (no script, reduced motion, sr-off). With script: off until Reveal adds .in as the
    panel scrolls into view, then each breaker flips in turn. The panel itself does not fade (.sr). */
 html.js .pd.sr { opacity: 1; transform: none; }
+.tone-steel .pd { background: linear-gradient(180deg, #f1f4f8, #d9dfe8); border-color: #aeb9c9; color: #10203d; box-shadow: inset 0 1px 0 #fff, 0 24px 48px rgba(2,10,30,0.45); }
+.tone-steel .pd-head { color: #4a5870; border-bottom-color: #a9b5c6; }
+.tone-steel .pd-hint { color: #1d54c4; }
+.tone-steel .pd-row { color: #10203d; border-bottom-color: rgba(16,32,61,0.12); }
+.tone-steel .pd-row:hover strong, .tone-steel .pd-row:focus-visible strong { color: #1d54c4; }
+.tone-steel .pd-ckt { color: #4f5b70; }
+.tone-steel .pd-label .mono { color: #46536a; }
+.tone-steel .brk { background: #1b2232; border-color: #6b778c; }
+.tone-steel .pd-led { box-shadow: 0 0 0 1px #1f8f53, 0 0 8px var(--signal); }
 @media (prefers-reduced-motion: no-preference) {
   html.js:not(.sr-off) .pd:not(.in) .brk-handle { transform: translateX(0); }
   html.js:not(.sr-off) .pd:not(.in) .pd-led { background: #34405a; box-shadow: none; }
@@ -504,6 +520,9 @@ html.js .pd.sr { opacity: 1; transform: none; }
   .hx-tilt { left: calc(max(32px, (100% - 1200px) / 2 + 32px) + 500px); right: auto; bottom: 56px; width: 170px; }
   .hx-cap { font-size: 64px; }
   .hx-media img, .hx-lift .hx-media img, .hx-panel .hx-media img { object-position: 50% 30%; }
+  .hx-duo img { filter: brightness(1.22) contrast(1.04); }
+  .tone-color .hx-duo img { filter: brightness(1.18) saturate(1.05); }
+  .hx-panel .hx-shade { background: linear-gradient(180deg, rgba(16,32,61,0) 80%, var(--bg) 100%), linear-gradient(90deg, var(--pg) 0%, var(--pg) 36%, rgba(34,66,126,0.5) 50%, rgba(34,66,126,0) 72%), radial-gradient(50% 60% at 85% 100%, rgba(42,109,244,0.3), rgba(42,109,244,0) 70%); }
   .hx-lift .hx-h1 { font-size: 64px; }
   .hx-job .hx-media { top: 0; height: auto; }
   .reel .phone { flex-basis: 180px; }

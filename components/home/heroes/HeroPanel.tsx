@@ -12,9 +12,13 @@ const CIRCUITS = ["launch-site", "business-on-claude", "mvp", "ios-app"]
   .map((id) => OFFERS.find((o) => o.id === id))
   .filter((o): o is NonNullable<typeof o> => !!o);
 
-export function HeroPanel() {
+export type PanelTone = "blue" | "steel" | "color";
+
+// tone: "blue" is the lifted brand duotone, "steel" turns the directory into a light panel cover,
+// "color" shows the photo in natural color. Preview-only until Jason picks one.
+export function HeroPanel({ tone = "blue" }: { tone?: PanelTone }) {
   return (
-    <section className="hx hx-panel" aria-label="Intro">
+    <section className={`hx hx-panel tone-${tone}`} aria-label="Intro">
       <div className="hx-media hx-duo">
         <Image
           src={A.hardhat}
