@@ -87,7 +87,7 @@ export default function ProcessPage() {
           <h2 className="display h2" style={{ margin: 0 }}>How the work gets checked.</h2>
           <Checker />
           <p className="measure" style={{ margin: 0, color: "var(--text-mid)" }}>
-            Every price and code citation in my public posts is checked against a list of what I can actually claim before it goes out.
+            I run a check on my public posts for banned wording and claims I haven’t approved before they go out.
           </p>
           <p style={{ margin: 0 }}>
             <Link href="/faq" className="text-link">Questions owners ask me</Link>

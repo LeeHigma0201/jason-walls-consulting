@@ -352,7 +352,7 @@ details.faq p { margin: 4px 0 12px; color: var(--text-mid); max-width: 62ch; }
 .intent > a:hover, .intent .opt:hover { border-color: var(--accent); transform: translateY(-1px); }
 .intent > a strong, .intent .opt strong { display: block; font-weight: 600; } .intent > a small, .intent .opt small { color: var(--text-mid); font-size: 15px; }
 .intent > a span.go { color: var(--accent-text); font-family: var(--font-jbm), monospace; font-size: 18px; }
-.intent .opt[aria-checked="true"] { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
+.intent .opt[aria-checked="true"] { border-color: var(--accent-text); box-shadow: 0 0 0 1px var(--accent-text); } /* --accent was 2.3:1 on the navy surface; --accent-text clears 3:1 on both tones */
 .breaker { position: relative; width: 26px; height: 44px; border-radius: 5px; background: var(--bg-2); border: 1px solid var(--rule); flex: none; }
 .breaker i { position: absolute; left: 3px; right: 3px; bottom: 3px; height: 18px; border-radius: 3px; background: var(--text-dim); transition: bottom 180ms cubic-bezier(0.16, 1, 0.3, 1), background 180ms; }
 .opt[aria-checked="true"] .breaker i { bottom: 21px; background: var(--signal); }
@@ -455,7 +455,7 @@ details.faq p { margin: 4px 0 12px; color: var(--text-mid); max-width: 62ch; }
    only reaches --bg at the bottom, a lighter duotone, a shorter shade and a navy card, not near-black. */
 .hx-panel { --pg: #22427e; background: radial-gradient(90% 40% at 80% 62svh, rgba(42,109,244,0.38), rgba(42,109,244,0) 70%), linear-gradient(180deg, var(--pg) 0, var(--pg) calc(60svh + 260px), var(--bg) 100%); }
 .hx-panel .hx-shade { background: linear-gradient(180deg, rgba(16,32,61,0.45) 0px, rgba(16,32,61,0) 110px), linear-gradient(180deg, rgba(34,66,126,0) calc(60svh - 220px), rgba(34,66,126,0.5) calc(60svh - 130px), rgba(34,66,126,0.86) calc(60svh - 60px), var(--pg) 60svh); }
-.hx-panel .hx-kicker { text-shadow: 0 0 2px rgba(5,12,28,0.9), 0 1px 10px rgba(5,12,28,0.75); }
+.hx-panel .hx-kicker { justify-self: start; padding: 3px 8px; border-radius: 4px; background: rgba(31,61,116,0.82); text-shadow: none; } /* worst photo point was 3.6:1 for 13px text; on the chip it is about 8:1 */
 .hx-duo { background: linear-gradient(180deg, #74a4ff 0%, #4a86f5 50%, #3a73e6 100%); }
 .hx-duo img { mix-blend-mode: luminosity; filter: brightness(1.42) contrast(1.04); }
 .tone-color .hx-duo { background: none; }
@@ -483,6 +483,7 @@ html.js .pd.sr { opacity: 1; transform: none; }
 .tone-steel .pd-hint { color: #1d54c4; }
 .tone-steel .pd-row { color: #10203d; border-bottom-color: rgba(31,61,116,0.12); }
 .tone-steel .pd-row:hover strong, .tone-steel .pd-row:focus-visible strong { color: #1d54c4; }
+.tone-steel .pd :focus-visible { outline-color: #1d54c4; } /* 6.1:1 on #f1f4f8; the default #bcd2ff ring was 1.4:1 here */
 .tone-steel .pd-ckt { color: #4f5b70; }
 .tone-steel .pd-label .mono { color: #46536a; }
 .tone-steel .brk { background: #1b2232; border-color: #6b778c; }

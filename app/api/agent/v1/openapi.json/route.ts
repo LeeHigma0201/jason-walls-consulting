@@ -1,9 +1,10 @@
 import { NextResponse } from 'next/server';
+import { SITE } from '@/lib/site';
 
 export const runtime = 'nodejs';
 
 function baseUrl(): string {
-  return process.env.AGENT_API_BASE_URL || process.env.NEXT_PUBLIC_SITE_URL || '';
+  return process.env.AGENT_API_BASE_URL || process.env.NEXT_PUBLIC_SITE_URL || SITE.url;
 }
 
 export function GET() {
@@ -13,9 +14,9 @@ export function GET() {
       title: 'Jason Walls Consulting Agent API',
       version: '1.0.0',
       description:
-        'Catalog of engagements and trade workflow templates (free), plus a metered scoping brief that names the right tier, the budget fit, and what is out of scope. Send Authorization: Bearer <key> for metered calls.',
+        'Catalog of engagements (free), each marked with its pricing status, plus a metered scoping brief that names the right tier, the budget fit and what is out of scope. Send Authorization: Bearer <key> for metered calls.',
     },
-    servers: [{ url: baseUrl() || 'http://localhost:3030' }],
+    servers: [{ url: baseUrl() }],
     'x-pricing': {
       currency: 'usd',
       model: 'per-interaction, prepaid balance',
@@ -29,7 +30,7 @@ export function GET() {
       '/api/agent/v1/catalog': {
         get: {
           operationId: 'consultingCatalog',
-          summary: 'List every engagement tier and trade workflow template with prices. Free.',
+          summary: 'List every engagement tier with its price and pricing status. Free.',
           responses: { '200': { description: 'Catalog' } },
         },
       },
@@ -37,7 +38,7 @@ export function GET() {
         post: {
           operationId: 'scopeBrief',
           summary:
-            'Buy a written scoping brief for a project: recommended engagement, budget verdict, out-of-scope list, and a cheaper template alternative when one fits. Costs $2.00 per call.',
+            'Buy a written scoping brief for a project: recommended engagement, budget verdict and out-of-scope list. Costs $2.00 per call.',
           security: [{ bearerAuth: [] }],
           requestBody: {
             required: true,

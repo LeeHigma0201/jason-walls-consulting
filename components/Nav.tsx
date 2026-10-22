@@ -23,8 +23,8 @@ function Icon({ d }: { d: React.ReactNode }) {
 export function Nav() {
   const path = usePathname() ?? "/";
   const cur = (href: string) => (href === "/" ? path === "/" : path.startsWith(href)) ? "page" : undefined;
-  // Phone bar: Prices, Work, Process, About, Call. Call is accent-filled and goes to /contact.
-  const tabs = [...NAV.map((n) => ({ href: n.href, label: n.label })), { href: NAV_CTA.href, label: "Call" }];
+  // Phone bar: Prices, Work, Process, About, Write. Write is accent-filled and goes to /contact.
+  const tabs = [...NAV.map((n) => ({ href: n.href, label: n.label })), { href: NAV_CTA.href, label: "Write" }];
   return (
     <>
       <header className="nav-top">
@@ -51,8 +51,8 @@ export function Nav() {
             key={b.href}
             href={b.href}
             aria-current={cur(b.href)}
-            aria-label={b.label === "Call" ? "Free 20-minute call, contact page" : undefined}
-            className={b.label === "Call" ? "tab-call" : undefined}
+            aria-label={b.label === "Write" ? "Write to me, contact page" : undefined}
+            className={b.label === "Write" ? "tab-call" : undefined}
           >
             <Icon d={ICONS[b.href]} />
             {b.label}

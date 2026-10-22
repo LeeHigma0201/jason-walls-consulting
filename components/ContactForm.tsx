@@ -99,8 +99,8 @@ export function ContactForm({ initialPackage = "" }: { initialPackage?: string }
         <div aria-live="polite" style={{ marginTop: 8 }}>{chosen ? <Price o={chosen} /> : null}</div>
       </div>
       <div>
-        <label className="label" htmlFor="message" style={{ fontFamily: "var(--font-plex), system-ui, sans-serif", fontSize: 17, lineHeight: 1.4, letterSpacing: 0, textTransform: "none", color: "var(--text)", marginBottom: 8 }}>What is the one thing you would pay never to do by hand again?</label>
-        <textarea className="input" id="message" name="message" rows={4} required />
+        <label className="label" htmlFor="message" style={{ fontFamily: "var(--font-plex), system-ui, sans-serif", fontSize: 17, lineHeight: 1.4, letterSpacing: 0, textTransform: "none", color: "var(--text)", marginBottom: 8 }}>What do you want built or fixed? A few lines is plenty.</label>
+        <textarea className="input" id="message" name="message" rows={4} required placeholder="The one thing you would pay never to do by hand again is a good place to start." />
       </div>
       <input type="text" name="hp_note" tabIndex={-1} autoComplete="off" style={{ position: "absolute", left: -9999 }} aria-hidden="true" />
       <div className="actions">
@@ -108,6 +108,7 @@ export function ContactForm({ initialPackage = "" }: { initialPackage?: string }
           {state === "sending" ? "Sending…" : "Send it"}
         </button>
       </div>
+      <p style={{ margin: 0, fontSize: 14, color: "var(--text-mid)" }}>I use this only to reply to you. I don’t share or sell it.</p>
       <div id="form-status" role="status" aria-live="polite">
         {state === "mailto" && <p style={{ margin: 0 }}>Your mail app should have opened with your message in it. If it did not, write to {SITE.email} and tell me what you wrote here.</p>}
         {state === "error" && (

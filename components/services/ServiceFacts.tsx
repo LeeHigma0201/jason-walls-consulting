@@ -17,7 +17,7 @@ export function PaymentFacts() {
 export function FixesFact() {
   return (
     <p className="measure" style={{ margin: 0 }}>
-      The Business on Claude, MVP and iOS packages include 30 days of fixes after launch or approval.
+      Your Business on Claude, MVP and iOS packages include 30 days of fixes after launch or approval.
     </p>
   );
 }

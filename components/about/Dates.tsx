@@ -1,6 +1,6 @@
 // Dated list for the About page. Every entry traces to PORTFOLIO-EVIDENCE.md (see the facts sheet).
 const DATES: { wk: string; title: string }[] = [
-  { wk: "2026-03", title: "ZombieWells built in a day, with attorney Sarah Stogner" },
+  { wk: "2026-03", title: "ZombieWells built in a day, with a Texas attorney" },
   { wk: "2026-07-10", title: "ChargeRight for iOS released" },
   { wk: "2026-07-15", title: "BendRight released" },
   { wk: "2026-07-18", title: "ChargeRight web redesign live at evchargeright.com" },

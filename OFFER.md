@@ -103,6 +103,8 @@ If the first weekly preview doesn't match the brief, stop there and pay only for
 | Care plan | Maintenance $25–600/mo; most small sites $50–500/mo; AI monitoring $100–300/mo | [apexure](https://www.apexure.com/blog/website-maintenance-cost), [ueni](https://ueni.com/blog/website-maintenance-cost/), [taskip](https://taskip.net/ai-automation-agency-pricing/) | $400/mo: upper-mid, because 3 hours of real changes are included, not just backups |
 | Day rate | US mid full-stack $85–135/hr; AI/automation freelance $50–150/hr; Toptal senior $100–150/hr | [secondtalent](https://www.secondtalent.com/cost-to-hire/full-stack-developer/), [adsnipper](https://adsnipper.com/blog/cost-to-hire-ai-developer/) | $1,200/day (≈$150/hr): Toptal-senior level, which the shipped work supports |
 
+Correction, 2026-10-22 (site board, pricing seat and claims verifier): the beevr.ai page shows $4K / $18K / $38K, not "$5,000–15,000 in 4–6 weeks", so that band's attribution in the MVP row is wrong. Verified medians with sources are in research/market-2026-10-22.md (MVP web app, n=8: low median $12,450). The table above has no derived-from or falsified-by columns; the board's proposed ladder in research/board-2026-10-22.md carries both.
+
 ## Market signal check (2026-10-21, Jason's ask: what people need)
 Vendor surveys, so directional: contractors rank price-calculation accuracy (71%), mobile experience (58%) and QuickBooks
 integration (52%) highest ([estimatorsuite survey, n=287](https://estimatorsuite.com/research/2026-contractor-software-adoption-survey/));

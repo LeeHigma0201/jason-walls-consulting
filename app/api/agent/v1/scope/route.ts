@@ -3,16 +3,14 @@
  *
  * The per-interaction product for a consulting site is not the lead form — it is
  * the thing Jason would otherwise spend a call producing: a written scope that
- * names the tier, the budget fit, what is explicitly out of scope, and which
- * off-the-shelf template beats a custom build. Charged at $2 a call so an agent
+ * names the tier, the budget fit and what is explicitly out of scope. Charged at $2 a call so an agent
  * can buy it on its user's behalf; the booking link it returns is free.
  *
  * Matching is deterministic (no model call) so the same inputs always price the
  * same way, and so the brief can never invent an engagement that isn't sold.
  */
 import { NextRequest, NextResponse } from 'next/server';
-import { OFFERS, PAYMENT_TERMS, PRICING_STATUS } from '@/lib/offers';
-import { TEMPLATES } from '@/lib/templates';
+import { OFFERS, PAYMENT_TERMS, PRICING_STATUS, PROPOSED_NOTE } from '@/lib/offers';
 import { SITE } from '@/lib/site';
 import { authorize, commit, meterHeaders } from '@/lib/agent-meter';
 
@@ -78,10 +76,6 @@ export async function POST(req: NextRequest) {
   const billed = commit(auth.key, TOOL, PRICE_CENTS);
   const tier = tierForBudget(budgetUsd, ongoing);
   const trade = tradeFor(goal);
-  const templateMatches = TEMPLATES.filter((t) => (trade ? t.trade === trade : false)).slice(0, 3);
-  const cheapestTemplate = templateMatches.length
-    ? templateMatches.reduce((a, b) => (a.priceNum <= b.priceNum ? a : b))
-    : null;
 
   const brief = {
     goal,
@@ -99,27 +93,17 @@ export async function POST(req: NextRequest) {
           youProvide: tier.youProvide,
           terms: PAYMENT_TERMS,
           pricingStatus: PRICING_STATUS,
+          note: PRICING_STATUS === 'approved' ? undefined : `Price is ${PROPOSED_NOTE}; nothing sells at a proposed price.`,
           bookUrl: `${baseUrl()}${tier.bookHref}`,
         }
       : null,
     // Named explicitly rather than left implicit: the honest answer to a small budget
-    // is a template purchase or a strategy hour, not a custom build quote.
+    // is the free call, not a custom build quote.
     budgetVerdict: tier
       ? `A $${budgetUsd.toLocaleString('en-US')} budget covers ${tier.name} (${tier.priceLabel}).`
       : budgetUsd > 0
-        ? `A $${budgetUsd.toLocaleString('en-US')} budget is under the entry price of every ${ongoing ? 'ongoing' : 'one-time'} engagement. Start with a template or a Strategy Hour.`
-        : 'No budget stated, so no engagement is recommended — book a discovery call and scope first.',
-    templateAlternative: cheapestTemplate
-      ? {
-          id: cheapestTemplate.id,
-          name: cheapestTemplate.name,
-          priceLabel: cheapestTemplate.priceLabel,
-          setupDays: cheapestTemplate.setupDays,
-          why: `Off-the-shelf ${cheapestTemplate.tradeLabel} workflow — ships in ${cheapestTemplate.setupDays} instead of a custom build.`,
-          buyUrl: cheapestTemplate.stripeUrl ?? null,
-        }
-      : null,
-    otherTemplates: templateMatches.map((t) => ({ id: t.id, name: t.name, priceLabel: t.priceLabel })),
+        ? `A $${budgetUsd.toLocaleString('en-US')} budget is under the entry price of every ${ongoing ? 'ongoing' : 'one-time'} engagement. Book the free 20-minute call and scope first.`
+        : 'No budget stated, so no engagement is recommended. Book the free 20-minute call and scope first.',
     nextStep: `${baseUrl()}/contact`,
   };
 

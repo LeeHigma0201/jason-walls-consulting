@@ -40,7 +40,9 @@ export const personSchema = () => ({
   "@id": PERSON_ID,
   name: SITE.name,
   jobTitle: "Electrician",
-  description: "Electrician, IBEW Local 369, Louisville, Kentucky. Builds and ships his own iOS apps.",
+  description:
+    "Electrician, IBEW Local 369, Louisville, Kentucky. Builds websites, AI workflows, web apps and iOS apps for trades and small businesses, and wrote the NEC Article 220 load calculation engine behind ChargeRight.",
+  knowsAbout: ["NEC Article 220 load calculations", "EV charger installation", "Electrical contracting", "Claude Code", "iOS apps", "Web apps", "AI workflows for small businesses"],
   image: A.electrician.startsWith("http") ? A.electrician : SITE.url + A.electrician,
   url: SITE.url,
   ...(SITE.email ? { email: SITE.email } : {}),
@@ -253,7 +255,7 @@ export const processJsonLd = (steps: { name: string; text: string }[]) => ({
 export const aboutJsonLd = () => ({
   "@context": CTX,
   ...page("ProfilePage", "/about", "About Jason Walls"),
-  dateModified: "2026-10-21",
+  dateModified: "2026-10-22",
   mainEntity: { "@id": PERSON_ID },
 });
 

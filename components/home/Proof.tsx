@@ -43,7 +43,7 @@ export function Proof() {
               <h3 className="display h3" style={{ margin: 0 }}>BendRight</h3>
               <p className="mono" style={{ margin: 0, fontSize: 15, color: "var(--text-mid)" }}>$6.99, version 1.1</p>
               <p style={{ margin: 0, color: "var(--text-mid)" }}>
-                Offsets, saddles and kicks on your phone, with an AR measure and no account.
+                Offsets, saddles and kicks on your phone, with an AR measure.
               </p>
             </div>
             <Phones

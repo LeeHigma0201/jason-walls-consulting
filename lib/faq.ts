@@ -7,7 +7,7 @@ const careTier = OFFERS.find((o) => o.id === "care");
 const carePrice = careTier?.priceNum ?? 0;
 
 // Order follows the objections owners raise: price, time, ownership, what if it goes wrong
-// (after launch), then the rest. Any string that contains a price carries the proposed note.
+// (something happens to me, after launch), then the rest. Any string that contains a price carries the proposed note.
 export const FAQ: Faq[] = [
   {
     q: "Is the price really fixed?",
@@ -22,8 +22,12 @@ export const FAQ: Faq[] = [
     a: "Yes. Everything is built on accounts in your name (hosting, domain, payments, app store). On the MVP package you get the code, the handover docs and a recorded walkthrough at launch, so you can hand it to another developer. Each package lists what you receive.",
   },
   {
+    q: "What if something happens to you?",
+    a: "You aren't stuck. Hosting, domain, payments and code all live on accounts in your name from day one. On the MVP package you also get handover docs and a recorded walkthrough, so another developer can pick it up.",
+  },
+  {
     q: "What happens after launch?",
-    a: `The Your Business on Claude, MVP and iOS packages include 30 days of fixes. After that, the Care Plan ($${carePrice} a month, ${PROPOSED_NOTE}) watches your hosting, keeps dependencies updated and includes up to three hours of changes a month. If you are already a client, you can also book a day when you need one.`,
+    a: `Your Business on Claude, MVP and iOS packages include 30 days of fixes. After that, the Care Plan ($${carePrice} a month, ${PROPOSED_NOTE}) watches your hosting, keeps dependencies updated and includes up to three hours of changes a month. If you are already a client, you can also book a day when you need one.`,
   },
   {
     q: "What do you need from me?",
@@ -39,7 +43,7 @@ export const FAQ: Faq[] = [
   },
   {
     q: "Web app or iOS app?",
-    a: "If your customers use it at a desk or from a link, web. If they reach for it on a job site or in a driveway, iOS. Many builds are web first with an iOS wrapper (Capacitor) later, from one codebase. We decide on the call.",
+    a: "If your customers use it at a desk or from a link, web. If they reach for it on a job site or in a driveway, iOS. Some builds start as web with an iOS wrapper (Capacitor) later, from one codebase. We decide on the call.",
   },
   {
     q: "Do you work with businesses outside Kentucky?",

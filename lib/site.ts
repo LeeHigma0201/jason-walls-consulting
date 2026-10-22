@@ -26,7 +26,7 @@ export const NAV = [
   { href: "/about", label: "About" },
 ] as const;
 
-// Last item in the top bar. The phone bar's accent "Call" tab points at the same href.
+// Last item in the top bar. The phone bar's accent "Write" tab points at the same href.
 export const NAV_CTA = { href: "/contact", label: "Free 20-min call" } as const;
 
 // Footer column 2.

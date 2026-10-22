@@ -35,7 +35,7 @@ export function Why({ photo = HARDHAT }: { photo?: WhyPhoto }) {
               I wrote the load calculation that ChargeRight runs on.
             </h2>
             <p className="prose" style={{ margin: 0, color: "var(--text-mid)" }}>
-              I’m an electrician in IBEW Local 369, so I know what a panel schedule, a timesheet and a quote look like on a real job. I build with Claude Code and start about 40 sessions a week, with about 250 agent and scheduled runs a week behind them.
+              I’m an electrician in IBEW Local 369, so I know what a panel schedule, a timesheet and a quote look like on a real job. I build with Claude Code and start about 40 sessions a week.
             </p>
           </div>
           <Checker />

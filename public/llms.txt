@@ -15,12 +15,12 @@ Payment is 50% to start and 50% at launch. On the MVP and iOS packages it is 40%
 
 ## What I have built
 - [ChargeRight on the App Store](https://apps.apple.com/us/app/chargeright/id6755695416): free, version 4.0.1. A homeowner finds out whether the panel has room for an EV charger before paying for an upgrade. I wrote the NEC Article 220 load calculation engine it runs on. The web version is at [evchargeright.com](https://evchargeright.com).
-- [BendRight on the App Store](https://apps.apple.com/us/app/bendright/id6779847124): $6.99, version 1.1. Offsets, saddles and kicks for conduit bending, with an AR measure and no account.
-- [ZombieWells](https://zombiewells.com): a public site about abandoned, leaking oil wells in the Permian Basin, built with attorney Sarah Stogner.
+- [BendRight on the App Store](https://apps.apple.com/us/app/bendright/id6779847124): $6.99, version 1.1. Offsets, saddles and kicks for conduit bending, with an AR measure.
+- [ZombieWells](https://zombiewells.com): a public site about abandoned, leaking oil wells in the Permian Basin, built with a Texas attorney.
 - [Claude Code mods](https://github.com/LeeHigma0201/claude-code-mods): the mods I published.
 
 ## How a job runs
-A free 20-minute call, then a written brief, then a fixed quote. On MVP and iOS jobs you get a preview every week, a link for web or a TestFlight build for iOS. Everything launches on accounts in your name, and you own the code, the domain and the data. An independent verifier checks the work before it ships.
+A free 20-minute call, then a written brief, then a fixed quote. On MVP and iOS jobs you get a preview every week, a link for web or a TestFlight build for iOS. Everything launches on accounts in your name, and you own the code, the domain and the data. Work is reviewed by an independent verifier.
 
 ## Contact
 - [Contact page](https://jason-walls.vercel.app/contact)

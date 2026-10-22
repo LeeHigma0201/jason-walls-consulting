@@ -31,7 +31,7 @@ export const OFFERS: OfferTier[] = [
     priceLabel: "$3,500",
     priceNum: 3500,
     duration: "1 week · fixed price",
-    short: "A site that books work. Up to five pages, live in a week, on your own domain.",
+    short: "A site that books work. Up to five pages, live in a week, on your own domain. Paid once, no monthly plan.",
     bestFor: "A trade or local business whose site doesn't bring in calls.",
     whatYouGet: [
       "Up to 5 pages: home, services, about, contact or booking, one more",
@@ -60,7 +60,7 @@ export const OFFERS: OfferTier[] = [
     whatYouGet: [
       "Half-day session to map the paperwork that eats your evenings",
       "1 to 3 workflows built and installed: estimates from site notes, invoices chased, a photo of a timesheet into a spreadsheet, job summaries, replies in your voice",
-      "A guardrail check so it never invents a price or a code citation",
+      "A guardrail check on every workflow for invented prices and code citations",
       "Plain-English docs and two training sessions for the team",
       "30 days of fixes",
     ],
@@ -84,7 +84,7 @@ export const OFFERS: OfferTier[] = [
       "Written scope and a fixed quote before any money moves",
       "Login, database, admin view, Stripe payments if you sell",
       "One AI feature where it pays: vision, extraction, an assistant",
-      "QuickBooks, your calendar or the tools you already pay for, connected",
+      "Your calendar or the tools you already pay for, connected",
       "Works on a phone in the truck, not just at a desk",
       "Tests on the money and data paths",
       "A preview link updated every week",
@@ -103,7 +103,7 @@ export const OFFERS: OfferTier[] = [
     priceLabel: "from $10,000",
     priceMin: 10000,
     duration: "4 weeks · scoped first",
-    short: "From idea to approved listing. Purchases, privacy page, screenshots and the submission handled.",
+    short: "From idea to App Store submission. Purchases, privacy page, screenshots and the filing handled.",
     bestFor: "A product your customers will reach for on a job site or in a driveway.",
     whatYouGet: [
       "Capacitor (web + iOS from one codebase) or native SwiftUI, chosen on the call",

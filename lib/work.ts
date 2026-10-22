@@ -22,7 +22,7 @@ export const WORK: Work[] = [
     kicker: "EV charger panel check · web + iOS",
     stage: ["Live", "App Store"],
     summary:
-      "Homeowners were being quoted panel upgrades they often did not need. The math that decides it is an NEC Article 220 load calculation (220.83(A) for an existing home adding load), and almost nobody runs it before quoting. I wrote the engine, with edition tables from 2017 to 2026, and built the web app with Stripe checkout and a native SwiftUI iOS app. It is live at evchargeright.com and on the App Store as version 4.0.1, with paying customers for the report.",
+      "A homeowner who wants an EV charger needs to know whether the panel has room before paying for an upgrade. ChargeRight answers that with an NEC Article 220 load calculation (220.83(A) for an existing home adding load). I wrote the engine, with edition tables from 2017 to 2026, and built the web app with Stripe checkout and a native SwiftUI iOS app. It is live at evchargeright.com and on the App Store as version 4.0.1.",
     links: [
       { label: "evchargeright.com", href: "https://evchargeright.com" },
       { label: "ChargeRight on the App Store", href: "https://apps.apple.com/us/app/chargeright/id6755695416" },
@@ -36,7 +36,7 @@ export const WORK: Work[] = [
     kicker: "Conduit bending calculator · iOS",
     stage: ["App Store"],
     summary:
-      "Bending math tends to get done on a scrap of conduit with a Sharpie, so I put offsets, saddles and kicks in a phone app with no account. Version 1.1 adds an AR measure. It has been on the App Store at $6.99 since July 15, 2026.",
+      "Bending math tends to get done on a scrap of conduit with a Sharpie, so I put offsets, saddles and kicks in a phone app. Version 1.1 adds an AR measure. It is $6.99 on the App Store and was released July 15, 2026.",
     links: [{ label: "BendRight on the App Store", href: "https://apps.apple.com/us/app/bendright/id6779847124" }],
     icon: "/screens/br-icon.png",
     featured: true,
@@ -47,7 +47,7 @@ export const WORK: Work[] = [
     kicker: "Public-interest well map · web",
     stage: ["Live"],
     summary:
-      "The facts about abandoned, leaking oil wells in the Permian Basin were scattered across RRC filings, federal funding notices and news reports, and the cleanup money runs out in 2030. I built a public site with attorney Sarah Stogner that gathers the sourced figures and lets anyone report a suspected well. The first version took me an afternoon.",
+      "The facts about abandoned, leaking oil wells in the Permian Basin were scattered across RRC filings, federal funding notices and news reports, and the cleanup money runs out in 2030. I built a public site with a Texas attorney that gathers the sourced figures and lets anyone report a suspected well. I built the first version in a day.",
     links: [{ label: "zombiewells.com", href: "https://zombiewells.com" }],
     featured: true,
   },
@@ -57,7 +57,7 @@ export const WORK: Work[] = [
     kicker: "AI operations for a one-person company",
     stage: ["Live", "Private"],
     summary:
-      "I run a one-person company, so I built a check that holds every price and code citation in my public posts against a list of what I can actually claim before it goes out. I also published four Claude Code mods in a public marketplace on GitHub.",
+      "I run a one-person company, so I built a check that runs on my public posts for banned wording and claims I haven't approved before they go out. I also published four Claude Code mods in a public marketplace on GitHub.",
     links: [{ label: "Claude Code mods on GitHub", href: "https://github.com/LeeHigma0201/claude-code-mods" }],
   },
   {
