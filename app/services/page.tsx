@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { PackageCard } from "@/components/PackageCard";
+import { PageHead } from "@/components/PageHead";
+import { A } from "@/lib/assets";
 import { CtaCard } from "@/components/ui/CtaCard";
 import { FixesFact, PaymentFacts } from "@/components/services/ServiceFacts";
 import { ONE_TIME_OFFERS, ONGOING_OFFERS, OFFERS, PROPOSED_NOTE } from "@/lib/offers";
@@ -25,15 +27,19 @@ export default function ServicesPage() {
         ]}
       />
 
-      <section className="section" style={{ paddingBottom: 32 }}>
-        <div className="wrap narrow stack">
-          <p className="kicker">Prices</p>
-          <h1 className="display h1" style={{ margin: 0 }}>What it costs, what you get, and what I need from you.</h1>
-          <p className="lede" style={{ margin: 0 }}>
-            Every job starts with a written scope and a fixed quote, and the price only changes if you approve a written change order. Every price here is {PROPOSED_NOTE}.
-          </p>
-        </div>
-      </section>
+      <PageHead
+        kicker="Prices"
+        title="What it costs, what you get, and what I need from you."
+        photo={{
+          src: A.jobsite,
+          alt: "Jason Walls looking into the camera in a sticker-covered hard hat, safety glasses and a hi-vis vest, beside crated equipment on a warehouse job.",
+          pos: "30% 28%",
+        }}
+      >
+        <p className="lede">
+          Every job starts with a written scope and a fixed quote, and the price only changes if you approve a written change order. Every price here is {PROPOSED_NOTE}.
+        </p>
+      </PageHead>
 
       <section className="section" style={{ paddingTop: 16, paddingBottom: 48 }}>
         <div className="wrap narrow stack-lg">

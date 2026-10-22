@@ -1,5 +1,5 @@
 import Link from "next/link";
-import type { OfferTier } from "@/lib/offers";
+import { circuitOf, type OfferTier } from "@/lib/offers";
 import { payLink } from "@/lib/payments";
 import { Price } from "@/components/ui/Price";
 import { Fold } from "@/components/ui/Fold";
@@ -14,9 +14,15 @@ export function PackageCard({ o, compact = false, delay = 0 }: { o: OfferTier; c
   return (
     <article id={compact ? undefined : o.id} className={`card pkg sr ${o.featured ? "card-featured" : ""}`} style={{ ["--d" as string]: `${delay}ms` }}>
       {o.featured && <span className="pill pill-accent">Where I’d start with one idea</span>}
-      <div>
-        <p className="kicker" style={{ margin: "0 0 8px" }}>{o.duration}</p>
-        <h3 className="display h3" style={{ margin: 0 }}>{o.name}</h3>
+      <div className="pkg-head">
+        <div>
+          <p className="kicker" style={{ margin: "0 0 8px" }}>{o.duration}</p>
+          <h3 className="display h3" style={{ margin: 0 }}>{o.name}</h3>
+        </div>
+        <span className="pkg-ckt" aria-hidden="true">
+          <span className="mono">CKT {circuitOf(o.id)}</span>
+          <span className="brk"><span className="brk-handle" /></span>
+        </span>
       </div>
       <Price o={o} />
       <p className="pkg-short">{o.short}</p>

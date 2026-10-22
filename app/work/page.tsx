@@ -4,6 +4,7 @@ import { WORK } from "@/lib/work";
 import { WorkCard } from "@/components/WorkCard";
 import { WorkBoard } from "@/components/work/WorkBoard";
 import { CtaCard } from "@/components/ui/CtaCard";
+import { PageHead } from "@/components/PageHead";
 import { JsonLd, breadcrumb, workJsonLd } from "@/lib/schema";
 
 export const metadata: Metadata = {
@@ -36,14 +37,7 @@ export default function WorkPage() {
     <>
       <JsonLd data={[breadcrumb([{ name: "Home", path: "/" }, { name: "Work", path: "/work" }]), workJsonLd(WORK)]} />
 
-      <section className="section" style={{ paddingBottom: 24 }}>
-        <div className="wrap narrow" style={{ display: "grid", gap: 16 }}>
-          <p className="kicker">Work</p>
-          <h1 className="display h1" style={{ margin: 0 }}>
-            What I have built, and where <em>each one stands.</em>
-          </h1>
-        </div>
-      </section>
+      <PageHead kicker="Work" title={<>What I have built, and where <em>each one stands.</em></>} />
 
       <section className="section" style={{ paddingTop: 24 }}>
         <div className="wrap" style={{ display: "grid", gap: 32 }}>

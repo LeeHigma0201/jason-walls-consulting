@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { A } from "@/lib/assets";
-import { OFFERS } from "@/lib/offers";
+import { OFFERS, circuitOf } from "@/lib/offers";
 import { HERO } from "./copy";
 
 // Option 2: the panel. Jason's hard hat and sunglasses photo in brand duotone, and the four packages
@@ -15,7 +15,7 @@ const CIRCUITS = ["launch-site", "business-on-claude", "mvp", "ios-app"]
 export type PanelTone = "blue" | "steel" | "color";
 
 // tone: "blue" is the lifted brand duotone, "steel" turns the directory into a light panel cover,
-// "color" shows the photo in natural color. Preview-only until Jason picks one.
+// "color" shows the photo in natural color. The home page uses steel (Jason, 2026-10-22).
 export function HeroPanel({ tone = "blue" }: { tone?: PanelTone }) {
   return (
     <section className={`hx hx-panel tone-${tone}`} aria-label="Intro">
@@ -44,7 +44,7 @@ export function HeroPanel({ tone = "blue" }: { tone?: PanelTone }) {
             {CIRCUITS.map((o, i) => (
               <li key={o.id} style={{ ["--i" as string]: i }}>
                 <Link href={`/services#${o.id}`} className="pd-row">
-                  <span className="mono pd-ckt" aria-hidden="true">{i * 2 + 1}</span>
+                  <span className="mono pd-ckt" aria-hidden="true">{circuitOf(o.id)}</span>
                   <span className="brk" aria-hidden="true"><span className="brk-handle" /></span>
                   <span className="pd-label">
                     <strong>{o.name}</strong>

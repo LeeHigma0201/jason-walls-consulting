@@ -21,7 +21,7 @@ export default async function ContactPage({ searchParams }: { searchParams: Prom
         .contact-avatar { position: relative; flex: none; width: 80px; height: 80px; border-radius: 50%; overflow: hidden; }
         @media (max-width: 559px) { .contact-avatar { width: 56px; height: 56px; } }
       `}</style>
-      <section className="section" style={{ paddingTop: 40 }}>
+      <section className="section ph" style={{ paddingTop: 40 }}>
         <div className="wrap">
           <div className="split">
             <div className="span-7">

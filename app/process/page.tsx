@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Checker } from "@/components/ui/Checker";
 import { CtaCard } from "@/components/ui/CtaCard";
+import { PageHead } from "@/components/PageHead";
 import { JsonLd, breadcrumb, processJsonLd } from "@/lib/schema";
 
 export const metadata: Metadata = {
@@ -55,13 +56,9 @@ export default function ProcessPage() {
         ]}
       />
 
-      <section className="section" style={{ paddingBottom: 32 }}>
-        <div className="wrap narrow" style={{ display: "grid", gap: 16 }}>
-          <p className="kicker">Process</p>
-          <h1 className="display h1" style={{ margin: 0 }}>How a job runs, from the first call to launch.</h1>
-          <p className="lede" style={{ margin: 0 }}>The order is the same for every package.</p>
-        </div>
-      </section>
+      <PageHead kicker="Process" title="How a job runs, from the first call to launch.">
+        <p className="lede">The order is the same for every package.</p>
+      </PageHead>
 
       <section className="section" style={{ paddingTop: 16 }}>
         <div className="wrap narrow">

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { FAQ } from "@/lib/faq";
 import { JsonLd, breadcrumb, faqSchema } from "@/lib/schema";
 import { CtaCard } from "@/components/ui/CtaCard";
+import { PageHead } from "@/components/PageHead";
 
 export const metadata: Metadata = {
   title: "FAQ",
@@ -14,15 +15,9 @@ export default function FaqPage() {
   return (
     <>
       <JsonLd data={[faqSchema(), breadcrumb([{ name: "Home", path: "/" }, { name: "FAQ", path: "/faq" }])]} />
-      <section className="section" style={{ paddingBottom: 24 }}>
-        <div className="wrap narrow stack">
-          <p className="kicker">FAQ</p>
-          <h1 className="display h1" style={{ margin: 0 }}>Questions owners ask me.</h1>
-          <p className="lede">
-            Price, time, who owns it, and what happens if something goes wrong, in that order.
-          </p>
-        </div>
-      </section>
+      <PageHead kicker="FAQ" title="Questions owners ask me.">
+        <p className="lede">Price, time, who owns it, and what happens if something goes wrong, in that order.</p>
+      </PageHead>
       <section className="section" style={{ paddingTop: 8 }}>
         <div className="wrap narrow">
           {FAQ.map((f, i) => (

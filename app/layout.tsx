@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 };
 
-export const viewport: Viewport = { themeColor: "#10203d", width: "device-width", initialScale: 1 };
+export const viewport: Viewport = { themeColor: "#1f3d74", width: "device-width", initialScale: 1 };
 
 // If Reveal has not mounted after 2.5s, show everything (sr-off). When it does mount later, drop sr-off so scroll-in resumes.
 const REVEAL_GATE =

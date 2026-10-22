@@ -10,18 +10,20 @@
    #1a3058 is about 2.8:1; accent-text is about 5.3:1). --text-dim: 18px and up only.
    ------------------------------------------------------------------ */
 :root {
-  --bg: #10203d;
-  --bg-2: #15294c;
-  --surface: #1a3058;
-  --surface-2: #213a68;
-  --text: #f2f5fa;
-  --text-mid: #b3bfd4;
-  --text-dim: #7d8ca8;
-  --rule: #2a4270;
+  /* Mid-navy ground, matched to the home hero (TASTE COLOR: a navy that isn't black). Every text token
+     passes AA on --bg through --surface-2; --text-dim is for 18px+ text and borders only. */
+  --bg: #1f3d74;
+  --bg-2: #24467f;
+  --surface: #2a4e8c;
+  --surface-2: #315897;
+  --text: #f4f7fb;
+  --text-mid: #cfd8e8;
+  --text-dim: #a3b3cf;
+  --rule: #4a6aa3;
   --accent: #2a6df4;
   --accent-ink: #ffffff;
-  --accent-text: #7aa5ff;
-  --accent-soft: rgba(42, 109, 244, 0.18);
+  --accent-text: #bcd2ff;
+  --accent-soft: rgba(42, 109, 244, 0.22);
   --signal: #3ddc84;
   --paper: #f6f2ea;
   --grid: transparent;
@@ -210,6 +212,22 @@ html.js .checker-step.sr { transition: opacity 400ms ease, transform 400ms ease,
 .price-aff { font-family: var(--font-jbm), ui-monospace, monospace; font-size: 15px; color: var(--text-mid); }
 .proposed { display: block; margin-top: 6px; font-family: var(--font-jbm), ui-monospace, monospace; font-size: 14px; letter-spacing: 0.04em; color: var(--accent-text); }
 .pkg { display: flex; flex-direction: column; gap: 14px; }
+/* Package cards are steel panel covers, like the home hero's directory. The card redefines the tokens so
+   everything inside (price, folds, pill, buttons) turns dark-on-light at AA contrast. */
+.pkg {
+  --bg: #e6ebf2; --bg-2: #e6ebf2; --surface: #f1f4f8; --surface-2: #e2e8f0;
+  --text: #10203d; --text-mid: #3f4c63; --text-dim: #5d6a80; --rule: #b4bfcf; --accent-text: #1d54c4;
+  color: var(--text);
+  background: linear-gradient(180deg, #f1f4f8, #d9dfe8);
+  border-color: #aeb9c9;
+  box-shadow: inset 0 1px 0 #fff, 0 18px 40px rgba(2, 10, 30, 0.35);
+}
+.pkg.card-featured { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent), 0 18px 40px rgba(2, 10, 30, 0.35); }
+/* Circuit number and an on breaker, matching the hero directory ("tap a circuit" lands here). */
+.pkg-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
+.pkg-ckt { display: grid; justify-items: end; gap: 6px; flex: none; padding-top: 2px; }
+.pkg-ckt .mono { font-size: 12px; letter-spacing: 0.1em; color: var(--text-mid); }
+.pkg .brk { background: #1b2232; border-color: #6b778c; }
 .pkg .pill-accent { position: absolute; top: -13px; left: 20px; }
 @media (min-width: 720px) { .pkg .pill-accent { left: 28px; } }
 @media (max-width: 819px) { .pkg.card-featured { margin-top: 14px; } }
@@ -408,8 +426,8 @@ details.faq p { margin: 4px 0 12px; color: var(--text-mid); max-width: 62ch; }
 .hx-shade {
   position: absolute; inset: 0; z-index: -1; pointer-events: none;
   background:
-    linear-gradient(180deg, rgba(16,32,61,0.6) 0px, rgba(16,32,61,0) 130px),
-    linear-gradient(180deg, rgba(16,32,61,0) calc(60svh - 240px), rgba(16,32,61,0.86) calc(60svh - 70px), var(--bg) 60svh),
+    linear-gradient(180deg, rgba(31,61,116,0.6) 0px, rgba(31,61,116,0) 130px),
+    linear-gradient(180deg, rgba(31,61,116,0) calc(60svh - 240px), rgba(31,61,116,0.86) calc(60svh - 70px), var(--bg) 60svh),
     radial-gradient(110% 38% at 70% 100%, rgba(42,109,244,0.34), rgba(42,109,244,0) 72%);
 }
 .hx-body { position: relative; display: grid; gap: 16px; padding-top: calc(60svh - 110px); padding-bottom: 44px; }
@@ -417,7 +435,7 @@ details.faq p { margin: 4px 0 12px; color: var(--text-mid); max-width: 62ch; }
 .hx-h1 { margin: 0; font-size: clamp(40px, 10.6vw, 76px); line-height: 1.02; letter-spacing: -0.02em; text-shadow: 0 2px 28px rgba(5,12,28,0.5); }
 .hx-lede { margin: 0; color: var(--text); max-width: 46ch; }
 .hx-actions { padding-top: 4px; }
-.hx-actions .btn-ghost { background: rgba(16,32,61,0.55); }
+.hx-actions .btn-ghost { background: rgba(31,61,116,0.55); }
 @media (max-width: 559px) { .hx-actions { grid-template-columns: 1fr 1fr; } .hx-actions .btn { padding-left: 10px; padding-right: 10px; } }
 
 /* 1. Lift: headline beside a real screen tilted in 3D, app icons as chips */
@@ -463,7 +481,7 @@ html.js .pd.sr { opacity: 1; transform: none; }
 .tone-steel .pd { background: linear-gradient(180deg, #f1f4f8, #d9dfe8); border-color: #aeb9c9; color: #10203d; box-shadow: inset 0 1px 0 #fff, 0 24px 48px rgba(2,10,30,0.45); }
 .tone-steel .pd-head { color: #4a5870; border-bottom-color: #a9b5c6; }
 .tone-steel .pd-hint { color: #1d54c4; }
-.tone-steel .pd-row { color: #10203d; border-bottom-color: rgba(16,32,61,0.12); }
+.tone-steel .pd-row { color: #10203d; border-bottom-color: rgba(31,61,116,0.12); }
 .tone-steel .pd-row:hover strong, .tone-steel .pd-row:focus-visible strong { color: #1d54c4; }
 .tone-steel .pd-ckt { color: #4f5b70; }
 .tone-steel .pd-label .mono { color: #46536a; }
@@ -484,7 +502,7 @@ html.js .pd.sr { opacity: 1; transform: none; }
 .hx-job .hx-media { top: -40px; height: calc(100vw * 4 / 3); }
 @media (max-width: 899px) { .hx-job .hx-media { -webkit-mask-image: linear-gradient(180deg, #000 62%, transparent 100%); mask-image: linear-gradient(180deg, #000 62%, transparent 100%); } }
 .hx-job .hx-media img { object-position: 30% 30%; }
-.hx-job .hx-shade { background: linear-gradient(180deg, rgba(16,32,61,0.6) 0px, rgba(16,32,61,0) 130px), linear-gradient(180deg, rgba(16,32,61,0) 38%, rgba(16,32,61,0.86) 64%, var(--bg) 94%); }
+.hx-job .hx-shade { background: linear-gradient(180deg, rgba(31,61,116,0.6) 0px, rgba(31,61,116,0) 130px), linear-gradient(180deg, rgba(31,61,116,0) 38%, rgba(31,61,116,0.86) 64%, var(--bg) 94%); }
 .hx-job .hx-body { padding-top: 46svh; padding-bottom: 28px; }
 .hx-zoom img { animation: hx-zoom 14s cubic-bezier(0.2, 0.6, 0.2, 1) both; transform-origin: 30% 30%; }
 @keyframes hx-zoom { from { transform: scale(1.14); } to { transform: scale(1); } }
@@ -507,14 +525,14 @@ html.js .pd.sr { opacity: 1; transform: none; }
 @media (min-width: 900px) {
   .hx { display: flex; align-items: center; min-height: 680px; }
   .hx-media { inset: 0 0 0 36%; height: auto; }
-  .hx-shade, .hx-job .hx-shade { background: linear-gradient(90deg, var(--bg) 0%, var(--bg) 36%, rgba(16,32,61,0.55) 50%, rgba(16,32,61,0) 72%), radial-gradient(50% 60% at 85% 100%, rgba(42,109,244,0.3), rgba(42,109,244,0) 70%); }
+  .hx-shade, .hx-job .hx-shade { background: linear-gradient(90deg, var(--bg) 0%, var(--bg) 36%, rgba(31,61,116,0.55) 50%, rgba(31,61,116,0) 72%), radial-gradient(50% 60% at 85% 100%, rgba(42,109,244,0.3), rgba(42,109,244,0) 70%); }
   .hx-body, .hx-job .hx-body { padding: 132px 32px 96px; max-width: 1200px; }
   .hx-body > * { max-width: 600px; }
   /* Desktop: the phone straddles the seam between the copy and the photo, clear of the face. */
   .hx-lift .hx-body { position: static; }
   .hx-lift-row { position: static; padding-right: 0; }
   .hx-lift .hx-body > * { max-width: 470px; }
-  .hx-lift .hx-shade { background: linear-gradient(180deg, rgba(16,32,61,0) 78%, var(--bg) 100%), linear-gradient(90deg, var(--bg) 0%, var(--bg) 46%, rgba(16,32,61,0.62) 54%, rgba(16,32,61,0) 74%), radial-gradient(50% 60% at 85% 100%, rgba(42,109,244,0.3), rgba(42,109,244,0) 70%); }
+  .hx-lift .hx-shade { background: linear-gradient(180deg, rgba(31,61,116,0) 78%, var(--bg) 100%), linear-gradient(90deg, var(--bg) 0%, var(--bg) 46%, rgba(31,61,116,0.62) 54%, rgba(31,61,116,0) 74%), radial-gradient(50% 60% at 85% 100%, rgba(42,109,244,0.3), rgba(42,109,244,0) 70%); }
   .hx-lift .hx-media { left: 46%; }
   .hx-lift .hx-media img { object-position: 60% 30%; }
   .hx-tilt { left: calc(max(32px, (100% - 1200px) / 2 + 32px) + 500px); right: auto; bottom: 56px; width: 170px; }
@@ -526,4 +544,31 @@ html.js .pd.sr { opacity: 1; transform: none; }
   .hx-lift .hx-h1 { font-size: 64px; }
   .hx-job .hx-media { top: 0; height: auto; }
   .reel .phone { flex-basis: 180px; }
+}
+
+/* ---------- inner-page header (PageHead) ----------
+   The home hero's look, shorter. Phone: the duotone photo fills the top 40svh under the nav and fades
+   into the ground; the kicker and headline sit on the fade. 900+: the photo is a framed tall crop
+   beside the headline. Without a photo (and on /contact) it is the blue glow alone. */
+.ph { position: relative; overflow: hidden; isolation: isolate; background: radial-gradient(70% 60% at 88% 0%, rgba(42,109,244,0.42), rgba(42,109,244,0) 72%), var(--bg); }
+.ph-body { display: grid; gap: 16px; padding-top: 48px; padding-bottom: 24px; }
+.ph-copy { display: grid; gap: 16px; align-content: end; }
+.ph-copy > * { margin: 0; }
+.ph-shade { display: none; }
+.ph-photo { margin-top: -60px; }
+.ph-media { position: absolute; top: 0; left: 0; right: 0; height: 40svh; z-index: -2; }
+.ph-photo .ph-shade {
+  display: block; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(31,61,116,0.5) 0px, rgba(31,61,116,0) 110px),
+    linear-gradient(180deg, rgba(31,61,116,0) calc(40svh - 170px), rgba(31,61,116,0.62) calc(40svh - 100px), rgba(31,61,116,0.9) calc(40svh - 40px), var(--bg) 40svh);
+}
+.ph-photo .ph-body { padding-top: calc(40svh - 56px); }
+.ph-photo .ph-kicker { color: var(--text); text-shadow: 0 0 2px rgba(5,12,28,0.9), 0 1px 10px rgba(5,12,28,0.75); }
+@media (min-width: 900px) {
+  .ph-body { padding-top: 96px; padding-bottom: 32px; }
+  .ph-photo { margin-top: 0; }
+  .ph-photo .ph-shade { display: none; }
+  .ph-photo .ph-body { grid-template-columns: minmax(0, 1fr) 260px; gap: 48px; align-items: end; padding-top: 72px; }
+  .ph-media { position: relative; inset: auto; height: 340px; z-index: auto; order: 2; border-radius: 10px; overflow: hidden; border: 1px solid var(--rule); box-shadow: var(--shadow); }
 }

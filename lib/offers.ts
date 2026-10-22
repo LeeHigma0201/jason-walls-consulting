@@ -155,6 +155,9 @@ export const OFFERS: OfferTier[] = [
   },
 ];
 
+// Panel circuit for each package, in OFFERS order on the odd (left) side: launch-site 1, business-on-claude 3, ...
+export const circuitOf = (id: string) => OFFERS.findIndex((o) => o.id === id) * 2 + 1;
+
 export const ONE_TIME_OFFERS = OFFERS.filter((o) => o.group === "one-time");
 export const ONGOING_OFFERS = OFFERS.filter((o) => o.group === "ongoing");
 
