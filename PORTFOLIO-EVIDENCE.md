@@ -164,7 +164,7 @@ Fields (excluded, see §5).
 ## 6. Current site facts (jason-walls.vercel.app)
 - Vercel project `jason-walls` (team `chargeright`), only domain `jason-walls.vercel.app`; **no custom
   domain**. Last production deploy 2026-05-16 at commit 37fc6a6; commits after that (App Store showcase,
-  story fix, agent API) never deployed. `hi@jasonwalls.work` is the contact address in `app/book/page.tsx`.
+  story fix, agent API) never deployed. `hi@jasonwalls.work` was the contact address in `app/book/page.tsx`; on 2026-10-21 `jasonwalls.work` resolved to NXDOMAIN (no A or MX record, unregistered, $11.25/yr at Vercel), so v2 shows no address unless `NEXT_PUBLIC_CONTACT_EMAIL` is set.
 - Live copy today still says "Master Electrician" (hero kicker, press card), "680,000+ views",
   "Anthropic case study", "Sunday Times" trust item: all replaced in v2.
 - Screenshots: headless Chrome is blocked inside the sandbox (profile socket), so product visuals for

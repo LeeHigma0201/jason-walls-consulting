@@ -23,7 +23,6 @@ Payment is 50% to start and 50% at launch. On the MVP and iOS packages it is 40%
 A free 20-minute call, then a written brief, then a fixed quote. On MVP and iOS jobs you get a preview every week, a link for web or a TestFlight build for iOS. Everything launches on accounts in your name, and you own the code, the domain and the data. An independent verifier checks the work before it ships.
 
 ## Contact
-- Email: hi@jasonwalls.work
 - [Contact page](https://jason-walls.vercel.app/contact)
 - [Agent API, free catalog](https://jason-walls.vercel.app/api/agent/v1/openapi.json)
 - [App Store developer page](https://apps.apple.com/us/developer/jason-lloyd-walls/id1855640312)
