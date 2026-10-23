@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { A, SIZE } from "@/lib/assets";
+import { A, SIZE, STORE } from "@/lib/assets";
 import { HERO } from "./copy";
 import { Signature } from "./Signature";
 
@@ -37,7 +37,7 @@ export function HeroReport() {
               sizes="(min-width:900px) 320px, 70vw"
             />
           </div>
-          <p className="mono hx-stage-note">ChargeRight, live on the App Store</p>
+          <a href={STORE.chargeright} rel="noopener" className="mono hx-stage-note">ChargeRight, live on the App Store</a>
         </div>
         <div className="actions hx-actions">
           <a href="#prices" className="btn btn-primary btn-lg">See the prices</a>
