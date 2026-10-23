@@ -37,10 +37,12 @@ const hits = new Map<string, number[]>();
 function limited(ip: string): boolean {
   const now = Date.now();
   const recent = (hits.get(ip) ?? []).filter((t) => now - t < WINDOW_MS);
-  recent.push(now);
   if (hits.size > 5000) hits.clear();
+  // Refused calls are not counted, so a blocked visitor's window drains while they wait.
+  if (recent.length >= MAX_PER_WINDOW) { hits.set(ip, recent); return true; }
+  recent.push(now);
   hits.set(ip, recent);
-  return recent.length > MAX_PER_WINDOW;
+  return false;
 }
 
 // Every refusal is one log line with the status and the reason, never the visitor's text.

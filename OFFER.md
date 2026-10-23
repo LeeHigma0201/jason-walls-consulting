@@ -110,7 +110,7 @@ Vendor surveys, so directional: contractors rank price-calculation accuracy (71%
 integration (52%) highest ([estimatorsuite survey, n=287](https://estimatorsuite.com/research/2026-contractor-software-adoption-survey/));
 74% want simpler pricing without add-ons and use only 31% of paid features ([Clockwork index, n=1,247](https://runclockwork.com/research/contractor-software-satisfaction-index-2026));
 about 47% of contractors offer online booking and 52% of home-service firms are investing in AI tools ([schedulingkit roundup](https://schedulingkit.com/statistics/home-services-statistics), sources unclear).
-Applied: packages now name estimates/invoices, QuickBooks and phone-in-the-truck use; pricing stays flat with no add-on modules.
+Applied: packages name estimates/invoices and phone-in-the-truck use; the QuickBooks mention was removed on 2026-10-22 as unsupported (board claims pass); pricing stays flat with no add-on modules.
 
 ## Changes from the current site (lib/offers.ts, 2026-05-10)
 - Strategy Hour $300 → dropped; the discovery call is free and short. (Keep if Jason wants a paid working session.)

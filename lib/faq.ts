@@ -23,7 +23,7 @@ export const FAQ: Faq[] = [
   },
   {
     q: "What if something happens to you?",
-    a: "Hosting, domain, payments and code all live on accounts in your name from day one. On the MVP package you also get handover docs and a recorded walkthrough, so another developer can pick it up.",
+    a: "Hosting, domain, code and any payment account are set up in your name and are yours by launch. On the MVP package you also get handover docs and a recorded walkthrough, so another developer can pick it up.",
   },
   {
     q: "What happens after launch?",

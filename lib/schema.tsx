@@ -42,7 +42,7 @@ export const personSchema = () => ({
   jobTitle: "Electrician",
   description:
     "Electrician, IBEW Local 369, Louisville, Kentucky. Builds websites, AI workflows, web apps and iOS apps for trades and small businesses, and wrote the NEC Article 220 load calculation engine behind ChargeRight.",
-  knowsAbout: ["NEC Article 220 load calculations", "EV charger installation", "Electrical contracting", "Claude Code", "iOS apps", "Web apps", "AI workflows for small businesses"],
+  knowsAbout: ["NEC Article 220 load calculations", "Claude Code", "iOS apps", "Web apps", "AI workflows for small businesses"],
   image: A.electrician.startsWith("http") ? A.electrician : SITE.url + A.electrician,
   url: SITE.url,
   ...(SITE.email ? { email: SITE.email } : {}),

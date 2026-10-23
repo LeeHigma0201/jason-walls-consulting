@@ -52,7 +52,7 @@ export default function AboutPage() {
                   I’m Jason Walls, an electrician in IBEW Local 369 in Louisville, Kentucky. On a job you learn what the work needs, which is not always what the brochure says.
                 </p>
                 <p style={{ margin: 0 }}>
-                  When AI made it possible for one person to build real software, I started with the tool I wished I’d had on the job, a load calculation a homeowner could run before paying for a panel upgrade they didn’t need. I wrote that engine, and it became ChargeRight. I also built BendRight, and a public map of leaking oil wells with attorney Sarah Stogner.
+                  When AI made it possible for one person to build real software, I started with the tool I wished I’d had on the job, a load calculation a homeowner could run before paying for a panel upgrade they didn’t need. I wrote that engine, and it became ChargeRight. I also built BendRight, and a public map of leaking oil wells with a Texas attorney.
                 </p>
                 <p style={{ margin: 0 }}>
                   I built all of it with Claude Code and a crew of agents I steer from my phone, and an independent verifier checks the work.

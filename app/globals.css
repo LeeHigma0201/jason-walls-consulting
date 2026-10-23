@@ -586,7 +586,7 @@ html.js .pd.sr { opacity: 1; transform: none; }
 .hx-crop-top img { object-position: 50% 0%; }
 /* 4: the real result over the evening home */
 .hx-report { --mh: 34svh; --pg: #22427e; background: radial-gradient(90% 40% at 50% var(--mh), rgba(42,109,244,0.5), rgba(42,109,244,0) 70%), linear-gradient(180deg, var(--pg) 0, var(--pg) calc(var(--mh) + 220px), var(--bg) 100%); }
-.hx-report .hx-media { height: var(--mh); }
+.hx-report .hx-media { inset: 0 0 auto 0; height: var(--mh); }
 .hx-report .hx-shade { background: linear-gradient(180deg, rgba(16,32,61,0.5) 0px, rgba(16,32,61,0) 110px), linear-gradient(180deg, rgba(34,66,126,0) calc(var(--mh) - 180px), rgba(34,66,126,0.55) calc(var(--mh) - 90px), var(--pg) var(--mh)); }
 .hx-report .hx-body { padding-top: calc(var(--mh) - 150px); }
 .hx-report .hx-kicker { justify-self: start; padding: 3px 8px; border-radius: 4px; background: rgba(31,61,116,0.82); text-shadow: none; }
@@ -602,7 +602,7 @@ html.js .pd.sr { opacity: 1; transform: none; }
 .hx-pair { max-width: 420px; margin-bottom: 16px; }
 .hx-pair .phone { border-radius: 26px; border-width: 5px; box-shadow: 0 24px 48px rgba(2,10,30,0.6), 0 0 80px rgba(42,109,244,0.35); }
 .hx-pair .phone:first-child { transform: rotate(-3deg) translateY(6px); }
-.hx-pair .phone:last-child { transform: rotate(3deg); }
+.hx-pair .phone:last-child, .hx-pair .phone:first-child:nth-last-child(2) + .phone { transform: rotate(3deg); }
 @media (prefers-reduced-motion: reduce) {
   .hx-stage .phone, .hx-pair .phone { transform: none; }
 }
