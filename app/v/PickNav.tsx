@@ -14,6 +14,9 @@ const HEROES = [
   ["/v/hero/1", "1"],
   ["/v/hero/2", "2"],
   ["/v/hero/3", "3"],
+  ["/v/hero/4", "4"],
+  ["/v/hero/5", "5"],
+  ["/v/hero/6", "6"],
 ] as const;
 // Option 2 brightness picks (Jason chose 2 but found it too dark).
 const TONES = [

@@ -573,3 +573,36 @@ html.js .pd.sr { opacity: 1; transform: none; }
   .ph-photo .ph-body { grid-template-columns: minmax(0, 1fr) 260px; gap: 48px; align-items: end; padding-top: 72px; }
   .ph-media { position: relative; inset: auto; height: 340px; z-index: auto; order: 2; border-radius: 10px; overflow: hidden; border: 1px solid var(--rule); box-shadow: var(--shadow); }
 }
+
+/* Hero options 4 to 6 (2026-10-22): the work leads; no portrait on the first screen. */
+.hx-sig { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; text-decoration: none; color: var(--text); justify-self: start; }
+.hx-sig-img { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; object-position: 50% 30%; border: 2px solid rgba(255,255,255,0.35); }
+.hx-sig > span { display: grid; gap: 1px; line-height: 1.2; }
+.hx-sig strong { font-size: 15px; font-weight: 600; }
+.hx-sig .mono { font-size: 12px; letter-spacing: 0.04em; color: var(--text-mid); }
+.hx-sig:hover strong, .hx-sig:focus-visible strong { text-decoration: underline; text-underline-offset: 3px; }
+.hx-crop { aspect-ratio: 800 / 900; }
+.hx-crop img { object-position: 50% 34%; }
+.hx-crop-top img { object-position: 50% 0%; }
+/* 4: the real result over the evening home */
+.hx-report { --mh: 42svh; --pg: #22427e; background: radial-gradient(90% 40% at 50% var(--mh), rgba(42,109,244,0.5), rgba(42,109,244,0) 70%), linear-gradient(180deg, var(--pg) 0, var(--pg) calc(var(--mh) + 220px), var(--bg) 100%); }
+.hx-report .hx-media { height: var(--mh); }
+.hx-report .hx-shade { background: linear-gradient(180deg, rgba(16,32,61,0.5) 0px, rgba(16,32,61,0) 110px), linear-gradient(180deg, rgba(34,66,126,0) calc(var(--mh) - 180px), rgba(34,66,126,0.55) calc(var(--mh) - 90px), var(--pg) var(--mh)); }
+.hx-report .hx-body { padding-top: calc(var(--mh) - 150px); }
+.hx-report .hx-kicker { justify-self: start; padding: 3px 8px; border-radius: 4px; background: rgba(31,61,116,0.82); text-shadow: none; }
+.hx-report .hx-h1 { font-size: clamp(36px, 9.4vw, 72px); }
+.hx-stage { display: grid; justify-items: center; gap: 10px; perspective: 1000px; }
+.hx-stage .phone { width: min(70vw, 300px); border-radius: 30px; border-width: 5px; transform: rotateY(-14deg) rotateX(5deg); transform-origin: 50% 100%; box-shadow: 0 30px 60px rgba(2,10,30,0.7), 0 0 100px rgba(42,109,244,0.5); }
+.hx-stage-note { margin: 0; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-mid); }
+/* 5 and 6: no photo on top, the glow on the mid-navy */
+.hx-two, .hx-brk { background: radial-gradient(90% 46% at 50% 0%, rgba(42,109,244,0.42), rgba(42,109,244,0) 70%), var(--bg); }
+.hx-two .hx-body, .hx-brk .hx-body { padding-top: 92px; }
+.hx-two .hx-h1, .hx-brk .hx-h1 { font-size: clamp(36px, 9.4vw, 72px); text-shadow: none; }
+.hx-two .hx-kicker { text-shadow: none; color: var(--text-mid); }
+.hx-pair { max-width: 420px; }
+.hx-pair .phone { border-radius: 26px; border-width: 5px; box-shadow: 0 24px 48px rgba(2,10,30,0.6), 0 0 80px rgba(42,109,244,0.35); }
+.hx-pair .phone:first-child { transform: rotate(-3deg) translateY(6px); }
+.hx-pair .phone:last-child { transform: rotate(3deg); }
+@media (prefers-reduced-motion: reduce) {
+  .hx-stage .phone, .hx-pair .phone { transform: none; }
+}
