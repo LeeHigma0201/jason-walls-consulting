@@ -585,14 +585,14 @@ html.js .pd.sr { opacity: 1; transform: none; }
 .hx-crop img { object-position: 50% 34%; }
 .hx-crop-top img { object-position: 50% 0%; }
 /* 4: the real result over the evening home */
-.hx-report { --mh: 42svh; --pg: #22427e; background: radial-gradient(90% 40% at 50% var(--mh), rgba(42,109,244,0.5), rgba(42,109,244,0) 70%), linear-gradient(180deg, var(--pg) 0, var(--pg) calc(var(--mh) + 220px), var(--bg) 100%); }
+.hx-report { --mh: 34svh; --pg: #22427e; background: radial-gradient(90% 40% at 50% var(--mh), rgba(42,109,244,0.5), rgba(42,109,244,0) 70%), linear-gradient(180deg, var(--pg) 0, var(--pg) calc(var(--mh) + 220px), var(--bg) 100%); }
 .hx-report .hx-media { height: var(--mh); }
 .hx-report .hx-shade { background: linear-gradient(180deg, rgba(16,32,61,0.5) 0px, rgba(16,32,61,0) 110px), linear-gradient(180deg, rgba(34,66,126,0) calc(var(--mh) - 180px), rgba(34,66,126,0.55) calc(var(--mh) - 90px), var(--pg) var(--mh)); }
 .hx-report .hx-body { padding-top: calc(var(--mh) - 150px); }
 .hx-report .hx-kicker { justify-self: start; padding: 3px 8px; border-radius: 4px; background: rgba(31,61,116,0.82); text-shadow: none; }
-.hx-report .hx-h1 { font-size: clamp(36px, 9.4vw, 72px); }
+.hx-report .hx-h1 { font-size: clamp(34px, 8.6vw, 72px); }
 .hx-stage { display: grid; justify-items: center; gap: 10px; perspective: 1000px; }
-.hx-stage .phone { width: min(70vw, 300px); border-radius: 30px; border-width: 5px; transform: rotateY(-14deg) rotateX(5deg); transform-origin: 50% 100%; box-shadow: 0 30px 60px rgba(2,10,30,0.7), 0 0 100px rgba(42,109,244,0.5); }
+.hx-stage .phone { width: min(56vw, 230px); border-radius: 30px; border-width: 5px; transform: rotateY(-14deg) rotateX(5deg); transform-origin: 50% 100%; box-shadow: 0 30px 60px rgba(2,10,30,0.7), 0 0 100px rgba(42,109,244,0.5); }
 .hx-stage-note { margin: 0; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-mid); }
 /* 5 and 6: no photo on top, the glow on the mid-navy */
 .hx-two, .hx-brk { background: radial-gradient(90% 46% at 50% 0%, rgba(42,109,244,0.42), rgba(42,109,244,0) 70%), var(--bg); }
