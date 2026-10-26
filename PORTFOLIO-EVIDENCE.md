@@ -104,6 +104,9 @@ Fields (excluded, see §5).
 ### 1.8 Client/other
 - kes-timesheets: photo of a handwritten crew timesheet → Excel, Gemini via Vercel proxy, 8 commits
   2026-08-26; Vercel project exists, URL not recorded. **INFERRED client work; needs the client's OK before showing.**
+- joey-carducci (`~/dev/clients/joey-carducci`): website for a Tampa Bay real estate agent (Future Home Realty Inc.),
+  started 2026-10-25. Storyboard of 7 pages × 2 looks, sourced research (DBPR license, FL 61J2-10.025 brokerage-name
+  rule, real Zillow reviews). State: storyboard built locally, not deployed. **Case study pending permission: needs Joey's OK.**
 - linkedin-connect (LinkedIn API posting CLI), revenue-hud and seo-hud (macOS HUDs), agent-world
   (research prototype; its own RESULTS.md says "NO task-reliability benefit"): internal, not for the site.
 
