@@ -52,6 +52,15 @@ export const WORK: Work[] = [
     featured: true,
   },
   {
+    slug: "liveinflorida",
+    name: "A real estate agent's site",
+    kicker: "Client site · Tampa Bay real estate · web",
+    stage: ["Live"],
+    summary:
+      "A Tampa Bay real estate agent needed a website on their own domain. I checked the license record and Florida's rule that puts the brokerage name next to every contact block, laid out seven pages in two looks, then built the site. It went live at liveinflorida.world on November 2, 2026, eight days after the first commit.",
+    links: [{ label: "liveinflorida.world", href: "https://liveinflorida.world" }],
+  },
+  {
     slug: "shop-tooling",
     name: "The shop's own tooling",
     kicker: "AI operations for a one-person company",
