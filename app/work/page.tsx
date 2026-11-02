@@ -10,7 +10,7 @@ import { JsonLd, breadcrumb, workJsonLd } from "@/lib/schema";
 export const metadata: Metadata = {
   title: "Work",
   description:
-    "What I have built and where each one stands: ChargeRight (web and iOS), BendRight (iOS), ZombieWells (web), and the tooling behind a one-person shop.",
+    "What I have built and where each one stands: ChargeRight (web and iOS), BendRight (iOS), ZombieWells (web), a client site for a real estate agent, and the tooling behind a one-person shop.",
   alternates: { canonical: "/work" },
 };
 
@@ -31,6 +31,7 @@ export default function WorkPage() {
   const cr = bySlug("chargeright");
   const br = bySlug("bendright");
   const zw = bySlug("zombiewells");
+  const lf = bySlug("liveinflorida");
   const board = ["shop-tooling", "inspectright", "lab"].map(bySlug);
 
   return (
@@ -41,13 +42,14 @@ export default function WorkPage() {
 
       <section className="section" style={{ paddingTop: 24 }}>
         <div className="wrap" style={{ display: "grid", gap: 32 }}>
-          <h2 className="display h2" style={{ margin: 0 }}>Three you can open today.</h2>
+          <h2 className="display h2" style={{ margin: 0 }}>Four you can open today.</h2>
           <div className="stack-lg">
             <WorkCard w={cr} wide screens={CR_SCREENS} />
             <div className="grid-2" style={{ alignItems: "start" }}>
               <WorkCard w={br} screens={BR_SCREENS} delay={60} />
               <WorkCard w={zw} delay={120} />
             </div>
+            <WorkCard w={lf} wide delay={60} />
           </div>
         </div>
       </section>
