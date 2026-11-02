@@ -106,7 +106,9 @@ Fields (excluded, see §5).
   2026-08-26; Vercel project exists, URL not recorded. **INFERRED client work; needs the client's OK before showing.**
 - joey-carducci (`~/dev/clients/joey-carducci`): website for a Tampa Bay real estate agent (Future Home Realty Inc.),
   started 2026-10-25. Storyboard of 7 pages × 2 looks, sourced research (DBPR license, FL 61J2-10.025 brokerage-name
-  rule, real Zillow reviews). State: storyboard built locally, not deployed. **Case study pending permission: needs Joey's OK.**
+  rule, real Zillow reviews). Live at https://liveinflorida.world since 2026-11-02 (joey repo commit f2ccdf1).
+  **2026-11-02: Jason chose to list it on /work and have Joey told rather than asked; no name, photo or reviews on the card.
+  The notice is sent from the joey-carducci session (check its CHANGE-REQUESTS.md); pull the card if Joey objects.**
 - linkedin-connect (LinkedIn API posting CLI), revenue-hud and seo-hud (macOS HUDs), agent-world
   (research prototype; its own RESULTS.md says "NO task-reliability benefit"): internal, not for the site.
 
